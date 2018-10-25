@@ -84,7 +84,7 @@ public class UsuarioMB {
                 Dao<Usuario> usuarioDAOGenerico = new GenericDAO<>(Usuario.class);
                 usuario.setEstadoUsuario("AHabilitar");
                 usuarioDAOGenerico.alterar(usuario);
-                return "/Login?faces-redirect=true";
+                return "/UsuarioDesativadoInfo?faces-redirect=true";
             }
 
         }

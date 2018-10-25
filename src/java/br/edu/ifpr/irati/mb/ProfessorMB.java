@@ -36,12 +36,6 @@ public class ProfessorMB {
         errosEdicaoProfessor = new ArrayList<>();
 
     }
-
-    public void habilitarProfessor(Professor professor){
-        Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
-        professor.setEstadoUsuario("Habilitado");
-        professorDAO.alterar(professor);
-    }
     
     public String salvarProfessor() throws HashGenerationException {
 
@@ -100,6 +94,12 @@ public class ProfessorMB {
         professorDAO.alterar(professorSelecionado);
         return "/PerfilDocente?faces-redirect=true";
 
+    }
+
+    public void habilitarProfessor(Professor professor){
+        Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
+        professor.setEstadoUsuario("Habilitado");
+        professorDAO.alterar(professor);
     }
 
     public void desabilitarProfessor(Professor professor) {

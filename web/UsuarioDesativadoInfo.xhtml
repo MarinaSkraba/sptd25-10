@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Usuário Desativado</title>
+        <link rel="stylesheet" type="text/css" href="css/css.css"/>
+    </h:head>
+    <h:body style="background-image: url(img/fundo_login.png)">
+
+        <div id="conteiner">
+            <div id="loginForm">
+                <h:form>
+                    <br/>
+                    <h:outputLabel value="Sua conta ainda está desativada. Com sua tentativa de acesso uma notificação foi enviada ao diretor de ensino, este, que pode ativar sua conta." 
+                                   styleClass="text01"
+                                   style="margin: 5px; width: 300px; font-size: large; text-align: justify;"/>
+                    <br/>
+                    <p:commandButton value="voltar" 
+                                     ajax="false" 
+                                     immediate="true"
+                                     styleClass="botaoAzul"
+                                     style="font-size: large; padding: 0px; margin: 5px 0px;"
+                                     action="/Login?faces-redirect=true"/>
+                </h:form>
+            </div>
+        </div>
+    </h:body>
+</html>
