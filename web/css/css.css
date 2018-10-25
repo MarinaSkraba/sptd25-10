@@ -464,22 +464,31 @@ body{
 }
 #telaInicioPanel{
     display: flex;
-    align-items: center;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
 }
 #telaInicioLadoEsquerdo{
-    width: 70%;
+    height: 80%;
+    padding: 25px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+#formParaTelaInicio{
+    width: 500px;
     height: 300px;
     padding: 20px;
     background-color: white;
 
-
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    justify-content: center; 
+
+    border-radius: 30px;
 
     box-shadow: 5px 5px 5px rgba(0,0,0,0.7);
 }

@@ -11,38 +11,41 @@
     <h:body style="background-image: url(img/fundo_login.png);">
         <h:form>
 
-            <div id="telaInicioPanel" style="width: 100%; height: 100%;" class="ui-g" >
+            <div id="telaInicioPanel" style="width: 100%;" class="ui-g" >
                 <div id="telaInicioLadoEsquerdo" class="ui-g">
-                    <h:outputText value="Bem vindo ao SPTD" 
-                                  styleClass="text01" 
-                                  style="font-size: 20pt;"/>
-                    <br/>
-                    <h:outputText value="O Sistema para Planos de Trabalho Docente é uma aplicação"
-                                  styleClass="text01"
-                                  style="font-size: large; text-align: justify;" />
-                    <br/>
-                    <br/>
-                    <p:commandButton value="Realizar Login" 
-                                     ajax="false" 
-                                     styleClass="botaoTelaInicio"
-                                     style="width: 40%; margin: 5px;"
-                                     action="/Login"/>
-                    <br/>
-                    <p:commandButton value="Buscar PTDs" 
-                                     ajax="false" 
-                                     actionListener="#{pTDASerMostradoMB.abrirTelaBuscarPTDs()}"
-                                     action="/BuscarPTDs"
-                                     styleClass="botaoTelaInicio"
-                                     style="width: 40%; margin: 5px;"/>
+                    <div id="formParaTelaInicio" class="ui-g">
+                        <h:outputText value="Bem vindo ao SPTD" 
+                                      styleClass="text01" 
+                                      style="font-size: 20pt;"/>
+                        <br/>
+                        <h:outputText value="O Sistema para Planos de Trabalho Docente é uma aplicação"
+                                      styleClass="text01"
+                                      style="font-size: large; text-align: justify;" />
+                        <br/>
+                        <br/>
+
+                        <p:commandButton value="Realizar Login" 
+                                         ajax="false" 
+                                         styleClass="botaoTelaInicio"
+                                         style="width: 60%; margin: 5px;"
+                                         action="/Login"/>
+                        <br/>
+                        <p:commandButton value="Buscar PTDs" 
+                                         ajax="false" 
+                                         actionListener="#{pTDASerMostradoMB.abrirTelaBuscarPTDs()}"
+                                         action="/BuscarPTDs"
+                                         styleClass="botaoTelaInicio"
+                                         style="width: 60%; margin: 5px;"/>
+                    </div>
                 </div>
                 <div id="telaInicioLadoDireito" class="ui-g">
-                    <div style="width: auto; text-align: left;">
+                    <div style="height: 100%; text-align: left;">
                         <div id="formTelaInicio">
                             <img src="img/logotipo_IF.png" width="80" height="106" />
                         </div>
                     </div>
                     <br/>
-                    <div style="width: auto; text-align: right; float: right;">
+                    <div style="width: auto; text-align: right; float: right; margin: 100px 0px;">
                         <div id="formTelaInicio" style="width: 150px; height: 150px; margin: 0px 20px;">
                             <h:outputLabel value="SPTD" 
                                            styleClass="text"
@@ -51,11 +54,6 @@
                     </div>
                     <div style="width: auto; text-align: center;">
                         <div id="formTelaInicio" style="width: 100px; height: 100px; "></div>
-                    </div>
-                    <div style="width: auto; text-align: center;">
-                        <div style="width: auto; text-align: center; float: right;">
-                            <div id="formTelaInicio" style="width: 70px; height: 70px;"></div>
-                        </div>
                     </div>
                 </div>
             </div>
