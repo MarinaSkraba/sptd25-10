@@ -411,7 +411,52 @@ body{
     background-color: #C92345;
     background-image: linear-gradient(to right, #C92345, #C92345);
 }
-
+.botaoDiferenciacaoCadastroEsquerda{
+    width: 200px;
+    height: 100px;
+    margin: 5px;
+    
+    font-size: 20pt;
+    font-family: calibri, sans-serif;
+    font-weight: 100;
+    color: white;
+    
+    border-color: #1785ad;
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+    
+    background-color: transparent;
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    background-image: linear-gradient(to right, transparent, transparent);
+    transition: background-color 0.3s;
+}
+.botaoDiferenciacaoCadastroEsquerda:hover{
+    border-color:rgb(23,157,189);
+    background-image: linear-gradient(to bottom, rgba(23,157,189,0.8), rgba(23,157,189,0.8));
+}
+.botaoDiferenciacaoCadastroDireita{
+    width: 200px;
+    height: 100px;
+    margin: 5px;
+    
+    font-size: 20pt;
+    font-family: calibri, sans-serif;
+    font-weight: 100;
+    color: white;
+    
+    border-color: #1785ad;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    
+    background-color: transparent;
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    background-image: linear-gradient(to right, transparent, transparent);
+    transition: background-color 0.3s;
+}
+.botaoDiferenciacaoCadastroDireita:hover{
+    border-color: rgba(23,157,189,0.9);
+    background-image: linear-gradient(to bottom, rgba(23,157,189,1), rgba(23,157,189,0.9));
+}
 #loginForm{
     width: 450px;
     height: 450px;
