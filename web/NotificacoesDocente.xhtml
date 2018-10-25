@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Tela Inicial</title>
+        <link rel="stylesheet" type="text/css" href="css/css.css"/>
+        <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
+    </h:head>
+    <h:body styleClass="body">
+
+        <!-- Barra de menu -->
+        <div id="barraMenu">
+            <font face="Calibri" 
+                  size="6" 
+                  color="white" 
+                  style="margin: 10px 10px; float:left; font-family: calibri, sans-serif; font-weight: 500;" styleClass="text">
+                SPTD
+            </font>
+
+            <h:form id="barraMenu">
+
+                <p:commandButton styleClass="opMenu"
+                                 iconPos="right"
+                                 icon="/img/Search/searchLarger_24.png"
+                                 value="Notificações"
+                                 action="/NotificacoesDocente"
+                                 style="float: left;"/>
+
+                <p:commandButton id="logout"
+                                 image="img/fundo_login.png" 
+                                 styleClass="imgLogado"/>
+
+                <!-- Informações e Logout -->
+                <p:overlayPanel id="Usuário" 
+                                for="logout" 
+                                hideEffect="fade" 
+                                style="padding: 0px;">
+                    <h:outputText value="#{usuarioMB.usuarioLogado.email}" 
+                                  styleClass="text01"
+                                  style="color: #1785ad; font-weight: normal; font-size: large; margin: 0px;"/>
+                    <br/>
+                    <p:commandButton value="Meu perfil"
+                                     styleClass="opMenu"
+                                     style="margin: 0px;"
+                                     ajax="false" 
+                                     actionListener="#{professorMB.setProfessorSelecionado(usuarioMB.usuarioLogado)}"
+                                     action="/PerfilDocente?faces-redirect=true"/>
+                    <br/>                     
+                    <p:commandButton value="Legislação"
+                                     styleClass="opMenu"
+                                     style="margin: 5px 0px;"
+                                     ajax="false" 
+                                     actionListener="#{professorMB.setProfessor(usuarioMB.usuarioLogado)}"
+                                     action="/legislacao?faces-redirect=true"/>
+                    <br/>
+                    <p:commandButton value="Sair"
+                                     styleClass="opVermelhaMenu"
+                                     style="margin: 5px 0px;"
+                                     ajax="false" 
+                                     immediate="true"
+                                     actionListener="#{usuarioMB.realizarLogout()}"
+                                     action="/Login?faces-redirect=true"/>
+                </p:overlayPanel>
+
+                <h:outputText value="#{usuarioMB.usuarioLogado.nomeCompleto}" 
+                              styleClass="text01"
+                              style="color: white; float: right; font-weight: normal; font-size: large;"/>
+
+                <p:commandButton id="addPTD"
+                                 styleClass="opMenu"
+                                 icon="/img/Search/searchLarger_24.png"
+                                 value="Editar PTD"/>
+
+                <p:commandButton styleClass="opMenu"
+                                 icon="/img/Search/searchLarger_24.png"
+                                 value="Pesquisa"
+                                 ajax="false" 
+                                 actionListener="#{pTDASerMostradoMB.abrirTelaBuscarPTDs()}"
+                                 action="/BuscarPTDs"/>
+
+                <!-- Caixa de "novo" PTD -->
+                <p:overlayPanel id="addPanel" 
+                                for="addPTD" 
+                                hideEffect="fade" 
+                                style="padding: 0px;">
+                    <p:commandButton value="PTD em branco"
+                                     styleClass="opMenu"
+                                     onclick="PF('confirmarCriacaoPTDEmBrancoDialog').show();"/>
+                    <br/>
+                    <p:commandButton value="Recuperar último"
+                                     styleClass="opMenu"
+                                     ajax="false" 
+                                     action="#{pTDMB.abrirCriarCorrigirPTDAPartirDoUltimoArquivado(usuarioMB.usuarioLogado)}"/>
+                    <br/>
+                    <p:commandButton value="Continuar editando"
+                                     styleClass="opMenu"
+                                     ajax="false" 
+                                     action="#{pTDMB.abrirCriarCorrigirPTDContinuarEdicao(usuarioMB.usuarioLogado)}"/>
+                </p:overlayPanel>
+
+                <!-- Caixa de aviso de substituição de PTD -->
+                <p:dialog header="Confirmar criação" 
+                          widgetVar="confirmarCriacaoPTDEmBrancoDialog" 
+                          modal="true" 
+                          showEffect="fade" 
+                          hideEffect="fade" 
+                          resizable="false">
+
+                    <h:outputText value="Ao criar um PTD em branco, você substitui qualquer outro que estava em edição." 
+                                  styleClass="text01"
+                                  style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                    <br/>
+
+                    <p:commandButton styleClass="botaoAzul" 
+                                     value="Estou ciente."
+                                     ajax="false" 
+                                     action="#{pTDMB.abrirCriarCorrigirPTDEmBranco(usuarioMB.usuarioLogado)}"/>
+
+                </p:dialog>
+
+            </h:form>
+        </div>
+
+        <!-- Conteúdo da Tela -->
+        <font face="Calibri" 
+              size="6" 
+              color="#A8A8A8" 
+              style="margin: 10px; font-weight: 100;" 
+              styleClass="text">
+            Notificações
+        </font>
+
+        <div id="screen">
+
+            <h:form style="width: 100%;">
+                <center>
+                    <div id="contentEstilizado">
+
+                        <h:outputText value="PTDs Reprovados" 
+                                      styleClass="text01" 
+                                      style="margin: 0px 0px 0px 0px;"/>
+                        <br/>
+                        <h:dataTable  value="#{pTDMB.ptdsReprovados}" 
+                                      var="ptdReprovado"
+                                      style="border-spacing: 0pt; width: 100%;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Observações do diretor | Opções " 
+                                                  styleClass="text01"
+                                                  style="font-size: large;"/>
+                                    <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
+                                </f:facet>
+                                <h:panelGrid columns="1" 
+                                             style="width:100%; text-align: center;" >
+                                    <h:outputText value="#{ptdReprovado.campoObservacoesDiretorEnsino}" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; width: 90%;"/>
+                                    <br/>
+                                    <p:commandButton styleClass="botaoAzul" 
+                                                     value="Colocar em edição"
+                                                     ajax="false" 
+                                                     actionListener="#{pTDMB.abrirCriarCorrigirPTDAPartirDeUmReprovado(ptdReprovado)}"/>
+                                    <p:commandButton styleClass="botaoVermelho" 
+                                                     value="Descartar"
+                                                     ajax="false" 
+                                                     action="#{pTDMB.cancelarPTD(pTDMB.ptd, usuarioMB.usuarioLogado.idUsuario, 'notificacoes')}"/>
+                                    <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
+                                </h:panelGrid>
+                            </h:column>
+
+                        </h:dataTable>
+
+                    </div>
+                    <br/>
+                    <div id="contentEstilizado">
+
+                        <h:outputText value="PTDs Aprovados" 
+                                      styleClass="text01" 
+                                      style="margin: 0px 0px 0px 0px;"/>
+                        <br/>
+                        <h:dataTable  value="#{pTDMB.ptdsAprovados}" 
+                                      var="ptdAprovado"
+                                      style="border-spacing: 0pt; width: 100%;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Data aprovação | Responsável pela aprovação | Opções " 
+                                                  styleClass="text01"
+                                                  style="font-size: large;"/>
+                                    <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
+                                </f:facet>
+                                <h:panelGrid columns="1" 
+                                             style="width:100%; text-align: center;" >
+                                    <h:outputText value="#{ptdAprovado.dataAvaliacaoPTD}" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; width: 90%;">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                    <br/>
+                                    <h:outputText value="#{ptdAprovado.diretorEnsino.nomeCompleto}" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; width: 90%;"/>
+                                    <p:commandButton styleClass="botaoAzul" 
+                                                     value="Abrir"
+                                                     ajax="false"
+                                                     actionListener="#{pTDMB.abrirMostrarPTDAprovado(ptdAprovado)}"
+                                                     action="/MostrarPTDAprovado"/>
+                                    <p:commandButton styleClass="botaoAzul" 
+                                                     value="Concluir"
+                                                     ajax="false"
+                                                     actionListener="#{pTDMB.concluirPTD(ptdAprovado)}"
+                                                     action="#{pTDMB.abrirNotificacoesDocente(usuarioMB.usuarioLogado.idUsuario)}"/>
+                                    <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
+                                </h:panelGrid>
+                            </h:column>
+
+                        </h:dataTable>
+
+                    </div>
+
+                    <br/>
+                    <div id="contentEstilizado">
+
+                        <h:outputText value="PTDs Concluídos" 
+                                      styleClass="text01" 
+                                      style="margin: 0px 0px 0px 0px;"/>
+                        <br/>
+                        <h:dataTable  value="#{pTDMB.ptdsConcluídos}" 
+                                      var="ptdConcluido"
+                                      style="border-spacing: 0pt; width: 100%;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Data aprovação | Responsável pela aprovação | Opções " 
+                                                  styleClass="text01"
+                                                  style="font-size: large;"/>
+                                    <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
+                                </f:facet>
+                                <h:panelGrid columns="1" 
+                                             style="width:100%; text-align: center;" >
+                                    <h:outputText value="#{ptdConcluido.dataAvaliacaoPTD}" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; width: 90%;">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                    <br/>
+                                    <h:outputText value="#{ptdConcluido.diretorEnsino.nomeCompleto}" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; width: 90%;"/>
+                                    <p:commandButton styleClass="botaoAzul" 
+                                                     value="Imprimir"
+                                                     ajax="false"/>
+                                    <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
+                                </h:panelGrid>
+                            </h:column>
+
+                        </h:dataTable>
+
+                    </div>
+
+                </center>
+            </h:form>
+
+        </div>
+
+    </h:body>
+</html>
+

@@ -1,0 +1,300 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Tela Inicial</title>
+        <link rel="stylesheet" type="text/css" href="css/css.css"/>
+        <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
+    </h:head>
+    <h:body styleClass="body">
+
+        <!-- Barra de menu -->
+        <div id="barraMenu">
+            <font face="Calibri" 
+                  size="6" 
+                  color="white" 
+                  style="margin: 10px 10px; float:left; font-family: calibri, sans-serif; font-weight: 500;" styleClass="text">
+                SPTD
+            </font>
+
+            <h:form id="barraMenu">
+
+                <p:commandButton styleClass="opMenu"
+                                 iconPos="right"
+                                 icon="/img/Search/searchLarger_24.png"
+                                 value="Notificações"
+                                 ajax="false"
+                                 style="float: left;"/>
+
+                <p:commandButton id="logout"
+                                 image="img/fundo_login.png" 
+                                 styleClass="imgLogado"/>
+
+                <!-- Informações e Logout -->
+                <p:overlayPanel id="Usuário" 
+                                for="logout" 
+                                hideEffect="fade" 
+                                style="padding: 0px;">
+                    <h:outputText value="#{usuarioMB.usuarioLogado.email}" 
+                                  styleClass="text01"
+                                  style="color: #1785ad; font-weight: normal; font-size: large; margin: 0px;"/>
+                    <br/>
+                    <p:commandButton value="Meu perfil"
+                                     styleClass="opMenu"
+                                     style="margin: 0px;"
+                                     ajax="false" 
+                                     actionListener="#{diretorEnsinoMB.setDiretorEnsinoSelecionado(usuarioMB.usuarioLogado)}"
+                                     action="/PerfilDiretorEnsino"/>
+                    <br/> 
+                    <p:commandButton value="Legislação"
+                                     styleClass="opMenu"
+                                     style="margin: 5px 0px;"
+                                     ajax="false" 
+                                     actionListener="#{diretorEnsinoMB.setDiretorEnsino(usuarioMB.usuarioLogado)}"
+                                     action="/legislacao?faces-redirect=true"/>
+                    <br/>
+                    <p:commandButton value="Sair"
+                                     styleClass="opVermelhaMenu"
+                                     style="margin: 5px 0px;"
+                                     ajax="false" 
+                                     immediate="true"
+                                     actionListener="#{usuarioMB.realizarLogout()}"
+                                     action="/Login?faces-redirect=true"/>
+                </p:overlayPanel>
+
+                <h:outputText value="#{usuarioMB.usuarioLogado.nomeCompleto}" 
+                              styleClass="text01"
+                              style="color: white; float: right; font-weight: normal; font-size: large;"/>
+
+                <p:commandButton id="cursoButton"
+                                 styleClass="opMenu"
+                                 icon="/img/Search/searchLarger_24.png"
+                                 value="Gerenciar Cursos"/>
+
+                <!-- Caixa de "novo" PTD -->
+                <p:overlayPanel id="cursoPanel" 
+                                for="cursoButton" 
+                                hideEffect="fade" 
+                                style="padding: 0px;">
+                    <p:commandButton value="Adicionar curso"
+                                     styleClass="opMenu"
+                                     onclick="PF('addCursoDialog').show();"/>
+                    <br/>
+                    <p:commandButton value="Editar cursos"
+                                     styleClass="opMenu"
+                                     onclick="PF('edtCursoDialog').show();"/>
+                </p:overlayPanel>
+
+                <!-- Caixa para adicionar curso -->
+                <p:dialog header="Adicionar um Curso" 
+                          widgetVar="addCursoDialog" 
+                          modal="true"                              
+                          showEffect="fade" 
+                          hideEffect="fade" 
+                          resizable="false"
+                          >
+
+                    <h:outputText value="NOME CURSO" 
+                                  styleClass="text01"
+                                  style="margin: 10px 25px -10px 25px;"/>
+                    <br/>
+
+                    <p:inputText value="#{cursoMB.curso.nomeCurso}"/>
+
+                    <br/>
+                    <p:commandButton value="Salvar" 
+                                     styleClass="botaoAzul"
+                                     action="#{cursoMB.salvarCurso(usuarioMB.usuarioLogado.idUsuario)}"
+                                     ajax="false"/>
+
+                </p:dialog>
+
+                <!-- Caixa para editar cursos -->
+                <p:dialog header="Editar Cursos" 
+                          widgetVar="edtCursoDialog" 
+                          modal="true" 
+                          showEffect="fade" 
+                          hideEffect="fade" 
+                          resizable="false">
+
+                    <h:dataTable  value="#{cursoMB.cursos}" 
+                                  var="curso" 
+                                  style="width: 100%;"
+                                  headerClass="text-center"
+                                  footerClass="text-center">
+
+                        <f:facet name="header">
+                            <h:outputText value="" />
+                        </f:facet>
+
+                        <h:column>
+
+                            <f:facet name="header">
+                                <h:outputText value="NOME CURSO" 
+                                              styleClass="text01"/>
+                            </f:facet>
+                            <p:inputText value="#{curso.nomeCurso}"
+                                         style="margin: 0px;"/>
+
+                        </h:column>
+
+                        <h:column>
+
+                            <f:facet name="header">
+                                <h:outputText value="OPÇÃO" 
+                                              styleClass="text01"/>
+                            </f:facet>
+
+                            <p:commandButton styleClass="botaoCinza" 
+                                             style="float: left; font-size: 12pt; margin: 0px;" 
+                                             value="#{cursoMB.verificarEstadoCurso(curso)}" 
+                                             ajax="false" 
+                                             action="#{cursoMB.mudarEstadoCurso(curso)}"/>
+
+                        </h:column>
+
+                    </h:dataTable>
+
+                    <br/>
+                    <p:commandButton value="Salvar edição"
+                                     action="#{cursoMB.alterarCurso()}"
+                                     styleClass="botaoAzul"/>
+
+                </p:dialog>
+
+                <p:commandButton styleClass="opMenu"
+                                 icon="/img/Search/searchLarger_24.png"
+                                 value="Pesquisa"
+                                 ajax="false" 
+                                 actionListener="#{pTDASerMostradoMB.abrirTelaBuscarPTDs()}"
+                                 action="/BuscarPTDs"/>
+
+            </h:form>
+        </div>
+
+        <!-- Conteúdo da Tela -->
+        <font face="Calibri" 
+              size="6" 
+              color="#A8A8A8" 
+              style="margin: 10px; font-weight: 100;" 
+              styleClass="text">
+            Notificações
+        </font>
+
+        <div id="screen">
+            <h:form style="width: 100%;">
+                <center>
+
+                    <div id="contentEstilizado">
+                        <h:outputText value="PTDs em Avalição" 
+                                      styleClass="text01" 
+                                      style="margin: 0px ;"/>
+                        <br/>
+                        <h:dataTable  value="#{pTDMB.ptdsEmAvaliacao}" 
+                                      var="ptdEsperando"
+                                      style="border-spacing: 0pt; width: 100%;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+                            <f:facet name="header">
+                                <h:outputText value="Professor | Status | Ver PTD" 
+                                              styleClass="text01"
+                                              style="font-size: large;"/>
+                            </f:facet>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <hr size="1px" style="color: #A8A8A8; width: 100%; opacity: 0.5; margin: 0; float: bottom;"/>
+                                </f:facet>
+
+                                <div id="linha">
+                                    <h:panelGrid columns="3" 
+                                                 style="width:100%;" >
+
+                                        <p:commandLink action="#{pTDAvaliacaoMB.abrirPTDEmAvaliacao(ptdEsperando)}" 
+                                                       title="Ver PTD" 
+                                                       ajax="false" 
+                                                       immediate="true"
+                                                       style="width: 200px;"
+                                                       styleClass="link">
+                                            <h:outputText value="#{ptdEsperando.professor.nomeCompleto}"  
+                                                          styleClass="text01"
+                                                          style="color: #1AB5D9; font-size: large;"/>
+                                        </p:commandLink>
+                                        <h:outputText value="#{pTDAvaliacaoMB.verificacaoIrregularidadesNotificacoesDiretorEnsino(ptdEsperando)}"  
+                                                      styleClass="text01"
+                                                      style="font-size: large; width: 200px;"/>
+                                        <p:commandButton styleClass="botaoAzul" 
+                                                         style="margin: 5px 0px 5px; float: left;" 
+                                                         value="Abrir PTD"
+                                                         ajax="false" 
+                                                         immediate="true"
+                                                         action="#{pTDAvaliacaoMB.abrirPTDEmAvaliacao(ptdEsperando)}"/>
+
+                                    </h:panelGrid>
+                                </div>
+                                <hr size="1px" style="color: #A8A8A8; width: 100%; opacity: 0.5; margin: 0; float: bottom;"/>
+
+                            </h:column>
+
+                        </h:dataTable>
+
+                        <br/>
+                    </div>
+                    <br/>
+                    <div id="contentEstilizado">
+                        <h:outputText value="Professores a Habilitar" 
+                                      styleClass="text01" 
+                                      style="margin: 0px ;"/>
+                        <br/>
+                        <h:dataTable  value="#{pTDMB.professoresAHabilitar}" 
+                                      var="professorEsperando"
+                                      style="border-spacing: 0pt; width: 100%;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+                            <f:facet name="header">
+                                <h:outputText value="Professor | Opção" 
+                                              styleClass="text01"
+                                              style="font-size: large;"/>
+                            </f:facet>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <hr size="1px" style="color: #A8A8A8; width: 100%; opacity: 0.5; margin: 0; float: bottom;"/>
+                                </f:facet>
+
+                                <div id="linha">
+                                    <h:panelGrid columns="3" 
+                                                 style="width:100%;" >
+                                        
+                                        <h:outputText value="#{professorEsperando.nomeCompleto}"  
+                                                      styleClass="text01"
+                                                      style="font-size: large; width: 200px;"/>
+                                        <p:commandButton styleClass="botaoAzul" 
+                                                         style="margin: 5px 0px 5px; float: left;" 
+                                                         value="Habilitar"
+                                                         ajax="false" 
+                                                         actionListener="#{professorMB.habilitarProfessor(professorEsperando)}"
+                                                         action="#{pTDMB.abrirNotificacoesDiretorEnsino(usuarioMB.usuarioLogado.idUsuario)}"/>
+
+                                    </h:panelGrid>
+                                </div>
+                                <hr size="1px" style="color: #A8A8A8; width: 100%; opacity: 0.5; margin: 0; float: bottom;"/>
+
+                            </h:column>
+
+                        </h:dataTable>
+
+                        <br/>
+                    </div>
+
+                </center>
+            </h:form>
+        </div>
+
+    </h:body>
+</html>
+

@@ -1,0 +1,231 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cadastro de usuário</title>
+        <link rel="stylesheet" type="text/css" href="css/css.css"/>
+        <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
+    </h:head>
+
+    <script>
+        PrimeFaces.locales['pt'] = {
+            closeText: 'Fechar',
+            prevText: 'Anterior',
+            nextText: 'Próximo',
+            currentText: 'Começo',
+            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+            weekHeader: 'Semana',
+            firstDay: 0,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            timeOnlyTitle: 'Só Horas',
+            timeText: 'Tempo',
+            hourText: 'Hora',
+            minuteText: 'Minuto',
+            secondText: 'Segundo',
+            ampm: false,
+            month: 'Mês',
+            week: 'Semana',
+            day: 'Dia',
+            allDayText: 'Todo o Dia'
+        };
+    </script>
+
+    <h:body styleClass="body">
+
+        <!-- Barra de menu -->
+        <div id="barraMenu">
+            <font face="Calibri" 
+                  size="6" 
+                  color="white" 
+                  style="margin: 10px 10px; float:left; font-family: calibri, sans-serif; font-weight: 500;" styleClass="text">
+                SPTD
+            </font>
+
+            <h:form id="barraMenu">
+
+                <p:commandButton styleClass="opMenu"
+                                 iconPos="right"
+                                 icon="/img/Search/searchLarger_24.png"
+                                 value="Voltar"
+                                 action="/Login"
+                                 ajax="false"
+                                 style="float: left;"/>
+            </h:form>
+        </div>
+
+        <!-- Conteúdo da Tela -->
+        <font face="Calibri" 
+              size="6" 
+              color="#A8A8A8" 
+              style="margin: 20px; font-weight: 100;" 
+              styleClass="text">
+            Cadastro Docente
+        </font>
+
+        <div id="screen">
+
+            <h:form style="width: 100%;">
+
+                <center>
+                    <div id="contentEstilizado">
+
+                        <h:outputText value="Informações Gerais" 
+                                      styleClass="text01" />
+                        <hr size="1px" style="color: #1785ad; width: 90%; opacity: 0.5; margin: 0; float: bottom;"/>
+                        <br/>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Nome completo: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:inputText value="#{professorMB.professor.nomeCompleto}"
+                                         style="margin: 5px; font-size: large;"
+                                         styleClass="text01"/>
+                            <h:outputText value="Email: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:inputText value="#{professorMB.professor.email}"
+                                         style="margin: 5px; font-size: large;"
+                                         styleClass="text01"/>
+                            <h:outputText value="Senha: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:password value="#{professorMB.professor.senhaAlfanumerica}"
+                                        style="margin: 5px; font-size: large;"
+                                        styleClass="text01"/>
+                            <h:outputText value="Confirmação senha: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:password value="#{professorMB.confirmacaoSenha}"
+                                        style="margin: 5px; font-size: large;"
+                                        styleClass="text01"/>
+                        </h:panelGrid>
+                        <br/>
+                        <h:outputText value="Perfil Docente" 
+                                      styleClass="text01" />
+                        <hr size="1px" style="color: #1785ad; width: 90%; opacity: 0.5; margin: 0; float: bottom;"/>
+                        <br/>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Matrícula SIAPE: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:inputText value="#{professorMB.professor.matriculaSIAPE}"
+                                         style="margin: 5px; font-size: large;"
+                                         styleClass="text01"/>
+                            <h:outputText value="Regime de trabalho: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:selectOneRadio value="#{professorMB.professor.regimeTrabalho}" 
+                                              style="font-size: large;"
+                                              styleClass="text01"
+                                              layout="grid" 
+                                              columns="1">
+                                <f:selectItem itemLabel=" Dedicação Exclusiva" 
+                                              itemValue="Dedicação Exclusiva" />
+                                <f:selectItem itemLabel=" 40 horas" 
+                                              itemValue="40h" />
+                                <f:selectItem itemLabel=" 20 horas" 
+                                              itemValue="20h" />
+                            </p:selectOneRadio>
+                            <h:outputText value="Tipo de contrato: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:selectOneRadio value="#{professorMB.professor.tipoContrato}" 
+                                              layout="grid" columns="1"
+                                              style="font-size: large;"
+                                              styleClass="text01">
+                                <f:selectItem itemLabel=" Efetivo" 
+                                              itemValue="Efetivo" />
+                                <f:selectItem itemLabel=" Temporário" 
+                                              itemValue="Temporario" />
+                            </p:selectOneRadio>
+                            <h:outputText value="Data de contratação: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:calendar value="#{professorMB.professor.dataContratacao}" 
+                                        mode="popup" 
+                                        locale="pt"
+                                        size="17"/>
+                        </h:panelGrid>
+                        <br/>
+
+                        <p:commandButton id="botaoAcao"
+                                         update="botaoAcao"
+                                         styleClass="botaoAzul" 
+                                         style="border-radius: 30px; font-size: large; margin-left: 10px;" 
+                                         value="Cadastrar"
+                                         onclick="PF('#{professorMB.verificarPossibilidadeCadastro()}').show();"/>
+
+                    </div>
+
+                </center>
+
+                <!-- Temporizador -->
+                <p:poll interval="1" update="erros"/>
+
+                <!-- Caixa de confirmação de cadastro -->
+                <p:dialog header="Confirmar cadastro" 
+                          widgetVar="confirmarCadastroDocenteDialog" 
+                          modal="true" 
+                          showEffect="fade" 
+                          hideEffect="fade" 
+                          resizable="false">
+
+                    <h:outputText value="Cadastro concluído. Após a liberação do diretor de ensino você estará livre para acessar!" 
+                                  styleClass="text01"
+                                  style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                    <br/>
+
+                    <p:commandButton styleClass="botaoAzul" 
+                                     value="Confirmar"
+                                     ajax="false"
+                                     action="#{professorMB.salvarProfessor()}"/>
+
+                </p:dialog>
+
+                <!-- Caixa de aviso de erro -->
+                <p:dialog header="Não permitido" 
+                          widgetVar="erroCadastroDocenteDialog" 
+                          modal="true" 
+                          showEffect="fade" 
+                          hideEffect="fade" 
+                          resizable="false">
+
+                    <h:outputText value="O cadastro ainda não pode devido aos erros indicados" 
+                                  styleClass="text01"
+                                  style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                    <br/>
+
+                    <h:dataTable  id="erros"
+                                  value="#{professorMB.errosCadastroProfessor}" 
+                                  var="erroCadastro" 
+                                  style="width: auto;"
+                                  headerClass="text-center"
+                                  footerClass="text-center">
+
+                        <h:column>
+                            <f:facet name="header">
+
+                            </f:facet>
+                            <h:outputText value="#{erroCadastro}" 
+                                          styleClass="text01"
+                                          style="font-size: large; color: #C92345; width: 400px;"/>
+                        </h:column>
+                    </h:dataTable>
+
+                </p:dialog>
+
+            </h:form>
+
+        </div>
+
+    </h:body>
+</html>
