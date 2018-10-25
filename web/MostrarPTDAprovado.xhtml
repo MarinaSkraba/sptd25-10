@@ -738,11 +738,12 @@
 
                     <!-- Mostrar atividades administrativas -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.ptdAprovado.administrativas}" 
-                                      var="administracao" 
-                                      style="border-spacing: 0pt; width: 100%;"
-                                      headerClass="text-center"
-                                      footerClass="text-center">
+                        <h:dataTable  
+                            value="#{pTDMB.ptdAprovado.administrativas}" 
+                            var="administracao" 
+                            style="border-spacing: 0pt; width: 100%;"
+                            headerClass="text-center"
+                            footerClass="text-center">
 
                             <h:column>
                                 <f:facet name="header">
@@ -1147,10 +1148,10 @@
 
                     <br/>
 
-                    <h:commandLink>
-                        <p:graphicImage name="/demo/images/pdf.png" width="24"/>
-                        <p:dataExporter type="pdf" target="tbl2" fileName="PTD" options="#{pTDASerMostradoMB.pdfOpt}" />
-                    </h:commandLink>
+                    <h:commandButton value="Biaxar">
+                        <!--                        <p:graphicImage name="/demo/images/pdf.png" width="24"/>-->
+                        <p:dataExporter type="pdf" target="mostrarTabela" fileName="PTD" options="#{pTDASerMostradoMB.pdfOpt}" />
+                    </h:commandButton>
                     <br/>
 
                     <!-- Caixa de reprovação de PTD -->
