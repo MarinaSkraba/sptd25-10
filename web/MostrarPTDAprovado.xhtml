@@ -142,13 +142,13 @@
 
                     <!-- Mostrar atividades aulas -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.ptdAprovado.aulas}" 
+                        <p:dataTable  id="funcionapls"
+                                      value="#{pTDMB.ptdAprovado.aulas}" 
                                       var="aula" 
                                       style="border-spacing: 0pt; width: 100%;"
-                                      headerClass="text-center"
-                                      footerClass="text-center">
+                                      >
 
-                            <h:column>
+                            <p:column sortBy="#{aula.curso.nomeCurso}">
                                 <f:facet name="header">
                                     <h:outputText value="CURSO" 
                                                   styleClass="text01"
@@ -157,8 +157,8 @@
                                 <h:outputText value="#{aula.curso.nomeCurso}" 
                                               styleClass="text01"
                                               style="font-size: large;"/>
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column sortBy="#{aula.componenteCurricular}">
                                 <f:facet name="header">
                                     <h:outputText value="COMPONENTE CURRICULAR" 
                                                   styleClass="text01"
@@ -167,8 +167,8 @@
                                 <h:outputText value="#{aula.componenteCurricular}"
                                               styleClass="text01"
                                               style="font-size: large;" />
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column sortBy="#{aula.cargaHorariaTotal}">
                                 <f:facet name="header">
                                     <h:outputText value="CARGA HORÁRIA TOTAL" 
                                                   styleClass="text01"
@@ -177,8 +177,8 @@
                                 <h:outputText value="#{aula.cargaHorariaTotal}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <!-- Tabela para títulos de horários -->
                                     <h:outputText value="HORÁRIO"
@@ -201,36 +201,35 @@
                                 </f:facet>
 
                                 <!-- Tabela para o conteúdo de horários -->
-                                <h:dataTable  value="#{aula.horariosAula}" 
+                                <p:dataTable  id="horarioAula"
+                                              value="#{aula.horariosAula}" 
                                               var="horario" 
-                                              headerClass="text-center"
-                                              footerClass="text-center"
                                               style="width: 100%;">
 
-                                    <h:column>
+                                    <p:column sortBy="#{horario.diaSemana}">
                                         <h:outputText value="#{horario.diaSemana}" 
                                                       styleClass="text01"
                                                       style="font-size: large;"/>
-                                    </h:column>
-                                    <h:column>
+                                    </p:column>
+                                    <p:column sortBy="#{horario.horaInicio}">
                                         <h:outputText value="#{horario.horaInicio}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
-                                    </h:column>
-                                    <h:column>
+                                    </p:column>
+                                    <p:column sortBy="#{horario.horaTermino}">
                                         <h:outputText value="#{horario.horaTermino}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
-                                    </h:column>
+                                    </p:column>
 
-                                </h:dataTable>
+                                </p:dataTable>
 
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
 
                                 <f:facet name="header">
                                     <h:outputText value="ORGANIZAÇÃO" 
@@ -241,9 +240,9 @@
                                               styleClass="text01"
                                               style="font-size: large;"/>
 
-                            </h:column>
+                            </p:column>
 
-                        </h:dataTable>
+                        </p:dataTable>
                     </div>
                     <center>
                         <div id="justificativaIrregularidade">
@@ -263,13 +262,13 @@
 
                     <!-- Mostrar atividades manutenção de ensino -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.ptdAprovado.manutencoesEnsino}" 
+                        <p:dataTable  id="funcionapl"
+                                      value="#{pTDMB.ptdAprovado.manutencoesEnsino}" 
                                       var="manutencao" 
                                       style="border-spacing: 0pt; width: 100%;"
-                                      headerClass="text-center"
-                                      footerClass="text-center">
+                                      >
 
-                            <h:column>
+                            <p:column sortBy="#{manutencao.tipoManutencao}">
                                 <f:facet name="header">
                                     <h:outputText value="TIPO DE ATIVIDADE" 
                                                   styleClass="text01"
@@ -278,8 +277,8 @@
                                 <h:outputText value="#{manutencao.tipoManutencao.rotulo}"
                                               styleClass="text01"
                                               style="font-size: large;" />
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column sortBy="#{manutencao.cargaHorariaSemanalManutencaoEnsino}">
                                 <f:facet name="header">
                                     <h:outputText value="CARGA HORÁRIA SEMANAL" 
                                                   styleClass="text01"
@@ -288,8 +287,8 @@
                                 <h:outputText value="#{manutencao.cargaHorariaSemanalManutencaoEnsino}" 
                                               styleClass="text01"
                                               style="font-size: large;"/>
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <!-- Tabela para títulos de horários -->
                                     <h:outputText value="HORÁRIO"
@@ -312,36 +311,34 @@
                                 </f:facet>
 
                                 <!-- Tabela para o conteúdo de horários -->
-                                <h:dataTable  value="#{manutencao.horariosManutecao}" 
+                                <p:dataTable  value="#{manutencao.horariosManutecao}" 
                                               var="horario" 
-                                              headerClass="text-center"
-                                              footerClass="text-center"
                                               style="width: 100%;">
 
-                                    <h:column>
+                                    <p:column sortBy="#{horario.diaSemana}">
                                         <h:outputText value="#{horario.diaSemana}" 
                                                       styleClass="text01"
                                                       style="font-size: large;"/>
-                                    </h:column>
-                                    <h:column>
+                                    </p:column>
+                                    <p:column sortBy="#{horario.horaInicio}">
                                         <h:outputText value="#{horario.horaInicio}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
-                                    </h:column>
-                                    <h:column>
+                                    </p:column>
+                                    <p:column sortBy="#{horario.horaTermino}">
                                         <h:outputText value="#{horario.horaTermino}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
-                                    </h:column>
+                                    </p:column>
 
-                                </h:dataTable>
+                                </p:dataTable>
 
-                            </h:column>
-                        </h:dataTable>
+                            </p:column>
+                        </p:dataTable>
                     </div>
                     <center>
                         <div id="justificativaIrregularidade">
@@ -363,13 +360,12 @@
 
                     <!-- Mostrar atividades apoio ao ensino -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.ptdAprovado.apoios}" 
+                        <p:dataTable  value="#{pTDMB.ptdAprovado.apoios}" 
                                       var="apoio" 
                                       style="border-spacing: 0pt; width: 100%;"
-                                      headerClass="text-center"
-                                      footerClass="text-center">
+                                      >
 
-                            <h:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="TIPO DE ATIVIDADE" 
                                                   styleClass="text01"
@@ -378,8 +374,8 @@
                                 <h:outputText value="#{apoio.tipoApoio.rotulo}"
                                               styleClass="text01"
                                               style="font-size: large;" />
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="CARGA HORÁRIA SEMANAL" 
                                                   styleClass="text01"
@@ -388,8 +384,8 @@
                                 <h:outputText value="#{apoio.cargaHorariaSemanalApoio}" 
                                               styleClass="text01"
                                               style="font-size: large;"/>
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <!-- Tabela para títulos de horários -->
                                     <h:outputText value="HORÁRIO"
@@ -412,36 +408,34 @@
                                 </f:facet>
 
                                 <!-- Tabela para o conteúdo de horários -->
-                                <h:dataTable  value="#{apoio.horariosApoio}" 
-                                              var="horario" 
-                                              headerClass="text-center"
-                                              footerClass="text-center"
+                                <p:dataTable  value="#{apoio.horariosApoio}" 
+                                              var="horario"
                                               style="width: 100%;">
 
-                                    <h:column>
+                                    <p:column>
                                         <h:outputText value="#{horario.diaSemana}" 
                                                       styleClass="text01"
                                                       style="font-size: large;"/>
-                                    </h:column>
-                                    <h:column>
+                                    </p:column>
+                                    <p:column>
                                         <h:outputText value="#{horario.horaInicio}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
-                                    </h:column>
-                                    <h:column>
+                                    </p:column>
+                                    <p:column>
                                         <h:outputText value="#{horario.horaTermino}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
-                                    </h:column>
+                                    </p:column>
 
-                                </h:dataTable>
+                                </p:dataTable>
 
-                            </h:column>
-                        </h:dataTable>
+                            </p:column>
+                        </p:dataTable>
                     </div>
                     <center>
                         <div id="justificativaIrregularidade">
@@ -469,13 +463,12 @@
 
                     <!-- Mostrar atividades pesquisa e/ou extensão (Autor) -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.participacoesAutorPTDAprovado}" 
+                        <p:dataTable  value="#{pTDMB.participacoesAutorPTDAprovado}" 
                                       var="participacaoPesquisaExtensaoAutor" 
                                       style="border-spacing: 0pt; width: 100%;"
-                                      headerClass="text-center"
-                                      footerClass="text-center">
+                                      >
 
-                            <h:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="PROCESSO" 
                                                   styleClass="text01"
@@ -484,8 +477,8 @@
                                 <h:outputText value="#{participacaoPesquisaExtensaoAutor.projetoPesquisaExtensao.numeroProcesso}" 
                                               styleClass="text01"
                                               style="font-size: large;"/>
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="TÍTULO" 
                                                   styleClass="text01"
@@ -495,8 +488,8 @@
                                 <h:outputText value="#{participacaoPesquisaExtensaoAutor.projetoPesquisaExtensao.tituloProcesso}"
                                               styleClass="text01"
                                               style="font-size: large;" />
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="CARGA HORÁRIA SEMANAL" 
                                                   styleClass="text01"
@@ -505,8 +498,8 @@
                                 <h:outputText value="#{participacaoPesquisaExtensaoAutor.cargaHorariaSemanalParticipacao}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <!-- Tabela para títulos de horários -->
                                     <h:outputText value="HORÁRIO"
@@ -529,36 +522,34 @@
                                 </f:facet>
 
                                 <!-- Tabela para o conteúdo de horários -->
-                                <h:dataTable  value="#{participacaoPesquisaExtensaoAutor.horariosParticipacao}" 
+                                <p:dataTable  value="#{participacaoPesquisaExtensaoAutor.horariosParticipacao}" 
                                               var="horario" 
-                                              headerClass="text-center"
-                                              footerClass="text-center"
                                               style="width: 100%;">
 
-                                    <h:column>
+                                    <p:column>
                                         <h:outputText value="#{horario.diaSemana}" 
                                                       styleClass="text01"
                                                       style="font-size: large;"/>
-                                    </h:column>
-                                    <h:column>
+                                    </p:column>
+                                    <p:column>
                                         <h:outputText value="#{horario.horaInicio}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
-                                    </h:column>
-                                    <h:column>
+                                    </p:column>
+                                    <p:column>
                                         <h:outputText value="#{horario.horaTermino}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
-                                    </h:column>
+                                    </p:column>
 
-                                </h:dataTable>
+                                </p:dataTable>
 
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="PREVISÃO DE CONCLUSÃO" 
                                                   styleClass="text01"
@@ -569,8 +560,8 @@
                                               style="font-size: large;">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                                 </h:outputText>
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="INSTITUIÇÃO ONDE A PESQUISA É DESENVOLVIDA" 
                                                   styleClass="text01"
@@ -579,8 +570,8 @@
                                 <h:outputText value="#{participacaoPesquisaExtensaoAutor.projetoPesquisaExtensao.instituicaoPesquisa}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
-                            </h:column>
-                        </h:dataTable>
+                            </p:column>
+                        </p:dataTable>
                     </div>
                     <center>
                         <div id="justificativaIrregularidade">
@@ -600,13 +591,12 @@
 
                     <!-- Mostrar atividades pesquisa e/ou extensão (Colaborador) -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.participacoesColabPTDAprovado}" 
+                        <p:dataTable  value="#{pTDMB.participacoesColabPTDAprovado}" 
                                       var="participacaoPesquisaExtensaoColab" 
                                       style="border-spacing: 0pt; width: 100%;"
-                                      headerClass="text-center"
-                                      footerClass="text-center">
+                                      >
 
-                            <h:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="PROCESSO" 
                                                   styleClass="text01"
@@ -615,8 +605,8 @@
                                 <h:outputText value="#{participacaoPesquisaExtensaoColab.projetoPesquisaExtensao.numeroProcesso}" 
                                               styleClass="text01"
                                               style="font-size: large;"/>
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="TÍTULO" 
                                                   styleClass="text01"
@@ -625,8 +615,8 @@
                                 <h:outputText value="#{participacaoPesquisaExtensaoColab.projetoPesquisaExtensao.tituloProcesso}"
                                               styleClass="text01"
                                               style="font-size: large;" />
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="CARGA HORÁRIA SEMANAL" 
                                                   styleClass="text01"
@@ -635,8 +625,8 @@
                                 <h:outputText value="#{participacaoPesquisaExtensaoColab.cargaHorariaSemanalParticipacao}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <!-- Tabela para títulos de horários -->
                                     <h:outputText value="HORÁRIO"
@@ -659,36 +649,34 @@
                                 </f:facet>
 
                                 <!-- Tabela para o conteúdo de horários -->
-                                <h:dataTable  value="#{participacaoPesquisaExtensaoColab.horariosParticipacao}" 
+                                <p:dataTable  value="#{participacaoPesquisaExtensaoColab.horariosParticipacao}" 
                                               var="horario" 
-                                              headerClass="text-center"
-                                              footerClass="text-center"
                                               style="width: 100%;">
 
-                                    <h:column>
+                                    <p:column>
                                         <h:outputText value="#{horario.diaSemana}" 
                                                       styleClass="text01"
                                                       style="font-size: large;"/>
-                                    </h:column>
-                                    <h:column>
+                                    </p:column>
+                                    <p:column>
                                         <h:outputText value="#{horario.horaInicio}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
-                                    </h:column>
-                                    <h:column>
+                                    </p:column>
+                                    <p:column>
                                         <h:outputText value="#{horario.horaTermino}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
-                                    </h:column>
+                                    </p:column>
 
-                                </h:dataTable>
+                                </p:dataTable>
 
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="PREVISÃO DE CONCLUSÃO" 
                                                   styleClass="text01"
@@ -699,8 +687,8 @@
                                               style="font-size: large;">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                                 </h:outputText>
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="INSTITUIÇÃO ONDE A PESQUISA É DESENVOLVIDA" 
                                                   styleClass="text01"
@@ -709,8 +697,8 @@
                                 <h:outputText value="#{participacaoPesquisaExtensaoColab.projetoPesquisaExtensao.instituicaoPesquisa}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
-                            </h:column>
-                        </h:dataTable>
+                            </p:column>
+                        </p:dataTable>
                     </div>
                     <center>
                         <div id="justificativaIrregularidade">
@@ -738,14 +726,13 @@
 
                     <!-- Mostrar atividades administrativas -->
                     <div id="mostrarTabela">
-                        <h:dataTable  
+                        <p:dataTable  
                             value="#{pTDMB.ptdAprovado.administrativas}" 
                             var="administracao" 
                             style="border-spacing: 0pt; width: 100%;"
-                            headerClass="text-center"
-                            footerClass="text-center">
+                            >
 
-                            <h:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="TIPO DE ATIVIDADE" 
                                                   styleClass="text01"
@@ -754,8 +741,8 @@
                                 <h:outputText value="#{administracao.tipoAdministracao}"
                                               styleClass="text01"
                                               style="font-size: large;" />
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="CARGA HORÁRIA SEMANAL" 
                                                   styleClass="text01"
@@ -764,8 +751,8 @@
                                 <h:outputText value="#{administracao.cargaHorariaSemanalAdministracao}" 
                                               styleClass="text01"
                                               style="font-size: large;"/>
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <!-- Tabela para títulos de horários -->
                                     <h:outputText value="HORÁRIO"
@@ -788,36 +775,34 @@
                                 </f:facet>
 
                                 <!-- Tabela para o conteúdo de horários -->
-                                <h:dataTable  value="#{administracao.horariosAdministracao}" 
+                                <p:dataTable  value="#{administracao.horariosAdministracao}" 
                                               var="horario" 
-                                              headerClass="text-center"
-                                              footerClass="text-center"
                                               style="width: 100%;">
 
-                                    <h:column>
+                                    <p:column>
                                         <h:outputText value="#{horario.diaSemana}" 
                                                       styleClass="text01"
                                                       style="font-size: large;"/>
-                                    </h:column>
-                                    <h:column>
+                                    </p:column>
+                                    <p:column>
                                         <h:outputText value="#{horario.horaInicio}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
-                                    </h:column>
-                                    <h:column>
+                                    </p:column>
+                                    <p:column>
                                         <h:outputText value="#{horario.horaTermino}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
-                                    </h:column>
+                                    </p:column>
 
-                                </h:dataTable>
+                                </p:dataTable>
 
-                            </h:column>
-                        </h:dataTable>
+                            </p:column>
+                        </p:dataTable>
                     </div>
                     <center>
                         <div id="justificativaIrregularidade">
@@ -845,13 +830,12 @@
 
                     <!-- Mostrar outras atividades desenvolvidas no campus -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.ptdAprovado.outrosTiposAtividades}" 
+                        <p:dataTable  value="#{pTDMB.ptdAprovado.outrosTiposAtividades}" 
                                       var="outrasAtividades" 
                                       style="border-spacing: 0pt; width: 100%;"
-                                      headerClass="text-center"
-                                      footerClass="text-center">
+                                      >
 
-                            <h:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="ATIVIDADE" 
                                                   styleClass="text01"
@@ -860,8 +844,8 @@
                                 <h:outputText value="#{outrasAtividades.rotulo}"
                                               styleClass="text01"
                                               style="font-size: large;" />
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="PERIODICIDADE" 
                                                   styleClass="text01"
@@ -871,8 +855,8 @@
                                               styleClass="text01"
                                               style="font-size: large;"/>
 
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="CARGA HORÁRIA SEMANAL" 
                                                   styleClass="text01"
@@ -881,9 +865,9 @@
                                 <h:outputText value="#{outrasAtividades.cargaHorariaSemanalOutroTipoAtividade}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
-                            </h:column>
+                            </p:column>
 
-                            <h:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <!-- Tabela para títulos de horários -->
                                     <h:outputText value="HORÁRIO"
@@ -906,36 +890,34 @@
                                 </f:facet>
 
                                 <!-- Tabela para o conteúdo de horários -->
-                                <h:dataTable  value="#{outrasAtividades.horariosOutroTipoAtividade}" 
+                                <p:dataTable  value="#{outrasAtividades.horariosOutroTipoAtividade}" 
                                               var="horario" 
-                                              headerClass="text-center"
-                                              footerClass="text-center"
                                               style="width: 100%;">
 
-                                    <h:column>
+                                    <p:column>
                                         <h:outputText value="#{horario.diaSemana}" 
                                                       styleClass="text01"
                                                       style="font-size: large;"/>
-                                    </h:column>
-                                    <h:column>
+                                    </p:column>
+                                    <p:column>
                                         <h:outputText value="#{horario.horaInicio}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
-                                    </h:column>
-                                    <h:column>
+                                    </p:column>
+                                    <p:column>
                                         <h:outputText value="#{horario.horaTermino}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
-                                    </h:column>
+                                    </p:column>
 
-                                </h:dataTable>
+                                </p:dataTable>
 
-                            </h:column>
-                        </h:dataTable>
+                            </p:column>
+                        </p:dataTable>
                     </div>
                     <center>
                         <div id="justificativaIrregularidade">
@@ -960,13 +942,11 @@
                     </h:panelGrid>
                     <!-- Mostrar atividades que pretende propor -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.ptdAprovado.atividadesASeremPropostas}" 
+                        <p:dataTable  value="#{pTDMB.ptdAprovado.atividadesASeremPropostas}" 
                                       var="atividadeASerProposta" 
-                                      style="border-spacing: 0pt; width: 100%;"
-                                      headerClass="text-center"
-                                      footerClass="text-center">
+                                      style="border-spacing: 0pt; width: 100%;">
 
-                            <h:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="ATIVIDADE" 
                                                   styleClass="text01"
@@ -975,8 +955,8 @@
                                 <h:outputText value="#{atividadeASerProposta.rotulo}"
                                               styleClass="text01"
                                               style="font-size: large;" />
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="PERIODICIDADE" 
                                                   styleClass="text01"
@@ -986,8 +966,8 @@
                                               styleClass="text01"
                                               style="font-size: large;"/>
 
-                            </h:column>
-                            <h:column>
+                            </p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="CARGA HORÁRIA SEMANAL" 
                                                   styleClass="text01"
@@ -996,9 +976,9 @@
                                 <h:outputText value="#{atividadeASerProposta.cargaHorariaSemanalAtividadeASerProposta}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
-                            </h:column>
+                            </p:column>
 
-                            <h:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <!-- Tabela para títulos de horários -->
                                     <h:outputText value="HORÁRIO"
@@ -1021,36 +1001,34 @@
                                 </f:facet>
 
                                 <!-- Tabela para o conteúdo de horários -->
-                                <h:dataTable  value="#{atividadeASerProposta.horariosAtividadesASerProposta}" 
-                                              var="horario" 
-                                              headerClass="text-center"
-                                              footerClass="text-center"
+                                <p:dataTable  value="#{atividadeASerProposta.horariosAtividadesASerProposta}" 
+                                              var="horario"
                                               style="width: 100%;">
 
-                                    <h:column>
+                                    <p:column>
                                         <h:outputText value="#{horario.diaSemana}" 
                                                       styleClass="text01"
                                                       style="font-size: large;"/>
-                                    </h:column>
-                                    <h:column>
+                                    </p:column>
+                                    <p:column>
                                         <h:outputText value="#{horario.horaInicio}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
-                                    </h:column>
-                                    <h:column>
+                                    </p:column>
+                                    <p:column>
                                         <h:outputText value="#{horario.horaTermino}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
-                                    </h:column>
+                                    </p:column>
 
-                                </h:dataTable>
+                                </p:dataTable>
 
-                            </h:column>
-                        </h:dataTable>
+                            </p:column>
+                        </p:dataTable>
                     </div>
 
                     <center>
@@ -1148,9 +1126,9 @@
 
                     <br/>
 
-                    <h:commandButton value="Biaxar">
-                        <!--                        <p:graphicImage name="/demo/images/pdf.png" width="24"/>-->
-                        <p:dataExporter type="pdf" target="mostrarTabela" fileName="PTD" options="#{pTDASerMostradoMB.pdfOpt}" />
+                    <h:commandButton value="Baixar PDF" styleClass="botaoAzul">
+                        <p:dataExporter type="pdf" encoding="iso-8859-1" target="funcionapls" fileName="PTD" />
+
                     </h:commandButton>
                     <br/>
 
