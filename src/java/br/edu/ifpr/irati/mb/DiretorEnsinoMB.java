@@ -21,7 +21,9 @@ public class DiretorEnsinoMB {
     private DiretorEnsino diretorEnsinoSelecionado;
     private PTD ptd;
     private List<PTD> ptds;
+    private List<String> errosCadastroDiretorEnsino;
     private List<String> errosEdicaoDiretorEnsino;
+    private String confirmacaoSenha;
     private String confirmacaoSenhaSelecionado;
 
     public DiretorEnsinoMB() {
@@ -29,19 +31,42 @@ public class DiretorEnsinoMB {
         ptd = new PTD();
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptds = ptdDAO.buscarTodos(PTD.class);
+        errosCadastroDiretorEnsino = new ArrayList<>();
         errosEdicaoDiretorEnsino = new ArrayList<>();
         diretorEnsino = new DiretorEnsino();
         diretorEnsinoSelecionado = new DiretorEnsino();
+        confirmacaoSenha = "";
         confirmacaoSenhaSelecionado = "";
 
     }
 
-    public void salvarDiretorEnsino() {
+    public String salvarDiretorEnsino() throws HashGenerationException {
 
+        String senhaSHA512 = "";
         Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
-        if (getDiretorEnsino().getEmail().contains("@ifpr.edu.br") == true) {
-            diretorEnsinoDAO.salvar(getDiretorEnsino());
-            setDiretorEnsino(new DiretorEnsino());
+        diretorEnsino.setEstadoUsuario("AHabilitar");
+        senhaSHA512 = Digest.hashString(diretorEnsino.getSenhaAlfanumerica(), "SHA-512");
+        diretorEnsino.setSenhaAlfanumerica(senhaSHA512);
+        diretorEnsinoDAO.salvar(diretorEnsino);
+        diretorEnsino = new DiretorEnsino();
+        return "/Login?faces-redirect=true";
+
+    }
+    
+    public String verificarPossibilidadeCadastroDiretorEnsino() {
+
+        String nomeCaixaRetorno = "";
+
+        if (getErrosEdicaoDiretorEnsino().isEmpty() == false) {
+
+            nomeCaixaRetorno = "erroCadastroDiretorEnsinoDialog";
+            return nomeCaixaRetorno;
+
+        } else {
+
+            nomeCaixaRetorno = "confirmarCadastroDiretorEnsinoDialog";
+            return nomeCaixaRetorno;
+            
         }
 
     }
@@ -137,7 +162,7 @@ public class DiretorEnsinoMB {
     public List<String> getErrosEdicaoDiretorEnsino() {
         errosEdicaoDiretorEnsino = new ArrayList<>();
         
-        if (getDiretorEnsinoSelecionado().getSenhaAlfanumerica().length() < 8 | getDiretorEnsino().getSenhaAlfanumerica().length() > 16) {
+        if (getDiretorEnsinoSelecionado().getSenhaAlfanumerica().length() < 8 | getDiretorEnsinoSelecionado().getSenhaAlfanumerica().length() > 16) {
 
             errosEdicaoDiretorEnsino.add("Sua senha deve conter entre  8 a 16 caracteres");
 
@@ -213,5 +238,71 @@ public class DiretorEnsinoMB {
      */
     public void setConfirmacaoSenhaSelecionado(String confirmacaoSenhaSelecionado) {
         this.confirmacaoSenhaSelecionado = confirmacaoSenhaSelecionado;
+    }
+
+    /**
+     * @return the errosCadastroDiretorEnsino
+     */
+    public List<String> getErrosCadastroDiretorEnsino() {
+        errosCadastroDiretorEnsino = new ArrayList<>();
+        
+        if (getDiretorEnsino().getSenhaAlfanumerica().length() < 8 | getDiretorEnsino().getSenhaAlfanumerica().length() > 16) {
+
+            errosCadastroDiretorEnsino.add("Sua senha deve conter entre  8 a 16 caracteres");
+
+        } else if (getDiretorEnsino().getSenhaAlfanumerica().equals(getConfirmacaoSenha()) == false) {
+
+            errosCadastroDiretorEnsino.add("As senhas informadas não coincidem");
+
+        }
+        Date dataAtual = new Date();
+        if (getDiretorEnsino().getDataContratacao().after(dataAtual)) {
+
+            errosCadastroDiretorEnsino.add("A data que você inseriu como sua data de contratação "
+                    + "é posterior a data atual");
+
+        } else if (getDiretorEnsino().getEmail().contains("@ifpr.edu.br") == false) {
+
+            errosCadastroDiretorEnsino.add("O email deve ser institucional(@ifpr.edu.br)");
+
+        } else if (diretorEnsino.getEmail().equalsIgnoreCase("")) {
+
+            errosCadastroDiretorEnsino.add("O campo 'Email' deve ser obrigatoriamente preenchido");
+
+        } else if (diretorEnsino.getNomeCompleto().equalsIgnoreCase("")) {
+
+            errosCadastroDiretorEnsino.add("O campo 'Nome completo' deve ser obrigatoriamente preenchido");
+
+        } else if (diretorEnsino.getSenhaAlfanumerica().equalsIgnoreCase("")) {
+
+            errosCadastroDiretorEnsino.add("O campo 'Senha' deve ser obrigatoriamente preenchido");
+
+        } else if (confirmacaoSenha.equalsIgnoreCase("")) {
+
+            errosCadastroDiretorEnsino.add("O campo 'Confirmação senha' deve ser obrigatoriamente preenchido");
+
+        }
+        return errosCadastroDiretorEnsino;
+    }
+
+    /**
+     * @param errosCadastroDiretorEnsino the errosCadastroDiretorEnsino to set
+     */
+    public void setErrosCadastroDiretorEnsino(List<String> errosCadastroDiretorEnsino) {
+        this.errosCadastroDiretorEnsino = errosCadastroDiretorEnsino;
+    }
+
+    /**
+     * @return the confirmacaoSenha
+     */
+    public String getConfirmacaoSenha() {
+        return confirmacaoSenha;
+    }
+
+    /**
+     * @param confirmacaoSenha the confirmacaoSenha to set
+     */
+    public void setConfirmacaoSenha(String confirmacaoSenha) {
+        this.confirmacaoSenha = confirmacaoSenha;
     }
 }

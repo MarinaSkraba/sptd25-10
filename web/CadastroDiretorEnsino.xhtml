@@ -9,6 +9,36 @@
         <link rel="stylesheet" type="text/css" href="css/css.css"/>
         <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     </h:head>
+
+    <script>
+        PrimeFaces.locales['pt'] = {
+            closeText: 'Fechar',
+            prevText: 'Anterior',
+            nextText: 'Próximo',
+            currentText: 'Começo',
+            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+            weekHeader: 'Semana',
+            firstDay: 0,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            timeOnlyTitle: 'Só Horas',
+            timeText: 'Tempo',
+            hourText: 'Hora',
+            minuteText: 'Minuto',
+            secondText: 'Segundo',
+            ampm: false,
+            month: 'Mês',
+            week: 'Semana',
+            day: 'Dia',
+            allDayText: 'Todo o Dia'
+        };
+    </script>
+
     <h:body styleClass="body">
 
         <!-- Barra de menu -->
@@ -25,44 +55,10 @@
                 <p:commandButton styleClass="opMenu"
                                  iconPos="right"
                                  icon="/img/Search/searchLarger_24.png"
-                                 value="Notificações"
-                                 action="/NotificacoesDocente"
+                                 value="Voltar"
+                                 action="/Login"
+                                 ajax="false"
                                  style="float: left;"/>
-
-                <p:commandButton id="logout"
-                                 image="img/fundo_login.png" 
-                                 styleClass="imgLogado"/>
-
-                <!-- Informações e Logout -->
-                <p:overlayPanel id="Usuário" 
-                                for="logout" 
-                                hideEffect="fade" 
-                                style="padding: 0px;">
-                    <h:outputText value="#{usuarioMB.usuarioLogado.email}" 
-                                  styleClass="text01"
-                                  style="color: #1785ad; font-weight: normal; font-size: large;"/>
-                    <br/>
-                    <!-- Link para acesso ao perfil -->
-                    <p:commandLink style="width: 200px; margin: 5px;"
-                                   styleClass="link"
-                                   >
-                        <h:outputText value="Meu perfil"  
-                                      styleClass="text01"
-                                      style="color: #1AB5D9; font-size: large;"/>
-                    </p:commandLink>
-                    <br/>
-                    <p:commandButton value="Sair"
-                                     styleClass="opVermelhaMenu"
-                                     ajax="false" 
-                                     immediate="true"
-                                     actionListener="#{usuarioMB.realizarLogout()}"
-                                     action="/Login?faces-redirect=true"/>
-                </p:overlayPanel>
-
-                <h:outputText value="#{usuarioMB.usuarioLogado.nomeCompleto}" 
-                              styleClass="text01"
-                              style="color: white; float: right; font-weight: normal; font-size: large;"/>
-
             </h:form>
         </div>
 
@@ -78,33 +74,107 @@
         <div id="screen">
 
             <h:form style="width: 100%;">
+
                 <center>
                     <div id="contentEstilizado">
 
-                        
+                        <h:outputText value="Informações Gerais" 
+                                      styleClass="text01" />
+                        <hr size="1px" style="color: #1785ad; width: 90%; opacity: 0.5; margin: 0; float: bottom;"/>
+                        <br/>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Nome completo: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:inputText value="#{diretorEnsinoMB.diretorEnsino.nomeCompleto}"
+                                         style="margin: 5px; font-size: large;"
+                                         styleClass="text01"/>
+                            <h:outputText value="Email: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:inputText value="#{diretorEnsinoMB.diretorEnsino.email}"
+                                         style="margin: 5px; font-size: large;"
+                                         styleClass="text01"/>
+                            <h:outputText value="Senha: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:password value="#{diretorEnsinoMB.diretorEnsino.senhaAlfanumerica}"
+                                        style="margin: 5px; font-size: large;"
+                                        styleClass="text01"/>
+                            <h:outputText value="Confirmação senha: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:password value="#{diretorEnsinoMB.confirmacaoSenha}"
+                                        style="margin: 5px; font-size: large;"
+                                        styleClass="text01"/>
+                        </h:panelGrid>
+
+                        <p:commandButton id="botaoAcao"
+                                         update="botaoAcao"
+                                         styleClass="botaoAzul" 
+                                         style="border-radius: 30px; font-size: large; margin-left: 10px;" 
+                                         value="Cadastrar"
+                                         onclick="PF('#{diretorEnsinoMB.verificarPossibilidadeCadastroDiretorEnsino()}').show();"/>
 
                     </div>
+
                 </center>
-                
+
+                <!-- Temporizador -->
+                <p:poll interval="1" update="erros"/>
+
                 <!-- Caixa de confirmação de cadastro -->
                 <p:dialog header="Confirmar cadastro" 
-                          widgetVar="confirmarCadastroDialog" 
+                          widgetVar="confirmarCadastroDiretorEnsinoDialog" 
                           modal="true" 
                           showEffect="fade" 
                           hideEffect="fade" 
                           resizable="false">
 
-                    <h:outputText value="" 
+                    <h:outputText value="Cadastro concluído. Após a liberação do diretor de ensino você estará livre para acessar!" 
                                   styleClass="text01"
-                                  style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                                  style="margin: 10px; font-size: large; width: 400px;"/>
                     <br/>
 
                     <p:commandButton styleClass="botaoAzul" 
                                      value="Confirmar"
-                                     ajax="false"/>
+                                     ajax="false"
+                                     action="#{diretorEnsinoMB.salvarDiretorEnsino()}"/>
 
                 </p:dialog>
-                
+
+                <!-- Caixa de aviso de erro -->
+                <p:dialog header="Não permitido" 
+                          widgetVar="erroCadastroDiretorEnsinoDialog" 
+                          modal="true" 
+                          showEffect="fade" 
+                          hideEffect="fade" 
+                          resizable="false">
+
+                    <h:outputText value="O cadastro ainda não pode devido aos erros indicados" 
+                                  styleClass="text01"
+                                  style="margin: 10px; font-size: large; width: 400px;"/>
+                    <br/>
+
+                    <h:dataTable  id="erros"
+                                  value="#{diretorEnsinoMB.errosCadastroDiretorEnsino}" 
+                                  var="erroCadastro" 
+                                  style="width: auto;"
+                                  headerClass="text-center"
+                                  footerClass="text-center">
+
+                        <h:column>
+                            <f:facet name="header">
+
+                            </f:facet>
+                            <h:outputText value="#{erroCadastro}" 
+                                          styleClass="text01"
+                                          style="font-size: large; color: #C92345; width: 400px;"/>
+                        </h:column>
+                    </h:dataTable>
+
+                </p:dialog>
+
             </h:form>
 
         </div>

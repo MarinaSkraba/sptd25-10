@@ -81,7 +81,7 @@
                                      actionListener="#{usuarioMB.realizarLogout()}"
                                      action="/Login?faces-redirect=true"/>
                 </p:overlayPanel>
-                
+
                 <h:outputText value="#{usuarioMB.usuarioLogado.nomeCompleto}" 
                               styleClass="text01"
                               style="color: white; float: right; font-weight: normal; font-size: large;"/>
@@ -158,13 +158,38 @@
                         <br/>
 
                         <p:commandButton styleClass="botaoAzul" 
-                                         style="border-radius: 30px; font-size: large; margin-left: 10px;" 
+                                         style="border-radius: 30px; font-size: large; margin: 10px;" 
                                          value="Editar Informações"
                                          ajax="false"
                                          action="/EditarPerfilDocente"/>
+                        <p:commandButton styleClass="botaoVermelho" 
+                                         style="border-radius: 30px; font-size: large; margin: 10px;" 
+                                         value="Desativar conta"
+                                         onclick="PF('confirmarDesabilitacaoDocenteDialog').show();"/>
 
                     </div>
                 </center>
+
+                <!-- Caixa de confirmação de desabilitação da conta -->
+                <p:dialog header="Confirmar cadastro" 
+                          widgetVar="confirmarDesabilitacaoDocenteDialog" 
+                          modal="true" 
+                          showEffect="fade" 
+                          hideEffect="fade" 
+                          resizable="false">
+
+                    <h:outputText value="Você realmente deseja desativar sua conta? Ao desativar sua conta você poderá ativá-la realizando uma tentativa de login, assim será enviada uma solicitação para o diretor de ensino que poderá habilitar sua conta novamente." 
+                                  styleClass="text01"
+                                  style="margin: 10px; font-size: large; width: 400px;"/>
+                    <br/>
+
+                    <p:commandButton styleClass="botaoAzul" 
+                                     value="Confirmar"
+                                     ajax="false"
+                                     actionListener="#{professorMB.desabilitarProfessor(professorMB.professorSelecionado)}"
+                                     action="/Login?faces-redirect=true"/>
+
+                </p:dialog>
 
             </h:form>
 

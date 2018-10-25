@@ -419,11 +419,10 @@ body{
     align-items: center;
     flex-direction: row;
     border-width: 2pt;
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(255,255,255,0.9);
     border-radius: 500px;
     justify-content: center; 
     box-shadow: 5px 5px 5px rgba(0,0,0,0.7);
-    -webkit-box-shadow: inset 0 0 10px #1785ad;
 }
 .botaoLogin{
     color: #7497A3;
