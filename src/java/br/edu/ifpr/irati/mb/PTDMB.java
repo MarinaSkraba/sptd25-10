@@ -578,7 +578,7 @@ public class PTDMB {
 
                     for (Horario hap : ap.getHorariosApoio()) {
                         if (hadm.getDiaSemana().equals(hap.getDiaSemana())) {
-                            if ((hadm.getHoraInicio().getTime() < hap.getHoraTermino().getTime() && hadm.getHoraInicio().getTime() >= hap.getHoraInicio().getTime()) | (hadm.getHoraTermino().getTime() <= hap.getHoraTermino().getTime() && hadm.getHoraTermino().getTime() >= hap.getHoraInicio().getTime())) {
+                            if ((hadm.getHoraInicio().getTime() < hap.getHoraTermino().getTime() && hadm.getHoraInicio().getTime() >= hap.getHoraInicio().getTime()) | (hadm.getHoraTermino().getTime() <= hap.getHoraTermino().getTime() && hadm.getHoraTermino().getTime() > hap.getHoraInicio().getTime())) {
 
                                 errosTabelaAdministrativas.add("Há conflitos entre horários de execução com "
                                         + "os horários na seção Apoio ao Ensino");
@@ -593,7 +593,7 @@ public class PTDMB {
 
                     for (Horario ha : a.getHorariosAula()) {
                         if (hadm.getDiaSemana().equals(ha.getDiaSemana())) {
-                            if ((hadm.getHoraInicio().getTime() < ha.getHoraTermino().getTime() && hadm.getHoraInicio().getTime() >= ha.getHoraInicio().getTime()) | (hadm.getHoraTermino().getTime() <= ha.getHoraTermino().getTime() && hadm.getHoraTermino().getTime() >= ha.getHoraInicio().getTime())) {
+                            if ((hadm.getHoraInicio().getTime() < ha.getHoraTermino().getTime() && hadm.getHoraInicio().getTime() >= ha.getHoraInicio().getTime()) | (hadm.getHoraTermino().getTime() <= ha.getHoraTermino().getTime() && hadm.getHoraTermino().getTime() > ha.getHoraInicio().getTime())) {
 
                                 errosTabelaAdministrativas.add("Há conflitos entre horários de execução com "
                                         + "os horários na seção Aulas");
@@ -607,7 +607,7 @@ public class PTDMB {
 
                         for (Horario hme : mE.getHorariosManutecao()) {
                             if (hadm.getDiaSemana().equals(hme.getDiaSemana())) {
-                                if ((hadm.getHoraInicio().getTime() < hme.getHoraTermino().getTime() && hadm.getHoraInicio().getTime() >= hme.getHoraInicio().getTime()) | (hadm.getHoraTermino().getTime() <= hme.getHoraTermino().getTime() && hadm.getHoraTermino().getTime() >= hme.getHoraInicio().getTime())) {
+                                if ((hadm.getHoraInicio().getTime() < hme.getHoraTermino().getTime() && hadm.getHoraInicio().getTime() >= hme.getHoraInicio().getTime()) | (hadm.getHoraTermino().getTime() <= hme.getHoraTermino().getTime() && hadm.getHoraTermino().getTime() > hme.getHoraInicio().getTime())) {
 
                                     errosTabelaAdministrativas.add("Há conflitos entre horários de execução com "
                                             + "os horários na seção Manutenção ao Ensino");
@@ -620,7 +620,7 @@ public class PTDMB {
 
                         for (Horario hota : oTA.getHorariosOutroTipoAtividade()) {
                             if (hadm.getDiaSemana().equals(hota.getDiaSemana())) {
-                                if ((hadm.getHoraInicio().getTime() < hota.getHoraTermino().getTime() && hadm.getHoraInicio().getTime() >= hota.getHoraInicio().getTime()) | (hadm.getHoraTermino().getTime() <= hota.getHoraTermino().getTime() && hadm.getHoraTermino().getTime() >= hota.getHoraInicio().getTime())) {
+                                if ((hadm.getHoraInicio().getTime() < hota.getHoraTermino().getTime() && hadm.getHoraInicio().getTime() >= hota.getHoraInicio().getTime()) | (hadm.getHoraTermino().getTime() <= hota.getHoraTermino().getTime() && hadm.getHoraTermino().getTime() > hota.getHoraInicio().getTime())) {
 
                                     errosTabelaAdministrativas.add("Há conflitos entre horários de execução com "
                                             + "os horários na seção Outras atividades desenvolvidas no campus");
@@ -635,7 +635,7 @@ public class PTDMB {
 
                         for (Horario hp : p.getHorariosParticipacao()) {
                             if (hadm.getDiaSemana().equals(hp.getDiaSemana())) {
-                                if ((hadm.getHoraInicio().getTime() < hp.getHoraTermino().getTime() && hadm.getHoraInicio().getTime() >= hp.getHoraInicio().getTime()) | (hadm.getHoraTermino().getTime() <= hp.getHoraTermino().getTime() && hadm.getHoraTermino().getTime() >= hp.getHoraInicio().getTime())) {
+                                if ((hadm.getHoraInicio().getTime() < hp.getHoraTermino().getTime() && hadm.getHoraInicio().getTime() >= hp.getHoraInicio().getTime()) | (hadm.getHoraTermino().getTime() <= hp.getHoraTermino().getTime() && hadm.getHoraTermino().getTime() > hp.getHoraInicio().getTime())) {
 
                                     errosTabelaAdministrativas.add("Há conflitos entre horários de execução com "
                                             + "os horários na seções de participação em Projetos de Pesquisa e/ou Extensão ");
@@ -679,7 +679,7 @@ public class PTDMB {
 
                     for (Horario hadmin : adm.getHorariosAdministracao()) {
                         if (hapoio.getDiaSemana().equals(hadmin.getDiaSemana())) {
-                            if ((hapoio.getHoraInicio().getTime() < hadmin.getHoraTermino().getTime() && hapoio.getHoraInicio().getTime() >= hadmin.getHoraInicio().getTime()) | (hapoio.getHoraTermino().getTime() <= hadmin.getHoraTermino().getTime() && hapoio.getHoraTermino().getTime() >= hadmin.getHoraInicio().getTime())) {
+                            if ((hapoio.getHoraInicio().getTime() < hadmin.getHoraTermino().getTime() && hapoio.getHoraInicio().getTime() >= hadmin.getHoraInicio().getTime()) | (hapoio.getHoraTermino().getTime() <= hadmin.getHoraTermino().getTime() && hapoio.getHoraTermino().getTime() > hadmin.getHoraInicio().getTime())) {
 
                                 errosTabelaApoioEnsino.add("Há conflitos entre horários de execução com "
                                         + "os horários na seção de Atividades Administrativas");
@@ -693,7 +693,7 @@ public class PTDMB {
 
                     for (Horario ha : a.getHorariosAula()) {
                         if (hapoio.getDiaSemana().equals(ha.getDiaSemana())) {
-                            if ((hapoio.getHoraInicio().getTime() < ha.getHoraTermino().getTime() && hapoio.getHoraInicio().getTime() >= ha.getHoraInicio().getTime()) | (hapoio.getHoraTermino().getTime() <= ha.getHoraTermino().getTime() && hapoio.getHoraTermino().getTime() >= ha.getHoraInicio().getTime())) {
+                            if ((hapoio.getHoraInicio().getTime() < ha.getHoraTermino().getTime() && hapoio.getHoraInicio().getTime() >= ha.getHoraInicio().getTime()) | (hapoio.getHoraTermino().getTime() <= ha.getHoraTermino().getTime() && hapoio.getHoraTermino().getTime() > ha.getHoraInicio().getTime())) {
 
                                 errosTabelaApoioEnsino.add("Há conflitos entre horários de execução com "
                                         + "os horários na seção Aulas");
@@ -707,7 +707,7 @@ public class PTDMB {
 
                     for (Horario hme : mE.getHorariosManutecao()) {
                         if (hapoio.getDiaSemana().equals(hme.getDiaSemana())) {
-                            if ((hapoio.getHoraInicio().getTime() < hme.getHoraTermino().getTime() && hapoio.getHoraInicio().getTime() >= hme.getHoraInicio().getTime()) | (hapoio.getHoraTermino().getTime() <= hme.getHoraTermino().getTime() && hapoio.getHoraTermino().getTime() >= hme.getHoraInicio().getTime())) {
+                            if ((hapoio.getHoraInicio().getTime() < hme.getHoraTermino().getTime() && hapoio.getHoraInicio().getTime() >= hme.getHoraInicio().getTime()) | (hapoio.getHoraTermino().getTime() <= hme.getHoraTermino().getTime() && hapoio.getHoraTermino().getTime() > hme.getHoraInicio().getTime())) {
 
                                 errosTabelaApoioEnsino.add("Há conflitos entre horários de execução com "
                                         + "os horários na seção Manutenção ao Ensino");
@@ -720,7 +720,7 @@ public class PTDMB {
 
                     for (Horario hota : oTA.getHorariosOutroTipoAtividade()) {
                         if (hapoio.getDiaSemana().equals(hota.getDiaSemana())) {
-                            if ((hapoio.getHoraInicio().getTime() < hota.getHoraTermino().getTime() && hapoio.getHoraInicio().getTime() >= hota.getHoraInicio().getTime()) | (hapoio.getHoraTermino().getTime() <= hota.getHoraTermino().getTime() && hapoio.getHoraTermino().getTime() >= hota.getHoraInicio().getTime())) {
+                            if ((hapoio.getHoraInicio().getTime() < hota.getHoraTermino().getTime() && hapoio.getHoraInicio().getTime() >= hota.getHoraInicio().getTime()) | (hapoio.getHoraTermino().getTime() <= hota.getHoraTermino().getTime() && hapoio.getHoraTermino().getTime() > hota.getHoraInicio().getTime())) {
 
                                 errosTabelaApoioEnsino.add("Há conflitos entre horários de execução com "
                                         + "os horários na seção Outros atividades desenvolvidas no campus");
@@ -734,7 +734,7 @@ public class PTDMB {
 
                     for (Horario hp : p.getHorariosParticipacao()) {
                         if (hapoio.getDiaSemana().equals(hp.getDiaSemana())) {
-                            if ((hapoio.getHoraInicio().getTime() < hp.getHoraTermino().getTime() && hapoio.getHoraInicio().getTime() >= hp.getHoraInicio().getTime()) | (hapoio.getHoraTermino().getTime() <= hp.getHoraTermino().getTime() && hapoio.getHoraTermino().getTime() >= hp.getHoraInicio().getTime())) {
+                            if ((hapoio.getHoraInicio().getTime() < hp.getHoraTermino().getTime() && hapoio.getHoraInicio().getTime() >= hp.getHoraInicio().getTime()) | (hapoio.getHoraTermino().getTime() <= hp.getHoraTermino().getTime() && hapoio.getHoraTermino().getTime() > hp.getHoraInicio().getTime())) {
 
                                 errosTabelaApoioEnsino.add("Há conflitos entre horários de execução com "
                                         + "os horários na seções de participação em Projetos de Pesquisa e/ou Extensão ");
@@ -832,7 +832,7 @@ public class PTDMB {
 
                     for (Horario hadmin : adm.getHorariosAdministracao()) {
                         if (ha.getDiaSemana().equals(hadmin.getDiaSemana())) {
-                            if ((ha.getHoraInicio().getTime() < hadmin.getHoraTermino().getTime() && ha.getHoraInicio().getTime() >= hadmin.getHoraInicio().getTime()) | (ha.getHoraTermino().getTime() <= hadmin.getHoraTermino().getTime() && ha.getHoraTermino().getTime() >= hadmin.getHoraInicio().getTime())) {
+                            if ((ha.getHoraInicio().getTime() < hadmin.getHoraTermino().getTime() && ha.getHoraInicio().getTime() >= hadmin.getHoraInicio().getTime()) | (ha.getHoraTermino().getTime() <= hadmin.getHoraTermino().getTime() && ha.getHoraTermino().getTime() > hadmin.getHoraInicio().getTime())) {
 
                                 errosTabelaAula.add("Há conflitos entre horários de execução com "
                                         + "os horários na seção de Atividades Administrativas");
@@ -846,7 +846,7 @@ public class PTDMB {
 
                     for (Horario hap : ap.getHorariosApoio()) {
                         if (ha.getDiaSemana().equals(hap.getDiaSemana())) {
-                            if ((ha.getHoraInicio().getTime() < hap.getHoraTermino().getTime() && ha.getHoraInicio().getTime() >= hap.getHoraInicio().getTime()) | (ha.getHoraTermino().getTime() <= hap.getHoraTermino().getTime() && ha.getHoraTermino().getTime() >= hap.getHoraInicio().getTime())) {
+                            if ((ha.getHoraInicio().getTime() < hap.getHoraTermino().getTime() && ha.getHoraInicio().getTime() >= hap.getHoraInicio().getTime()) | (ha.getHoraTermino().getTime() <= hap.getHoraTermino().getTime() && ha.getHoraTermino().getTime() > hap.getHoraInicio().getTime())) {
 
                                 errosTabelaAula.add("Há conflitos entre horários de execução com "
                                         + "os horários na seção Apoio ao Ensino");
@@ -860,7 +860,7 @@ public class PTDMB {
 
                     for (Horario hme : mE.getHorariosManutecao()) {
                         if (ha.getDiaSemana().equals(hme.getDiaSemana())) {
-                            if ((ha.getHoraInicio().getTime() < hme.getHoraTermino().getTime() && ha.getHoraInicio().getTime() >= hme.getHoraInicio().getTime()) | (ha.getHoraTermino().getTime() <= hme.getHoraTermino().getTime() && ha.getHoraTermino().getTime() >= hme.getHoraInicio().getTime())) {
+                            if ((ha.getHoraInicio().getTime() < hme.getHoraTermino().getTime() && ha.getHoraInicio().getTime() >= hme.getHoraInicio().getTime()) | (ha.getHoraTermino().getTime() <= hme.getHoraTermino().getTime() && ha.getHoraTermino().getTime() > hme.getHoraInicio().getTime())) {
 
                                 errosTabelaAula.add("Há conflitos entre horários de execução com "
                                         + "os horários na seção Manutenção ao Ensino");
@@ -873,7 +873,7 @@ public class PTDMB {
 
                     for (Horario hota : oTA.getHorariosOutroTipoAtividade()) {
                         if (ha.getDiaSemana().equals(hota.getDiaSemana())) {
-                            if ((ha.getHoraInicio().getTime() < hota.getHoraTermino().getTime() && ha.getHoraInicio().getTime() >= hota.getHoraInicio().getTime()) | (ha.getHoraTermino().getTime() <= hota.getHoraTermino().getTime() && ha.getHoraTermino().getTime() >= hota.getHoraInicio().getTime())) {
+                            if ((ha.getHoraInicio().getTime() < hota.getHoraTermino().getTime() && ha.getHoraInicio().getTime() >= hota.getHoraInicio().getTime()) | (ha.getHoraTermino().getTime() <= hota.getHoraTermino().getTime() && ha.getHoraTermino().getTime() > hota.getHoraInicio().getTime())) {
 
                                 errosTabelaAula.add("Há conflitos entre horários de execução com "
                                         + "os horários na seção Outras atividades desenvolvidas no campus");
@@ -887,7 +887,7 @@ public class PTDMB {
 
                     for (Horario hp : p.getHorariosParticipacao()) {
                         if (ha.getDiaSemana().equals(hp.getDiaSemana())) {
-                            if ((ha.getHoraInicio().getTime() < hp.getHoraTermino().getTime() && ha.getHoraInicio().getTime() >= hp.getHoraInicio().getTime()) | (ha.getHoraTermino().getTime() <= hp.getHoraTermino().getTime() && ha.getHoraTermino().getTime() >= hp.getHoraInicio().getTime())) {
+                            if ((ha.getHoraInicio().getTime() < hp.getHoraTermino().getTime() && ha.getHoraInicio().getTime() >= hp.getHoraInicio().getTime()) | (ha.getHoraTermino().getTime() <= hp.getHoraTermino().getTime() && ha.getHoraTermino().getTime() > hp.getHoraInicio().getTime())) {
 
                                 errosTabelaAula.add("Há conflitos entre horários de execução com "
                                         + "os horários na seções de participação em Projetos de Pesquisa e/ou Extensão ");
@@ -934,7 +934,7 @@ public class PTDMB {
 
                     for (Horario hadmin : adm.getHorariosAdministracao()) {
                         if (hME.getDiaSemana().equals(hadmin.getDiaSemana())) {
-                            if ((hME.getHoraInicio().getTime() < hadmin.getHoraTermino().getTime() && hME.getHoraInicio().getTime() >= hadmin.getHoraInicio().getTime()) | (hME.getHoraTermino().getTime() <= hadmin.getHoraTermino().getTime() && hME.getHoraTermino().getTime() >= hadmin.getHoraInicio().getTime())) {
+                            if ((hME.getHoraInicio().getTime() < hadmin.getHoraTermino().getTime() && hME.getHoraInicio().getTime() >= hadmin.getHoraInicio().getTime()) | (hME.getHoraTermino().getTime() <= hadmin.getHoraTermino().getTime() && hME.getHoraTermino().getTime() > hadmin.getHoraInicio().getTime())) {
 
                                 errosTabelaManuEnsino.add("Há conflitos entre horários de execução com "
                                         + "os horários na seção de Atividades Administrativas");
@@ -948,7 +948,7 @@ public class PTDMB {
 
                     for (Horario hap : ap.getHorariosApoio()) {
                         if (hME.getDiaSemana().equals(hap.getDiaSemana())) {
-                            if ((hME.getHoraInicio().getTime() < hap.getHoraTermino().getTime() && hME.getHoraInicio().getTime() >= hap.getHoraInicio().getTime()) | (hME.getHoraTermino().getTime() <= hap.getHoraTermino().getTime() && hME.getHoraTermino().getTime() >= hap.getHoraInicio().getTime())) {
+                            if ((hME.getHoraInicio().getTime() < hap.getHoraTermino().getTime() && hME.getHoraInicio().getTime() >= hap.getHoraInicio().getTime()) | (hME.getHoraTermino().getTime() <= hap.getHoraTermino().getTime() && hME.getHoraTermino().getTime() > hap.getHoraInicio().getTime())) {
 
                                 errosTabelaManuEnsino.add("Há conflitos entre horários de execução com "
                                         + "os horários na seção Apoio ao Ensino");
@@ -962,7 +962,7 @@ public class PTDMB {
 
                     for (Horario haula : aula.getHorariosAula()) {
                         if (hME.getDiaSemana().equals(haula.getDiaSemana())) {
-                            if ((hME.getHoraInicio().getTime() < haula.getHoraTermino().getTime() && hME.getHoraInicio().getTime() >= haula.getHoraInicio().getTime()) | (hME.getHoraTermino().getTime() <= haula.getHoraTermino().getTime() && hME.getHoraTermino().getTime() >= haula.getHoraInicio().getTime())) {
+                            if ((hME.getHoraInicio().getTime() < haula.getHoraTermino().getTime() && hME.getHoraInicio().getTime() >= haula.getHoraInicio().getTime()) | (hME.getHoraTermino().getTime() <= haula.getHoraTermino().getTime() && hME.getHoraTermino().getTime() > haula.getHoraInicio().getTime())) {
 
                                 errosTabelaManuEnsino.add("Há conflitos entre horários de execução com"
                                         + " os horários na seção Aulas");
@@ -975,7 +975,7 @@ public class PTDMB {
 
                     for (Horario hoTa : oTa.getHorariosOutroTipoAtividade()) {
                         if (hME.getDiaSemana().equals(hoTa.getDiaSemana())) {
-                            if ((hME.getHoraInicio().getTime() < hoTa.getHoraTermino().getTime() && hME.getHoraInicio().getTime() >= hoTa.getHoraInicio().getTime()) | (hME.getHoraTermino().getTime() <= hoTa.getHoraTermino().getTime() && hME.getHoraTermino().getTime() >= hoTa.getHoraInicio().getTime())) {
+                            if ((hME.getHoraInicio().getTime() < hoTa.getHoraTermino().getTime() && hME.getHoraInicio().getTime() >= hoTa.getHoraInicio().getTime()) | (hME.getHoraTermino().getTime() <= hoTa.getHoraTermino().getTime() && hME.getHoraTermino().getTime() > hoTa.getHoraInicio().getTime())) {
 
                                 errosTabelaManuEnsino.add("Há conflitos entre horários de execução com "
                                         + "os horários na seção Outros atividades desenvolvidas no campus");
@@ -988,7 +988,7 @@ public class PTDMB {
 
                     for (Horario hp : p.getHorariosParticipacao()) {
                         if (hME.getDiaSemana().equals(hp.getDiaSemana())) {
-                            if ((hME.getHoraInicio().getTime() < hp.getHoraTermino().getTime() && hME.getHoraInicio().getTime() >= hp.getHoraInicio().getTime()) | (hME.getHoraTermino().getTime() <= hp.getHoraTermino().getTime() && hME.getHoraTermino().getTime() >= hp.getHoraInicio().getTime())) {
+                            if ((hME.getHoraInicio().getTime() < hp.getHoraTermino().getTime() && hME.getHoraInicio().getTime() >= hp.getHoraInicio().getTime()) | (hME.getHoraTermino().getTime() <= hp.getHoraTermino().getTime() && hME.getHoraTermino().getTime() > hp.getHoraInicio().getTime())) {
 
                                 errosTabelaManuEnsino.add("Há conflitos entre horários de execução com "
                                         + "os horários na seções de participação em Projetos de Pesquisa e/ou Extensão ");
@@ -1029,7 +1029,7 @@ public class PTDMB {
 
                     for (Horario hadmin : adm.getHorariosAdministracao()) {
                         if (hoTa.getDiaSemana().equals(hadmin.getDiaSemana())) {
-                            if ((hoTa.getHoraInicio().getTime() < hadmin.getHoraTermino().getTime() && hoTa.getHoraInicio().getTime() >= hadmin.getHoraInicio().getTime()) | (hoTa.getHoraTermino().getTime() <= hadmin.getHoraTermino().getTime() && hoTa.getHoraTermino().getTime() >= hadmin.getHoraInicio().getTime())) {
+                            if ((hoTa.getHoraInicio().getTime() < hadmin.getHoraTermino().getTime() && hoTa.getHoraInicio().getTime() >= hadmin.getHoraInicio().getTime()) | (hoTa.getHoraTermino().getTime() <= hadmin.getHoraTermino().getTime() && hoTa.getHoraTermino().getTime() > hadmin.getHoraInicio().getTime())) {
 
                                 errosTabelaOutrasAtividades.add("Há conflitos entre horários de execução com "
                                         + "os horários na seção de Atividades Administrativas");
@@ -1043,7 +1043,7 @@ public class PTDMB {
 
                     for (Horario hap : ap.getHorariosApoio()) {
                         if (hoTa.getDiaSemana().equals(hap.getDiaSemana())) {
-                            if ((hoTa.getHoraInicio().getTime() < hap.getHoraTermino().getTime() && hoTa.getHoraInicio().getTime() >= hap.getHoraInicio().getTime()) | (hoTa.getHoraTermino().getTime() <= hap.getHoraTermino().getTime() && hoTa.getHoraTermino().getTime() >= hap.getHoraInicio().getTime())) {
+                            if ((hoTa.getHoraInicio().getTime() < hap.getHoraTermino().getTime() && hoTa.getHoraInicio().getTime() >= hap.getHoraInicio().getTime()) | (hoTa.getHoraTermino().getTime() <= hap.getHoraTermino().getTime() && hoTa.getHoraTermino().getTime() > hap.getHoraInicio().getTime())) {
 
                                 errosTabelaOutrasAtividades.add("Há conflitos entre horários de execução com "
                                         + "os horários na seção Apoio ao Ensino");
@@ -1057,7 +1057,7 @@ public class PTDMB {
 
                     for (Horario hme : mE.getHorariosManutecao()) {
                         if (hoTa.getDiaSemana().equals(hme.getDiaSemana())) {
-                            if ((hoTa.getHoraInicio().getTime() < hme.getHoraTermino().getTime() && hoTa.getHoraInicio().getTime() >= hme.getHoraInicio().getTime()) | (hoTa.getHoraTermino().getTime() <= hme.getHoraTermino().getTime() && hoTa.getHoraTermino().getTime() >= hme.getHoraInicio().getTime())) {
+                            if ((hoTa.getHoraInicio().getTime() < hme.getHoraTermino().getTime() && hoTa.getHoraInicio().getTime() >= hme.getHoraInicio().getTime()) | (hoTa.getHoraTermino().getTime() <= hme.getHoraTermino().getTime() && hoTa.getHoraTermino().getTime() > hme.getHoraInicio().getTime())) {
 
                                 errosTabelaOutrasAtividades.add("Há conflitos entre horários de execução com "
                                         + "os horários na seção Manutenção ao Ensino");
@@ -1070,7 +1070,7 @@ public class PTDMB {
 
                     for (Horario haulas : aula.getHorariosAula()) {
                         if (hoTa.getDiaSemana().equals(haulas.getDiaSemana())) {
-                            if ((hoTa.getHoraInicio().getTime() < haulas.getHoraTermino().getTime() && hoTa.getHoraInicio().getTime() >= haulas.getHoraInicio().getTime()) | (hoTa.getHoraTermino().getTime() <= haulas.getHoraTermino().getTime() && hoTa.getHoraTermino().getTime() >= haulas.getHoraInicio().getTime())) {
+                            if ((hoTa.getHoraInicio().getTime() < haulas.getHoraTermino().getTime() && hoTa.getHoraInicio().getTime() >= haulas.getHoraInicio().getTime()) | (hoTa.getHoraTermino().getTime() <= haulas.getHoraTermino().getTime() && hoTa.getHoraTermino().getTime() > haulas.getHoraInicio().getTime())) {
 
                                 errosTabelaOutrasAtividades.add("Há conflitos entre horários de execução com "
                                         + "os horários na seção Aula");
@@ -1084,7 +1084,7 @@ public class PTDMB {
 
                     for (Horario hp : p.getHorariosParticipacao()) {
                         if (hoTa.getDiaSemana().equals(hp.getDiaSemana())) {
-                            if ((hoTa.getHoraInicio().getTime() < hp.getHoraTermino().getTime() && hoTa.getHoraInicio().getTime() >= hp.getHoraInicio().getTime()) | (hoTa.getHoraTermino().getTime() <= hp.getHoraTermino().getTime() && hoTa.getHoraTermino().getTime() >= hp.getHoraInicio().getTime())) {
+                            if ((hoTa.getHoraInicio().getTime() < hp.getHoraTermino().getTime() && hoTa.getHoraInicio().getTime() >= hp.getHoraInicio().getTime()) | (hoTa.getHoraTermino().getTime() <= hp.getHoraTermino().getTime() && hoTa.getHoraTermino().getTime() > hp.getHoraInicio().getTime())) {
 
                                 errosTabelaOutrasAtividades.add("Há conflitos entre horários de execução com "
                                         + "os horários nas seções de participação em Projetos de Pesquisa e/ou Extensão ");
@@ -1125,7 +1125,7 @@ public class PTDMB {
 
                         for (Horario hadmin : adm.getHorariosAdministracao()) {
                             if (hpartAutor.getDiaSemana().equals(hadmin.getDiaSemana())) {
-                                if ((hpartAutor.getHoraInicio().getTime() < hadmin.getHoraTermino().getTime() && hpartAutor.getHoraInicio().getTime() >= hadmin.getHoraInicio().getTime()) | (hpartAutor.getHoraTermino().getTime() <= hadmin.getHoraTermino().getTime() && hpartAutor.getHoraTermino().getTime() >= hadmin.getHoraInicio().getTime())) {
+                                if ((hpartAutor.getHoraInicio().getTime() < hadmin.getHoraTermino().getTime() && hpartAutor.getHoraInicio().getTime() >= hadmin.getHoraInicio().getTime()) | (hpartAutor.getHoraTermino().getTime() <= hadmin.getHoraTermino().getTime() && hpartAutor.getHoraTermino().getTime() > hadmin.getHoraInicio().getTime())) {
 
                                     errosTabelaPesquisaExtensaoAutor.add("Há conflitos entre horários de execução com "
                                             + "os horários na seção de Atividades Administrativas");
@@ -1139,7 +1139,7 @@ public class PTDMB {
 
                         for (Horario hap : ap.getHorariosApoio()) {
                             if (hpartAutor.getDiaSemana().equals(hap.getDiaSemana())) {
-                                if ((hpartAutor.getHoraInicio().getTime() < hap.getHoraTermino().getTime() && hpartAutor.getHoraInicio().getTime() >= hap.getHoraInicio().getTime()) | (hpartAutor.getHoraTermino().getTime() <= hap.getHoraTermino().getTime() && hpartAutor.getHoraTermino().getTime() >= hap.getHoraInicio().getTime())) {
+                                if ((hpartAutor.getHoraInicio().getTime() < hap.getHoraTermino().getTime() && hpartAutor.getHoraInicio().getTime() >= hap.getHoraInicio().getTime()) | (hpartAutor.getHoraTermino().getTime() <= hap.getHoraTermino().getTime() && hpartAutor.getHoraTermino().getTime() > hap.getHoraInicio().getTime())) {
 
                                     errosTabelaPesquisaExtensaoAutor.add("Há conflitos entre horários de execução com"
                                             + " os horários na seção Apoio ao Ensino");
@@ -1153,7 +1153,7 @@ public class PTDMB {
 
                         for (Horario hme : mE.getHorariosManutecao()) {
                             if (hpartAutor.getDiaSemana().equals(hme.getDiaSemana())) {
-                                if ((hpartAutor.getHoraInicio().getTime() < hme.getHoraTermino().getTime() && hpartAutor.getHoraInicio().getTime() >= hme.getHoraInicio().getTime()) | (hpartAutor.getHoraTermino().getTime() <= hme.getHoraTermino().getTime() && hpartAutor.getHoraTermino().getTime() >= hme.getHoraInicio().getTime())) {
+                                if ((hpartAutor.getHoraInicio().getTime() < hme.getHoraTermino().getTime() && hpartAutor.getHoraInicio().getTime() >= hme.getHoraInicio().getTime()) | (hpartAutor.getHoraTermino().getTime() <= hme.getHoraTermino().getTime() && hpartAutor.getHoraTermino().getTime() > hme.getHoraInicio().getTime())) {
 
                                     errosTabelaPesquisaExtensaoAutor.add("Há conflitos entre horários de execução com "
                                             + "os horários na seção de Manutenção ao Ensino");
@@ -1166,7 +1166,7 @@ public class PTDMB {
 
                         for (Horario haulas : aula.getHorariosAula()) {
                             if (hpartAutor.getDiaSemana().equals(haulas.getDiaSemana())) {
-                                if ((hpartAutor.getHoraInicio().getTime() < haulas.getHoraTermino().getTime() && hpartAutor.getHoraInicio().getTime() >= haulas.getHoraInicio().getTime()) | (hpartAutor.getHoraTermino().getTime() <= haulas.getHoraTermino().getTime() && hpartAutor.getHoraTermino().getTime() >= haulas.getHoraInicio().getTime())) {
+                                if ((hpartAutor.getHoraInicio().getTime() < haulas.getHoraTermino().getTime() && hpartAutor.getHoraInicio().getTime() >= haulas.getHoraInicio().getTime()) | (hpartAutor.getHoraTermino().getTime() <= haulas.getHoraTermino().getTime() && hpartAutor.getHoraTermino().getTime() > haulas.getHoraInicio().getTime())) {
 
                                     errosTabelaPesquisaExtensaoAutor.add("Há conflitos entre horários de execução com "
                                             + "os horários na seção Aulas");
@@ -1180,7 +1180,7 @@ public class PTDMB {
 
                         for (Horario hoTa : oTA.getHorariosOutroTipoAtividade()) {
                             if (hpartAutor.getDiaSemana().equals(hoTa.getDiaSemana())) {
-                                if ((hpartAutor.getHoraInicio().getTime() < hoTa.getHoraTermino().getTime() && hpartAutor.getHoraInicio().getTime() >= hoTa.getHoraInicio().getTime()) | (hpartAutor.getHoraTermino().getTime() <= hoTa.getHoraTermino().getTime() && hpartAutor.getHoraTermino().getTime() >= hoTa.getHoraInicio().getTime())) {
+                                if ((hpartAutor.getHoraInicio().getTime() < hoTa.getHoraTermino().getTime() && hpartAutor.getHoraInicio().getTime() >= hoTa.getHoraInicio().getTime()) | (hpartAutor.getHoraTermino().getTime() <= hoTa.getHoraTermino().getTime() && hpartAutor.getHoraTermino().getTime() > hoTa.getHoraInicio().getTime())) {
 
                                     errosTabelaPesquisaExtensaoAutor.add("Há conflitos entre horários de execução com "
                                             + "os horários na seção Outras atividades desenvolvidas no campus");
@@ -1224,7 +1224,7 @@ public class PTDMB {
 
                         for (Horario hadmin : adm.getHorariosAdministracao()) {
                             if (hpartColab.getDiaSemana().equals(hadmin.getDiaSemana())) {
-                                if ((hpartColab.getHoraInicio().getTime() < hadmin.getHoraTermino().getTime() && hpartColab.getHoraInicio().getTime() >= hadmin.getHoraInicio().getTime()) | (hpartColab.getHoraTermino().getTime() <= hadmin.getHoraTermino().getTime() && hpartColab.getHoraTermino().getTime() >= hadmin.getHoraInicio().getTime())) {
+                                if ((hpartColab.getHoraInicio().getTime() < hadmin.getHoraTermino().getTime() && hpartColab.getHoraInicio().getTime() >= hadmin.getHoraInicio().getTime()) | (hpartColab.getHoraTermino().getTime() <= hadmin.getHoraTermino().getTime() && hpartColab.getHoraTermino().getTime() > hadmin.getHoraInicio().getTime())) {
 
                                     errosTabelaPesquisaExtensaoColaborador.add("Há conflitos entre horários de execução com os horários na seção de Atividades Administrativas");
 
@@ -1237,7 +1237,7 @@ public class PTDMB {
 
                         for (Horario hap : ap.getHorariosApoio()) {
                             if (hpartColab.getDiaSemana().equals(hap.getDiaSemana())) {
-                                if ((hpartColab.getHoraInicio().getTime() < hap.getHoraTermino().getTime() && hpartColab.getHoraInicio().getTime() >= hap.getHoraInicio().getTime()) | (hpartColab.getHoraTermino().getTime() <= hap.getHoraTermino().getTime() && hpartColab.getHoraTermino().getTime() >= hap.getHoraInicio().getTime())) {
+                                if ((hpartColab.getHoraInicio().getTime() < hap.getHoraTermino().getTime() && hpartColab.getHoraInicio().getTime() >= hap.getHoraInicio().getTime()) | (hpartColab.getHoraTermino().getTime() <= hap.getHoraTermino().getTime() && hpartColab.getHoraTermino().getTime() > hap.getHoraInicio().getTime())) {
 
                                     errosTabelaPesquisaExtensaoColaborador.add("Há conflitos entre horários de execução com "
                                             + "os horários na seção Apoio ao Ensino");
@@ -1251,7 +1251,7 @@ public class PTDMB {
 
                         for (Horario hme : mE.getHorariosManutecao()) {
                             if (hpartColab.getDiaSemana().equals(hme.getDiaSemana())) {
-                                if ((hpartColab.getHoraInicio().getTime() < hme.getHoraTermino().getTime() && hpartColab.getHoraInicio().getTime() >= hme.getHoraInicio().getTime()) | (hpartColab.getHoraTermino().getTime() <= hme.getHoraTermino().getTime() && hpartColab.getHoraTermino().getTime() >= hme.getHoraInicio().getTime())) {
+                                if ((hpartColab.getHoraInicio().getTime() < hme.getHoraTermino().getTime() && hpartColab.getHoraInicio().getTime() >= hme.getHoraInicio().getTime()) | (hpartColab.getHoraTermino().getTime() <= hme.getHoraTermino().getTime() && hpartColab.getHoraTermino().getTime() > hme.getHoraInicio().getTime())) {
 
                                     errosTabelaPesquisaExtensaoColaborador.add("Há conflitos entre horários de execução com "
                                             + "os horários na seção de Manutenção ao Ensino");
@@ -1264,7 +1264,7 @@ public class PTDMB {
 
                         for (Horario haulas : aula.getHorariosAula()) {
                             if (hpartColab.getDiaSemana().equals(haulas.getDiaSemana())) {
-                                if ((hpartColab.getHoraInicio().getTime() < haulas.getHoraTermino().getTime() && hpartColab.getHoraInicio().getTime() >= haulas.getHoraInicio().getTime()) | (hpartColab.getHoraTermino().getTime() <= haulas.getHoraTermino().getTime() && hpartColab.getHoraTermino().getTime() >= haulas.getHoraInicio().getTime())) {
+                                if ((hpartColab.getHoraInicio().getTime() < haulas.getHoraTermino().getTime() && hpartColab.getHoraInicio().getTime() >= haulas.getHoraInicio().getTime()) | (hpartColab.getHoraTermino().getTime() <= haulas.getHoraTermino().getTime() && hpartColab.getHoraTermino().getTime() > haulas.getHoraInicio().getTime())) {
 
                                     errosTabelaPesquisaExtensaoColaborador.add("Há conflitos entre horários de execução com "
                                             + "os horários na seção Aulas");
@@ -1279,7 +1279,7 @@ public class PTDMB {
                         for (Horario hoTa : oTA.getHorariosOutroTipoAtividade()) {
 
                             if (hpartColab.getDiaSemana().equals(hoTa.getDiaSemana())) {
-                                if ((hpartColab.getHoraInicio().getTime() < hoTa.getHoraTermino().getTime() && hpartColab.getHoraInicio().getTime() >= hoTa.getHoraInicio().getTime()) | (hpartColab.getHoraTermino().getTime() <= hoTa.getHoraTermino().getTime() && hpartColab.getHoraTermino().getTime() >= hoTa.getHoraInicio().getTime())) {
+                                if ((hpartColab.getHoraInicio().getTime() < hoTa.getHoraTermino().getTime() && hpartColab.getHoraInicio().getTime() >= hoTa.getHoraInicio().getTime()) | (hpartColab.getHoraTermino().getTime() <= hoTa.getHoraTermino().getTime() && hpartColab.getHoraTermino().getTime() > hoTa.getHoraInicio().getTime())) {
 
                                     errosTabelaPesquisaExtensaoColaborador.add("Há conflitos entre horários de execução com "
                                             + "os horários na seção Outras atividades desenvolvidas no campus");

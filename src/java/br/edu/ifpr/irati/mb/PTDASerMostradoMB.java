@@ -45,52 +45,7 @@ public class PTDASerMostradoMB {
         participacoesColabPTDConcluido = new ArrayList<>();
         textoBusca = "";
         filtroBusca = "";
-        legislacaoAula = "Art. 4º - As aulas, além das presenciais, "
-                + "poderão ser ministradas na modalidade de Ensino a Distância"
-                + " – EAD, desde que previstas no Projeto Pedagógico do Curso, "
-                + "aprovado pelo Conselho Superior, nos limites e condições "
-                + "estabelecidas pela legislação vigente específica e sem "
-                + "remuneração adicional.";
-        legislacaoApoio = "Art. 6º - Serão consideradas Atividades de Apoio ao Ensino"
-                + " as ações do docente, diretamente vinculadas às matrizes curriculares"
-                + " e programas dos cursos regulares do IFPR, e/ou que incidam diretamente "
-                + "na melhoria das condições de oferta de ensino, compreendendo:\n"
-                + "I.Orientação de Estágio Curricular Supervisionado;"
-                + "II.Orientação de Trabalho de Conclusão de Curso;\n"
-                + "III.Orientação de Atividades Complementares;";
-        legislacaoManutencao = "Art. 5º - Serão consideradas Atividades de Manutenção "
-                + "de Ensino as ações didáticas do docente relacionadas ao estudo,"
-                + " planejamento, preparação, desenvolvimento e avaliação das aulas"
-                + " ministradas nos cursos e programas regulares do IFPR, com base "
-                + "no artigo 112 da Lei 11.784, de 22/09/08.";
-        legislacaoGeral = "Art. 2º - O Regime de Trabalho dos docentes efetivos do Quadro Permanente "
-                + "do IFPR, ou dos docentes com contrato de trabalho na qualidade de substitutos, é"
-                + " definido segundo critérios de contratação previstos na legislação Federal"
-                + " – Lei nº 7.596/87, de 10/04/87, Decreto Federal 94.664, de 23/07/87, Portaria nº 475, "
-                + "de 26/08/87 e Lei 11.784, de 22/09/08, compreendendo os seguintes regimes de trabalho:\n"
-                + " \n"
-                + "I. Tempo parcial de 20 (vinte) horas semanais de trabalho;\n"
-                + "II. Tempo integral de 40 (quarenta) horas semanais de trabalho, em 2 (dois) turnos diários completos;\n"
-                + "III. Dedicação exclusiva, 40 horas semanais, em 2 (dois) turnos diários completos e impedimento "
-                + "do exercício de outra atividade remunerada, pública ou privada; e\n"
-                + "IV.	Contrato administrativo de prestação de serviços, de acordo com a Lei n º 8.745, de 09/12/93 "
-                + "e Lei n º9.849, de 26/10/99.\n"
-                + "Art. 11 – A carga horária destinada as atividades de ensino terá a seguinte distribuição:\n"
-                + "I.  Docentes com regime de tempo parcial de 20 (vinte) horas semanais de trabalho destinarão:"
-                + " no mínimo 08 (oito) e no máximo 12 (doze) horas para aula, 04 (quatro) horas para manutenção "
-                + "de ensino e 04 (quatro) para apoio ao ensino; e\n"
-                + "II. Docentes com regime de tempo integral de 40 (quarenta) horas semanais de trabalho ou Dedicação "
-                + "Exclusiva destinarão: no mínimo 12 (doze) e no máximo 16 (dezesseis) horas semanais para aula, 04 (quatro) horas para manutenção de ensino e 04 (quatro) para apoio ao ensino.\n"
-                + "Art. 12 – Os docentes em regime de tempo integral de 40 (quarenta) horas e dedicação exclusiva, exceto "
-                + "os docentes afastados na forma da lei, estão obrigados ao cumprimento de 16 (dezesseis) horas em atividades "
-                + "de pesquisa e/ou extensão.\n"
-                + "Parágrafo Único – Os docentes em regime de tempo integral de 40 (quarenta) horas e dedicação exclusiva "
-                + "que não desenvolvem atividades de pesquisa e/ou extensão terão a carga horária automaticamente destinada"
-                + " às atividades de apoio ao ensino e para aula.\n"
-                + "Art. 14 – O docente que exerça função administrativa e de assessoramento, previstas no Regimento do IFPR,"
-                + " poderá ter reduzida sua carga horária destinada ás atividades de ensino, pesquisa e extensão, "
-                + "mediante autorização das instâncias superiores a que esteja vinculado.";
-    }
+        }
 
     public void realizarBusca() {
 
@@ -114,8 +69,8 @@ public class PTDASerMostradoMB {
         setPdfOpt(new PDFOptions());
         getPdfOpt().setFacetBgColor("#F88017");
         getPdfOpt().setFacetFontColor("#0000ff");
-        getPdfOpt().setFacetFontStyle("BOLD");
-        getPdfOpt().setCellFontSize("12");
+        getPdfOpt().setFacetFontStyle("ARIAL");
+        getPdfOpt().setCellFontSize("9");
     }
 
     public void gerarPDF(Object document) throws IOException, BadElementException, DocumentException {
@@ -126,46 +81,7 @@ public class PTDASerMostradoMB {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         String logoif = externalContext.getRealPath("") + File.separator + "img" + "logoif.jpg";
         String logoMinisterioEducacao = externalContext.getRealPath("") + File.separator + "img" + "logoMinisterioEducacao.jpg";
-        pdf.addAuthor(getPtdConcluido().getProfessor().getNomeCompleto());
-        pdf.addHeader(logoif, logoMinisterioEducacao);
-        pdf.addTitle("1 IDENTIFICAÇAO DO DOCENTE");
-// tabela identificação docente
-        pdf.addSubject(legislacaoGeral);
-        pdf.addTitle("2 ATIVIDADES DE ENSINO");
-        pdf.addTitle("2.1 AULAS");
-        pdf.addSubject(legislacaoAula);
-// tabela aulas 
-        pdf.addSubject(ptdConcluido.getCampoJustificativaAtividadeEnsino());
-        pdf.addTitle("2.2 ATIVIDADES MANUTENÇÃO AO ENSINO");
-        pdf.addSubject(legislacaoManutencao);
-// tabela manutenções ao ensino
-        pdf.addSubject(ptdConcluido.getCampoJustificativaManutencaoEnsino());
-        pdf.addTitle("2.3 APOIO AO ENSINO");
-        pdf.addSubject(legislacaoApoio);
-// tabela apoios ao ensino
-        pdf.addSubject(ptdConcluido.getCampoJustificativaApoioEnsino());
-        pdf.addTitle("3 ATIVIDADES DE PESQUISA E EXTENSÃO");
-        pdf.addTitle("3.1 ATIVIDADES DE PESQUISA E/OU EXTENSÃO CADASTRADAS NO COPE(PARTICIPAÇÃO COMO AUTOR)");
-// tabela projetos pesquisa e/ou extensão cadastrados como autor 
-        pdf.addTitle("3.2 ATIVIDADES DE PESQUISA E/OU EXTENSÃO CADASTRADAS NO COPE(PARTICIPAÇÃO COMO COLABORADOR");
-// tabela projetos pesquisa 
-        pdf.addSubject(ptdConcluido.getCampoJustificativaProjetoPesquisaExtensao());
-        pdf.addTitle("4 ATIVIDADES ADMINISTRATIVAS");
-// tabela atividades administrativas
-        pdf.addSubject(ptdConcluido.getCampoJustificativaAdministracao());
-        pdf.addTitle("5 OUTRAS ATIVIDADES DESENVOLVIDAS NO CAMPUS");
-//tabela outras atividades
-        pdf.addSubject(ptdConcluido.getCampoJustificativaOutrasAtividades());
-        pdf.addTitle("6 OUTRAS ATIVIDADES QUE PRETENDO PROPOR NO SEMESTRE");
-// tabela outras atividades que pretende propor
-
-        pdf.addSubject(ptdConcluido.getCampoJustificativaSeremPropostas());
-        pdf.addTitle("7 QUADRO GERAL DAS ATIVIDADES- CARGA HORÁRIA SEMANAL");
-// tabela contabilizando atividades
-        pdf.addSubject(ptdConcluido.getDataAvaliacaoPTD().toString());
-        pdf.addSubject("____________________________________________");
-        pdf.addSubject("Assinatura Docente");
-        pdf.addSubject(ptdConcluido.getProfessor().getNomeCompleto());
+        pdf.addHeader(logoif, logoMinisterioEducacao);   
 
     }
 
