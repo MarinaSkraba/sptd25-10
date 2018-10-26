@@ -20,10 +20,10 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idUsuario;
 
-    @Column(name = "nomeCompleto", length = 100)
+    @Column(name = "nomeCompleto", length = 150)
     private String nomeCompleto;
 
-    @Column(name = "email", nullable = false, length = 25)
+    @Column(name = "email", nullable = false, length = 100)
     private String email;
 
     @Column(name = "imagemPerfil", length = 100)

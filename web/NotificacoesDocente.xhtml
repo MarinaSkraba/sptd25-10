@@ -218,11 +218,32 @@
                                     <p:commandButton styleClass="botaoAzul" 
                                                      value="Concluir"
                                                      ajax="false"
-                                                     actionListener="#{pTDMB.concluirPTD(ptdAprovado)}"
-                                                     action="#{pTDMB.abrirNotificacoesDocente(usuarioMB.usuarioLogado.idUsuario)}"/>
+                                                     onclick="PF('confirmarConclusaoDocenteDialog').show();"
+                                                     />
                                     <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
                                 </h:panelGrid>
                             </h:column>
+
+                            <!-- Caixa de confirmação de conclusão -->
+                            <p:dialog header="Confirmar cadastro" 
+                                      widgetVar="confirmarConclusaoDocenteDialog" 
+                                      modal="true" 
+                                      showEffect="fade" 
+                                      hideEffect="fade" 
+                                      resizable="false">
+
+                                <h:outputText value="Ao concluir um PTD você o coloca em vigência, substituindo o atual, deseja continuar?" 
+                                              styleClass="text01"
+                                              style="margin: 10px; font-size: large; width: 400px;"/>
+                                <br/>
+
+                                <p:commandButton styleClass="botaoAzul" 
+                                                 value="Continuar"
+                                                 ajax="false"
+                                                 actionListener="#{pTDMB.concluirPTD(ptdAprovado)}"
+                                                 action="#{pTDMB.abrirNotificacoesDocente(usuarioMB.usuarioLogado.idUsuario)}"/>
+
+                            </p:dialog>
 
                         </h:dataTable>
 
