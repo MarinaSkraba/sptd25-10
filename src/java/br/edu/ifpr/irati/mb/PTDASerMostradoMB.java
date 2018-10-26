@@ -30,6 +30,7 @@ public class PTDASerMostradoMB {
     private List<Participacao> participacoesColabPTDConcluido;
     private String textoBusca;
     private String filtroBusca;
+    private String filtroTipoPTD;
     private PDFOptions pdfOpt;
     private String legislacaoAula;
     private String legislacaoApoio;
@@ -45,23 +46,46 @@ public class PTDASerMostradoMB {
         participacoesColabPTDConcluido = new ArrayList<>();
         textoBusca = "";
         filtroBusca = "";
-        }
+        filtroTipoPTD = "";
+    }
 
     public void realizarBusca() {
 
         setPtdsResultadoBusca((List<PTD>) new ArrayList());
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
+        if (!textoBusca.equalsIgnoreCase("")) {
+            if (getFiltroBusca().equals("buscaPorNome")) {
 
-        if (getFiltroBusca().equals("buscaPorNome")) {
+                setPtdsResultadoBusca(ptdDAOEspecifico.buscarPTDsPorNomeDocente(getTextoBusca()));
 
-            setPtdsResultadoBusca(ptdDAOEspecifico.buscarPTDsPorNomeDocente(getTextoBusca()));
+            } else if (getFiltroBusca().equals("buscaPorAtividade")) {
 
-        } else if (getFiltroBusca().equals("buscaPorAtividade")) {
+                setPtdsResultadoBusca(ptdDAOEspecifico.buscarPTDsPorAtividade(getTextoBusca()));
 
-            setPtdsResultadoBusca(ptdDAOEspecifico.buscarPTDsPorAtividade(getTextoBusca()));
-
+            }
+        } else {
+            setPtdsResultadoBusca(ptdDAOEspecifico.buscarPTDsConcluidos());
         }
+    }
 
+    public void atualizarListaResultadosDeAcorcoComTipoPTD() {
+        realizarBusca();
+        List<PTD> ptdsResultadoBuscaAux = ptdsResultadoBusca;
+        if (filtroTipoPTD.equalsIgnoreCase("Vigente")) {
+            ptdsResultadoBusca = new ArrayList<>();
+            for (PTD ptd : ptdsResultadoBuscaAux) {
+                if(ptd.getEstadoPTD().equalsIgnoreCase("CONCLUÍDO")){
+                    ptdsResultadoBusca.add(ptd);
+                }
+            }
+        } else if (filtroTipoPTD.equalsIgnoreCase("Arquivado")) {
+            ptdsResultadoBusca = new ArrayList<>();
+            for (PTD ptd : ptdsResultadoBuscaAux) {
+                if(ptd.getEstadoPTD().equalsIgnoreCase("ARQUIVADO")){
+                    ptdsResultadoBusca.add(ptd);
+                }
+            }
+        }
     }
 
     public void layoutPDF() {
@@ -81,7 +105,7 @@ public class PTDASerMostradoMB {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         String logoif = externalContext.getRealPath("") + File.separator + "img" + "logoif.jpg";
         String logoMinisterioEducacao = externalContext.getRealPath("") + File.separator + "img" + "logoMinisterioEducacao.jpg";
-        pdf.addHeader(logoif, logoMinisterioEducacao);   
+        pdf.addHeader(logoif, logoMinisterioEducacao);
 
     }
 
@@ -263,6 +287,20 @@ public class PTDASerMostradoMB {
      */
     public void setLegislacaoGeral(String legislacaoGeral) {
         this.legislacaoGeral = legislacaoGeral;
+    }
+
+    /**
+     * @return the filtroTipoPTD
+     */
+    public String getFiltroTipoPTD() {
+        return filtroTipoPTD;
+    }
+
+    /**
+     * @param filtroTipoPTD the filtroTipoPTD to set
+     */
+    public void setFiltroTipoPTD(String filtroTipoPTD) {
+        this.filtroTipoPTD = filtroTipoPTD;
     }
 
 }

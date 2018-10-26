@@ -137,6 +137,7 @@
 
             <h:form style="width: 100%;">
                 <center>
+                    <!-- PTDs Reprovados -->
                     <div id="contentEstilizado">
 
                         <h:outputText value="PTDs Reprovados" 
@@ -178,6 +179,7 @@
 
                     </div>
                     <br/>
+                    <!-- PTDs Aprovados -->
                     <div id="contentEstilizado">
 
                         <h:outputText value="PTDs Aprovados" 
@@ -225,11 +227,11 @@
                         </h:dataTable>
 
                     </div>
-
                     <br/>
+                    <!-- PTD Atual -->
                     <div id="contentEstilizado">
 
-                        <h:outputText value="PTDs Concluídos" 
+                        <h:outputText value="PTD Vigente" 
                                       styleClass="text01" 
                                       style="margin: 0px 0px 0px 0px;"/>
                         <br/>
@@ -246,7 +248,7 @@
                                                   style="font-size: large;"/>
                                     <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
                                 </f:facet>
-                                <h:panelGrid columns="1" 
+                                <h:panelGrid columns="" 
                                              style="width:100%; text-align: center;" >
                                     <h:outputText value="#{ptdConcluido.dataAvaliacaoPTD}" 
                                                   styleClass="text01"
@@ -257,6 +259,11 @@
                                     <h:outputText value="#{ptdConcluido.diretorEnsino.nomeCompleto}" 
                                                   styleClass="text01"
                                                   style="font-size: large; width: 90%;"/>
+                                    <p:commandButton styleClass="botaoAzul" 
+                                                     value="Abrir"
+                                                     ajax="false"
+                                                     actionListener="#{pTDASerMostradoMB.abrirMostrarPTD(ptdResultado)}"
+                                                     action="MostrarPTD"/>
                                     <p:commandButton styleClass="botaoAzul" 
                                                      value="Imprimir"
                                                      ajax="false"/>

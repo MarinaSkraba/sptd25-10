@@ -10,6 +10,8 @@ public interface IPTDDAO {
     
     public List<PTD> buscarPTDsConcluidos();
     
+    public List<PTD> buscarPTDsArquivadosPorProfessor(Serializable idUsuario);
+    
     public List<PTD> buscarPTDsAprovadosPorProfessor(Serializable idUsuario);
     
     public List<PTD> buscarPTDsEmEdicaoPorProfessor(Serializable idUsuario);

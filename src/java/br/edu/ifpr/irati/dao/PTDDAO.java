@@ -53,6 +53,25 @@ public class PTDDAO implements IPTDDAO {
         session.close();
         return results;
     }
+    
+    @Override
+    public List<PTD> buscarPTDsArquivadosPorProfessor(Serializable idUsuario) {
+        int id = (int) idUsuario;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String estado = "ARQUIVADO";
+        String hql = "from ptd p where p.estadoPTD like '" + estado + "' ";
+        Query query = session.createQuery(hql);
+        List<PTD> results = query.list();
+        List<PTD> filtrados = new ArrayList<>();
+        for (PTD ptd : results) {
+            if (ptd.getProfessor().getIdUsuario() == id) {
+                filtrados.add(ptd);
+            }
+        }
+        session.clear();
+        session.close();
+        return filtrados;
+    }
 
     @Override
     public List<PTD> buscarPTDsAprovadosPorProfessor(Serializable idUsuario) {
@@ -137,9 +156,10 @@ public class PTDDAO implements IPTDDAO {
 
     @Override
     public List<PTD> buscarPTDsPorNomeDocente(String nomeDocente) {
-        String estado = "CONCLUÍDO";
+        String estadoConcluido = "CONCLUÍDO";
+        String estadoArquivado = "ARQUIVADO";
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from ptd p where p.estadoPTD like '" + estado + "' ";
+        String hql = "from ptd p where p.estadoPTD like '" + estadoConcluido + "' or like '" + estadoArquivado + "' ";
         Query query = session.createQuery(hql);
         List<PTD> results = query.list();
         List<PTD> filtrados = new ArrayList<>();
@@ -158,9 +178,10 @@ public class PTDDAO implements IPTDDAO {
     @Override
     public List<PTD> buscarPTDsPorAtividade(String rotuloAtividade) {
 
-        String estado = "CONCLUÍDO";
+        String estadoConcluido = "CONCLUÍDO";
+        String estadoArquivado = "ARQUIVADO";
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from ptd p where p.estadoPTD like '" + estado + "' ";
+        String hql = "from ptd p where p.estadoPTD like '" + estadoConcluido + "' or like '" + estadoArquivado + "' ";
         Query query = session.createQuery(hql);
         List<PTD> results = query.list();
         List<PTD> filtrados = new ArrayList<>();

@@ -70,7 +70,32 @@
                 <br/>
                 <center>
                     <div id="contentEstilizado">
-
+                        <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                            <h:outputText value="Mostrar os PTDs" 
+                                          styleClass="text01"
+                                          style="font-size: small; margin: 0px 10px;"/>
+                            <p:commandButton value="Vigentes" 
+                                             ajax="false" 
+                                             styleClass="botaoAzul"
+                                             style="margin: 0px; float:left; font-family: calibri, sans-serif; font-weight: 500; padding: 0px; font-size: smaller;"
+                                             actionListener="#{pTDASerMostradoMB.setFiltroTipoPTD('Vigente')}"/>
+                            <p:commandButton value="Arquivados" 
+                                             ajax="false" 
+                                             styleClass="botaoAzul"
+                                             style="margin: 5px; float:left; font-family: calibri, sans-serif; font-weight: 500; padding: 0px; font-size: smaller;"
+                                             actionListener="#{pTDASerMostradoMB.setFiltroTipoPTD('Arquivado')}"
+                                             action="#{pTDASerMostradoMB.atualizarListaResultadosDeAcorcoComTipoPTD()}"/>
+                            <p:commandButton value="Todos" 
+                                             ajax="false" 
+                                             styleClass="botaoAzul"
+                                             style="margin: 0px; float:left; font-family: calibri, sans-serif; font-weight: 500; padding: 0px; font-size: smaller;"
+                                             actionListener="#{pTDASerMostradoMB.setFiltroTipoPTD('Todos')}"
+                                             action="#{pTDASerMostradoMB.atualizarListaResultadosDeAcorcoComTipoPTD()}"/>
+                        </div>
+                        <hr size="1px" style="color: #1785ad; width: 90%; opacity: 0.5; margin: 0; float: bottom; margin: 5px 0px 5px;"/>
+                        <h:outputText value="Resultado Pesquisa" 
+                                      styleClass="text01" 
+                                      style="margin: 5px;"/>
                         <h:dataTable  value="#{pTDASerMostradoMB.ptdsResultadoBusca}" 
                                       var="ptdResultado"
                                       style="border-spacing: 0pt; width: 100%;"
@@ -85,7 +110,7 @@
                             <h:column>
                                 <f:facet name="header">
                                     <center>
-                                        <hr size="1px" style="color: #1785ad; width: 90%; opacity: 0.5; margin: 0; float: bottom;"/>
+                                        <hr size="1px" style="color: #1785ad; width: 90%; opacity: 0.5; margin: 0; float: bottom; margin: 5px 0px 5px;"/>
                                     </center>
                                 </f:facet>
 

@@ -49,6 +49,7 @@ public class PTDMB {
     private List<PTD> ptdsEmEdicao;
     private List<PTD> ptdsAprovados;
     private List<PTD> ptdsConcluídos;
+    private List<PTD> ptdsArquivados;
     private List<Participacao> participacoesAutorPTDEdicao;
     private List<Participacao> participacoesColabPTDEdicao;
     private List<Participacao> participacoesAutorPTDAprovado;
@@ -76,6 +77,7 @@ public class PTDMB {
         ptdsReprovados = new ArrayList<>();
         ptdsEmEdicao = new ArrayList();
         ptdsConcluídos = new ArrayList();
+        ptdsArquivados = new ArrayList<>();
         ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
         participacoesAutorPTDEdicao = new ArrayList<>();
         participacoesColabPTDEdicao = new ArrayList<>();
@@ -165,6 +167,7 @@ public class PTDMB {
         ptdsReprovados = ptdDAOEspecifico.buscarPTDsReprovadosPorProfessor(idUsuario);
         ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovadosPorProfessor(idUsuario);
         ptdsConcluídos = ptdDAOEspecifico.buscarPTDsConcluidosPorProfessor(idUsuario);
+        ptdsArquivados = ptdDAOEspecifico.buscarPTDsArquivadosPorProfessor(idUsuario);
         return "/NotificacoesDocente?faces-redirect=true";
     }
 
@@ -1554,6 +1557,12 @@ public class PTDMB {
     public void concluirPTD(PTD ptd){
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
         ptd.setEstadoPTD("CONCLUÍDO");
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
+        List<PTD> ptdsConcluídosAux = ptdDAOEspecifico.buscarPTDsConcluidosPorProfessor(ptd.getProfessor().getIdUsuario());
+        for(PTD p : ptdsConcluídosAux){
+            p.setEstadoPTD("ARQUIVADO");
+            ptdDAOGenerico.alterar(p);
+        }
         ptdDAOGenerico.alterar(ptd);
     }
 
@@ -1882,6 +1891,20 @@ public class PTDMB {
      */
     public void setDiretoresAHabilitar(List<DiretorEnsino> diretoresAHabilitar) {
         this.diretoresAHabilitar = diretoresAHabilitar;
+    }
+
+    /**
+     * @return the ptdsArquivados
+     */
+    public List<PTD> getPtdsArquivados() {
+        return ptdsArquivados;
+    }
+
+    /**
+     * @param ptdsArquivados the ptdsArquivados to set
+     */
+    public void setPtdsArquivados(List<PTD> ptdsArquivados) {
+        this.ptdsArquivados = ptdsArquivados;
     }
 
 }
