@@ -34,7 +34,8 @@ public class OutroTipoAtividadeMB {
         periodicidade.add("Diariamente");
         periodicidade.add("Semanalmente");
         periodicidade.add("Mensalmente");
-        
+        periodicidade.add("Semestralmente");
+        periodicidade.add("Anualmente");
     }
 
     public String salvarOutroTipoAtividade(Serializable idUsuario, PTD ptd) {
