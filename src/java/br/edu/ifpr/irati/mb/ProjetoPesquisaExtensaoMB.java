@@ -57,7 +57,8 @@ public class ProjetoPesquisaExtensaoMB {
         participacaoAutor.setEstadoParticipacao("Ativo");
         participacaoAutor.setProfessor(professorAutor);
         participacaoDAO.salvar(participacaoAutor);
-        participacaoAutor = participacaoDAO.buscarTodos(Participacao.class).get(participacaoDAO.buscarTodos(Participacao.class).size() - 1);
+        List<Participacao> pAux = participacaoDAO.buscarTodos(Participacao.class);
+        participacaoAutor = pAux.get(pAux.size() - 1);
         projetoExtensaoDAO.alterar(participacaoAutor.getProjetoPesquisaExtensao());
         ptd.getParticipacoes().add(participacaoAutor);
         ptdDAO.alterar(ptd);
