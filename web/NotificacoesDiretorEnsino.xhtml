@@ -267,9 +267,9 @@
                                 </f:facet>
 
                                 <div id="linha">
-                                    <h:panelGrid columns="3" 
+                                    <h:panelGrid columns="2" 
                                                  style="width:100%;" >
-                                        
+
                                         <h:outputText value="#{professorEsperando.nomeCompleto}"  
                                                       styleClass="text01"
                                                       style="font-size: large; width: 200px;"/>
@@ -290,8 +290,81 @@
 
                         <br/>
                     </div>
+                    <br/>
+                    <div id="contentEstilizado">
+                        <h:outputText value="Novos Diretores de Ensino" 
+                                      styleClass="text01" 
+                                      style="margin: 0px ;"/>
+                        <br/>
+                        <h:dataTable  value="#{pTDMB.diretoresAHabilitar}" 
+                                      var="diretorEsperando"
+                                      style="border-spacing: 0pt; width: 100%;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+                            <f:facet name="header">
+                                <h:outputText value="Nome | Opções" 
+                                              styleClass="text01"
+                                              style="font-size: large;"/>
+                            </f:facet>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <hr size="1px" style="color: #A8A8A8; width: 100%; opacity: 0.5; margin: 0; float: bottom;"/>
+                                </f:facet>
+
+                                <div id="linha">
+                                    <h:panelGrid columns="3" 
+                                                 style="width:100%;" >
+
+                                        <h:outputText value="#{diretorEsperando.nomeCompleto}"  
+                                                      styleClass="text01"
+                                                      style="font-size: large; width: 200px;"/>
+                                        <p:commandButton styleClass="botaoAzul" 
+                                                         style="margin: 5px 0px 5px; float: left;" 
+                                                         value="Aceitar"
+                                                         onclick="PF('substituicaoDiretorEnsinoDialog').show();"/>
+                                        <p:commandButton styleClass="botaoVermelho" 
+                                                         style="margin: 5px 0px 5px; float: left;" 
+                                                         value="Negar"
+                                                         ajax="false" 
+                                                         actionListener="#{diretorEnsinoMB.desabilitarDiretorEnsino(diretorEsperando)}"
+                                                         action="#{pTDMB.abrirNotificacoesDiretorEnsino(usuarioMB.usuarioLogado.idUsuario)}"/>
+
+
+                                        <!-- Caixa de confirmação de substituição -->
+                                        <p:dialog header="Confirmar substituição" 
+                                                  widgetVar="substituicaoDiretorEnsinoDialog" 
+                                                  modal="true" 
+                                                  showEffect="fade" 
+                                                  hideEffect="fade" 
+                                                  resizable="false">
+
+                                            <h:outputText value="Ao aceitar a solicitação de acesso de um novo diretor de ensino você estará desativando sua conta. Você deseja efetuar a substituição?" 
+                                                          styleClass="text01"
+                                                          style="margin: 10px; font-size: large; width: 400px;"/>
+                                            <br/>
+
+                                            <p:commandButton styleClass="botaoVermelho" 
+                                                             value="Confirmar"
+                                                             ajax="false"
+                                                             actionListener="#{diretorEnsinoMB.desabilitarDiretorEnsino(usuarioMB.usuarioLogado)}"
+                                                             action="#{diretorEnsinoMB.habilitarDiretorEnsino(diretorEsperando)}"/>
+
+                                        </p:dialog>
+
+                                    </h:panelGrid>
+                                </div>
+                                <hr size="1px" style="color: #A8A8A8; width: 100%; opacity: 0.5; margin: 0; float: bottom;"/>
+
+                            </h:column>
+
+                        </h:dataTable>
+
+                        <br/>
+                    </div>
 
                 </center>
+
             </h:form>
         </div>
 

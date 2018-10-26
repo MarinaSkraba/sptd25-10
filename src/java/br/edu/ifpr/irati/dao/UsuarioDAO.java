@@ -35,5 +35,17 @@ public class UsuarioDAO implements IUsuarioDao {
         session.close();
         return u;
     }
+    
+    @Override
+    public List<Usuario> buscarUsuariosASeremHabilitados(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String estado = "AHabilitar";
+        String hql = "from usuario u where u.estadoUsuario like '" + estado + "' ";
+        Query query = session.createQuery(hql);
+        List<Usuario> results = query.list();
+        session.clear();
+        session.close();
+        return results;
+    }
 
 }

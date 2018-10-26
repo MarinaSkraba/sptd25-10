@@ -57,7 +57,7 @@ public class DiretorEnsinoMB {
 
         String nomeCaixaRetorno = "";
 
-        if (getErrosEdicaoDiretorEnsino().isEmpty() == false) {
+        if (getErrosCadastroDiretorEnsino().isEmpty() == false) {
 
             nomeCaixaRetorno = "erroCadastroDiretorEnsinoDialog";
             return nomeCaixaRetorno;
@@ -101,12 +101,21 @@ public class DiretorEnsinoMB {
         setDiretorEnsino(new DiretorEnsino());
 
     }
+    
+    public String habilitarDiretorEnsino(DiretorEnsino diretorEnsino){
+        
+        Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
+        diretorEnsino.setEstadoUsuario("Habilitado");
+        diretorEnsinoDAO.alterar(diretorEnsino);
+        return "/Login?faces-redirect=true";
+        
+    }
 
-    public void desabilitarDiretorEnsino() {
+    public void desabilitarDiretorEnsino(DiretorEnsino diretorEnsino) {
 
         Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
-        getDiretorEnsino().setEstadoUsuario("Desabilitado");
-        diretorEnsinoDAO.alterar(getDiretorEnsino());
+        diretorEnsino.setEstadoUsuario("Desabilitado");
+        diretorEnsinoDAO.alterar(diretorEnsino);
 
     }
 

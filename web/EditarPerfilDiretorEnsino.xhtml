@@ -136,11 +136,13 @@
                         </h:panelGrid>
                         <br/>
 
-                        <p:commandButton styleClass="botaoAzul" 
+                        <p:commandButton id="botaoAcao"
+                                         update="botaoAcao"
+                                         styleClass="botaoAzul" 
                                          style="border-radius: 30px; font-size: large; margin-left: 10px;" 
                                          value="Editar"
                                          onclick="PF('#{diretorEnsinoMB.verificarPossibilidadeAtualizacaoDiretorEnsino()}')"/>
-
+                        
                     </div>
                 </center>
 

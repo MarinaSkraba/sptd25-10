@@ -3,11 +3,9 @@ package br.edu.ifpr.irati.mb;
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
 import br.edu.ifpr.irati.dao.IPTDDAO;
-import br.edu.ifpr.irati.dao.IProfessorDAO;
-import br.edu.ifpr.irati.dao.IProjetoPesquisaExtensaoDao;
+import br.edu.ifpr.irati.dao.IUsuarioDao;
 import br.edu.ifpr.irati.dao.PTDDAO;
-import br.edu.ifpr.irati.dao.ProfessorDAO;
-import br.edu.ifpr.irati.dao.ProjetoPesquisaExtensaoDAO;
+import br.edu.ifpr.irati.dao.UsuarioDAO;
 import br.edu.ifpr.irati.modelo.Administracao;
 import br.edu.ifpr.irati.modelo.Apoio;
 import br.edu.ifpr.irati.modelo.AtividadeASerProposta;
@@ -56,6 +54,7 @@ public class PTDMB {
     private List<Participacao> participacoesAutorPTDAprovado;
     private List<Participacao> participacoesColabPTDAprovado;
     private List<Professor> professoresAHabilitar;
+    private List<DiretorEnsino> diretoresAHabilitar;
     private String estadoCargaHorariaPTD;
     private List<String> errosTabelaAula;
     private List<String> errosTabelaManuEnsino;
@@ -83,6 +82,7 @@ public class PTDMB {
         participacoesAutorPTDAprovado = new ArrayList<>();
         participacoesColabPTDAprovado = new ArrayList<>();
         professoresAHabilitar = new ArrayList<>();
+        diretoresAHabilitar = new ArrayList<>();
         this.estadoCargaHorariaPTD = "";
         errosTabelaAula = new ArrayList<>();
         errosTabelaManuEnsino = new ArrayList<>();
@@ -170,9 +170,22 @@ public class PTDMB {
 
     public String abrirNotificacoesDiretorEnsino(int idUsuario) {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
-        IProfessorDAO professorDAO = new ProfessorDAO();
+        Dao<DiretorEnsino> diretorDAO = new GenericDAO(DiretorEnsino.class);
+        Dao<Professor> professorDAO = new GenericDAO(Professor.class);
+        IUsuarioDao usuarioDAOEspecifico = new UsuarioDAO();
+        List<Usuario> usuarios = usuarioDAOEspecifico.buscarUsuariosASeremHabilitados();
         ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
-        professoresAHabilitar = professorDAO.buscarProfessoresASeremHabilitados();
+        professoresAHabilitar = new ArrayList<>();
+        diretoresAHabilitar =  new ArrayList<>();
+        for(Usuario u : usuarios){
+            if(u instanceof DiretorEnsino){
+                DiretorEnsino d = diretorDAO.buscarPorId(u.getIdUsuario());
+                diretoresAHabilitar.add(d);
+            }else{
+                Professor p = professorDAO.buscarPorId(u.getIdUsuario());
+                professoresAHabilitar.add(p);
+            }
+        }
         return "/NotificacoesDiretorEnsino?faces-redirect=true";
     }
 
@@ -1855,6 +1868,20 @@ public class PTDMB {
      */
     public void setProfessoresAHabilitar(List<Professor> professoresAHabilitar) {
         this.professoresAHabilitar = professoresAHabilitar;
+    }
+
+    /**
+     * @return the diretoresAHabilitar
+     */
+    public List<DiretorEnsino> getDiretoresAHabilitar() {
+        return diretoresAHabilitar;
+    }
+
+    /**
+     * @param diretoresAHabilitar the diretoresAHabilitar to set
+     */
+    public void setDiretoresAHabilitar(List<DiretorEnsino> diretoresAHabilitar) {
+        this.diretoresAHabilitar = diretoresAHabilitar;
     }
 
 }
