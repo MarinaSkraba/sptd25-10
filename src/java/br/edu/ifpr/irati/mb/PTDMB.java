@@ -179,12 +179,12 @@ public class PTDMB {
         List<Usuario> usuarios = usuarioDAOEspecifico.buscarUsuariosASeremHabilitados();
         ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
         professoresAHabilitar = new ArrayList<>();
-        diretoresAHabilitar =  new ArrayList<>();
-        for(Usuario u : usuarios){
-            if(u instanceof DiretorEnsino){
+        diretoresAHabilitar = new ArrayList<>();
+        for (Usuario u : usuarios) {
+            if (u instanceof DiretorEnsino) {
                 DiretorEnsino d = diretorDAO.buscarPorId(u.getIdUsuario());
                 diretoresAHabilitar.add(d);
-            }else{
+            } else {
                 Professor p = professorDAO.buscarPorId(u.getIdUsuario());
                 professoresAHabilitar.add(p);
             }
@@ -1364,6 +1364,10 @@ public class PTDMB {
             ptd.setCargaHorariaSecaoAdministracao(ptd.getCargaHorariaSecaoAdministracao()
                     + adm.getCargaHorariaSemanalAdministracao());
         }
+        for (AtividadeASerProposta asp : getPtd().getAtividadesASeremPropostas()) {
+            ptd.setCargaHorariaSecaoAtividadesASeremPropostas(ptd.getCargaHorariaSecaoAtividadesASeremPropostas()
+                    + asp.getCargaHorariaSemanalAtividadeASerProposta());
+        }
 
         for (Participacao part : getPtd().getParticipacoes()) {
             if (part.getRotulo().equals("Autor")) {
@@ -1513,6 +1517,7 @@ public class PTDMB {
             }
         }
         cargaHorariaTotalPTDAux = ptd.getCargaHorariaSecaoAdministracao()
+                + ptd.getCargaHorariaSecaoAtividadesASeremPropostas()
                 + ptd.getCargaHorariaSecaoApoioEnsino()
                 + ptd.getCargaHorariaSecaoAulas()
                 + ptd.getCargaHorariaSecaoManutencaoEnsino()
@@ -1537,14 +1542,12 @@ public class PTDMB {
         } else {
             setEstadoCargaHorariaPTD("INCORRETO");
         }
-        
+
         cargaHorariaTotalPTDPTDEdicao = cargaHorariaTotalPTDAux;
 
         ptd.setCargaHorariaTotal(cargaHorariaTotalPTDAux);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
-
-    
 
     }
 
@@ -1554,12 +1557,12 @@ public class PTDMB {
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
-    public void concluirPTD(PTD ptd){
+    public void concluirPTD(PTD ptd) {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
         ptd.setEstadoPTD("CONCLUÍDO");
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         List<PTD> ptdsConcluídosAux = ptdDAOEspecifico.buscarPTDsConcluidosPorProfessor(ptd.getProfessor().getIdUsuario());
-        for(PTD p : ptdsConcluídosAux){
+        for (PTD p : ptdsConcluídosAux) {
             p.setEstadoPTD("ARQUIVADO");
             ptdDAOGenerico.alterar(p);
         }
