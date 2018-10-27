@@ -44,9 +44,10 @@ public class PTDDAO implements IPTDDAO {
 
     @Override
     public List<PTD> buscarPTDsConcluidos() {
+        String estadoConcluido = "CONCLUÍDO";
+        String estadoArquivado = "ARQUIVADO";
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String estado = "CONCLUÍDO";
-        String hql = "from ptd p where p.estadoPTD like '" + estado + "' ";
+        String hql = "from ptd p where p.estadoPTD like '" + estadoConcluido + "' or p.estadoPTD like '" + estadoArquivado + "' ";
         Query query = session.createQuery(hql);
         List<PTD> results = query.list();
         session.clear();

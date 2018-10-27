@@ -49,6 +49,12 @@ public class PTDASerMostradoMB {
         filtroTipoPTD = "";
     }
 
+    public void mostrarTodos() {
+        textoBusca = "";
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
+        ptdsResultadoBusca = ptdDAOEspecifico.buscarPTDsConcluidos();
+    }
+
     public void realizarBusca() {
 
         setPtdsResultadoBusca((List<PTD>) new ArrayList());
@@ -64,28 +70,31 @@ public class PTDASerMostradoMB {
 
             }
         } else {
-            setPtdsResultadoBusca(ptdDAOEspecifico.buscarPTDsConcluidos());
+            ptdsResultadoBusca = ptdDAOEspecifico.buscarPTDsConcluidos();
         }
+
     }
 
     public void atualizarListaResultadosDeAcorcoComTipoPTD() {
+
         realizarBusca();
         List<PTD> ptdsResultadoBuscaAux = ptdsResultadoBusca;
         if (filtroTipoPTD.equalsIgnoreCase("Vigente")) {
             ptdsResultadoBusca = new ArrayList<>();
             for (PTD ptd : ptdsResultadoBuscaAux) {
-                if(ptd.getEstadoPTD().equalsIgnoreCase("CONCLUÍDO")){
+                if (ptd.getEstadoPTD().equalsIgnoreCase("CONCLUÍDO")) {
                     ptdsResultadoBusca.add(ptd);
                 }
             }
         } else if (filtroTipoPTD.equalsIgnoreCase("Arquivado")) {
             ptdsResultadoBusca = new ArrayList<>();
             for (PTD ptd : ptdsResultadoBuscaAux) {
-                if(ptd.getEstadoPTD().equalsIgnoreCase("ARQUIVADO")){
+                if (ptd.getEstadoPTD().equalsIgnoreCase("ARQUIVADO")) {
                     ptdsResultadoBusca.add(ptd);
                 }
             }
         }
+
     }
 
     public void layoutPDF() {
