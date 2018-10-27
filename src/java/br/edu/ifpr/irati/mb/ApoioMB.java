@@ -53,6 +53,7 @@ public class ApoioMB {
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
         apoio = new Apoio();
+        tipoApoio = new TipoApoio();
         return "CriarCorrigirPTD?faces-redirect=true";
 
     }
