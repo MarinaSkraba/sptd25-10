@@ -217,33 +217,33 @@
                                                      action="/MostrarPTDAprovado"/>
                                     <p:commandButton styleClass="botaoAzul" 
                                                      value="Concluir"
-                                                     ajax="false"
-                                                     onclick="PF('confirmarConclusaoDocenteDialog').show();"
+                                                     onclick="PF('123Dialog').show();"
                                                      />
                                     <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
+
+                                    <!-- Caixa de confirmação de conclusão -->
+                                    <p:dialog header="Confirmar cadastro" 
+                                              widgetVar="123Dialog" 
+                                              modal="true" 
+                                              showEffect="fade" 
+                                              hideEffect="fade" 
+                                              resizable="false">
+
+                                        <h:outputText value="Ao concluir um PTD você o coloca em vigência, substituindo o atual, deseja continuar?" 
+                                                      styleClass="text01"
+                                                      style="margin: 10px; font-size: large; width: 400px;"/>
+                                        <br/>
+
+                                        <p:commandButton styleClass="botaoAzul" 
+                                                         value="Continuar"
+                                                         ajax="false"
+                                                         actionListener="#{pTDMB.concluirPTD(ptdAprovado)}"
+                                                         action="#{pTDMB.abrirNotificacoesDocente(usuarioMB.usuarioLogado.idUsuario)}"/>
+
+                                    </p:dialog>
+
                                 </h:panelGrid>
                             </h:column>
-
-                            <!-- Caixa de confirmação de conclusão -->
-                            <p:dialog header="Confirmar cadastro" 
-                                      widgetVar="confirmarConclusaoDocenteDialog" 
-                                      modal="true" 
-                                      showEffect="fade" 
-                                      hideEffect="fade" 
-                                      resizable="false">
-
-                                <h:outputText value="Ao concluir um PTD você o coloca em vigência, substituindo o atual, deseja continuar?" 
-                                              styleClass="text01"
-                                              style="margin: 10px; font-size: large; width: 400px;"/>
-                                <br/>
-
-                                <p:commandButton styleClass="botaoAzul" 
-                                                 value="Continuar"
-                                                 ajax="false"
-                                                 actionListener="#{pTDMB.concluirPTD(ptdAprovado)}"
-                                                 action="#{pTDMB.abrirNotificacoesDocente(usuarioMB.usuarioLogado.idUsuario)}"/>
-
-                            </p:dialog>
 
                         </h:dataTable>
 
