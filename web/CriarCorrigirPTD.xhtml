@@ -151,6 +151,54 @@
                                          styleClass="botaoVermelho"/>
 
                     </p:dialog>
+                    
+                    <h:outputText value="1. Identificação do docente" 
+                                  styleClass="text01" 
+                                  style="font-size: 22pt;"/>
+
+                    <br/>
+                    <!-- Tabela informações docente -->
+                    <center>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="DOCENTE"  
+                                          styleClass="text01"
+                                          style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
+                            <h:outputText value="#{pTDAvaliacaoMB.ptdEmAvaliacao.professor.nomeCompleto}"  
+                                          styleClass="text01"
+                                          style="font-size: large; width: 300px;"/>
+                        </h:panelGrid>
+                        <h:panelGrid columns="4">
+
+                            <h:outputText value="REGIME DE TRABALHO"  
+                                          styleClass="text01"
+                                          style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 190px;"/>
+                            <h:outputText value="#{pTDAvaliacaoMB.ptdEmAvaliacao.professor.regimeTrabalho}"  
+                                          styleClass="text01"
+                                          style="font-size: large; width: 100px;"/>
+                            <h:outputText value="SIAPE"  
+                                          styleClass="text01"
+                                          style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 170px;"/>
+                            <h:outputText value="#{pTDAvaliacaoMB.ptdEmAvaliacao.professor.matriculaSIAPE}"  
+                                          styleClass="text01"
+                                          style="font-size: large; width: 100px;"/>
+                            <h:outputText value="CONTRATAÇÃO"  
+                                          styleClass="text01"
+                                          style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 190px;"/>
+                            <h:outputText value="#{pTDAvaliacaoMB.ptdEmAvaliacao.professor.tipoContrato}"  
+                                          styleClass="text01"
+                                          style="font-size: large; width: 100px;"/>
+                            <h:outputText value="DATA CONTRATAÇÃO"  
+                                          styleClass="text01"
+                                          style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 170px;"/>
+                            <h:outputText value="#{pTDAvaliacaoMB.ptdEmAvaliacao.professor.dataContratacao}"  
+                                          styleClass="text01"
+                                          style="font-size: large; width: 100px;">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </h:panelGrid>
+                    </center>
+
+                    <br> </br>  
 
                     <!-- Atividades de Ensino -->
                     <h:outputText value="2. Atividades de Ensino" 
@@ -205,12 +253,13 @@
 
                         <p:selectOneMenu id="selectCurso" 
                                          value="#{aulaMB.cursoSelecionado}"
-                                         converter="cursoConverter">
+                                         converter="cursoConverter"
+                                         style="width: 150px;">
 
                             <f:selectItems value="#{cursoMB.cursosAtivos}" 
                                            var="curso" 
                                            itemValue="#{curso}"
-                                           itemLabel="#{curso}" />
+                                           itemLabel="#{curso}"/>
                         </p:selectOneMenu>
 
                         <h:outputText value="COMPONENTE CURRICULAR" 
@@ -269,7 +318,8 @@
 
                         <p:selectOneMenu id="selectCursoEdicao" 
                                          value="#{aulaMB.aulaSelecionadaParaAula.curso}"
-                                         converter="cursoConverter">
+                                         converter="cursoConverter"
+                                         style="width: 150px;">
 
                             <f:selectItems value="#{cursoMB.cursosAtivos}" 
                                            var="curso" 
@@ -301,7 +351,8 @@
                         <br/>
                         <p:selectOneMenu id="selectTipoOfertaEdicao" 
                                          value="#{aulaMB.aulaSelecionadaParaAula.tipoOferta}"
-                                         converter="tipoOfertaConverter">
+                                         converter="tipoOfertaConverter"
+                                         style="width: 150px;">
 
                             <f:selectItems value="#{tipoOfertaMB.tiposOferta}" 
                                            var="tipoOferta" 
@@ -335,7 +386,7 @@
                                 </f:facet>
                                 <h:outputText value="#{aula.curso.nomeCurso}" 
                                               styleClass="text01"
-                                              style="font-size: large;"/>
+                                              style="font-size: large; width: 200px;"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -346,7 +397,7 @@
 
                                 <h:outputText value="#{aula.componenteCurricular}"
                                               styleClass="text01"
-                                              style="font-size: large;" />
+                                              style="font-size: large; width: 200px;" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -1164,7 +1215,7 @@
                                 </f:facet>
                                 <h:outputText value="#{apoioEnsino.tipoApoio.rotulo}" 
                                               styleClass="text01"
-                                              style="font-size: large;"/>
+                                              style="font-size: large; width: 200px;"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -1591,7 +1642,8 @@
                         <br/>
                         <p:selectOneMenu id="selectProjetoSeu" 
                                          value="#{projetoPesquisaExtensaoMB.participacaoAutor.projetoPesquisaExtensao}"
-                                         converter="projetoPesquisaExtensaoConverter">
+                                         converter="projetoPesquisaExtensaoConverter"
+                                         style="width: 150px;">
 
                             <f:selectItems value="#{projetoPesquisaExtensaoMB.projetosPesquisaExtensaoAtivos}" 
                                            var="projetoSeu" 
@@ -1676,7 +1728,7 @@
                                 </f:facet>
                                 <h:outputText value="#{participacaoPesquisaExtensaoAutor.projetoPesquisaExtensao.tituloProcesso}"
                                               styleClass="text01"
-                                              style="font-size: large;" />
+                                              style="font-size: large; width: 200px;" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -2054,7 +2106,8 @@
                         <br/>
                         <p:selectOneMenu id="selectProjetoColab" 
                                          value="#{projetoPesquisaExtensaoMB.participacaoColab.projetoPesquisaExtensao}"
-                                         converter="projetoPesquisaExtensaoConverter">
+                                         converter="projetoPesquisaExtensaoConverter"
+                                         style="width: 150px;">
 
                             <f:selectItems value="#{projetoPesquisaExtensaoMB.projetosPesquisaExtensaoAtivos}" 
                                            var="projetoColab" 
@@ -2084,7 +2137,8 @@
                         <br/>
                         <p:selectOneMenu id="selectProjetoColabEdicao" 
                                          value="#{projetoPesquisaExtensaoMB.participacaoColabSelecionadoParaParticipacaoColab.projetoPesquisaExtensao}"
-                                         converter="projetoPesquisaExtensaoConverter">
+                                         converter="projetoPesquisaExtensaoConverter"
+                                         style="width: 150px;">
 
                             <f:selectItems value="#{projetoPesquisaExtensaoMB.projetosPesquisaExtensaoAtivos}" 
                                            var="projetoColabEdicao" 
@@ -2127,7 +2181,7 @@
                                 </f:facet>
                                 <h:outputText value="#{participacaoPesquisaExtensaoColab.projetoPesquisaExtensao.tituloProcesso}"
                                               styleClass="text01"
-                                              style="font-size: large;" />
+                                              style="font-size: large; width: 200px;" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -2557,7 +2611,7 @@
                                 </f:facet>
                                 <h:outputText value="#{administracao.tipoAdministracao.rotulo}" 
                                               styleClass="text01"
-                                              style="font-size: large;"/>
+                                              style="font-size: large; width: 200px;"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -2924,7 +2978,8 @@
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
                         <p:selectOneMenu id="selectPeriodicidadeOutrasAtividades" 
-                                         value="#{outroTipoAtividadeMB.outroTipoAtividade.periodicidade}">
+                                         value="#{outroTipoAtividadeMB.outroTipoAtividade.periodicidade}"
+                                         style="width: 150px;">
 
                             <f:selectItems value="#{outroTipoAtividadeMB.periodicidade}" 
                                            var="periodicidadeOutrasAtividades" 
@@ -2961,7 +3016,8 @@
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
                         <p:selectOneMenu id="selectEdicaoPeriodicidadeOutrasAtividades" 
-                                         value="#{outroTipoAtividadeMB.outroTipoAtividadeSelecionadaParaOutroTipoAtividade.periodicidade}">
+                                         value="#{outroTipoAtividadeMB.outroTipoAtividadeSelecionadaParaOutroTipoAtividade.periodicidade}"
+                                         style="width: 150px;">
 
                             <f:selectItems value="#{outroTipoAtividadeMB.periodicidade}" 
                                            var="periodicidadeOutrasAtividades" 
@@ -2994,7 +3050,7 @@
                                 </f:facet>
                                 <h:outputText value="#{outraAtividade.rotulo}" 
                                               styleClass="text01"
-                                              style="font-size: large;"/>
+                                              style="font-size: large; width: 200px;"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -3371,7 +3427,8 @@
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
                         <p:selectOneMenu id="selectPeriodicidadeAtividadeAPropor" 
-                                         value="#{atividadeASerPropostaMB.atividadeASerProposta.periodicidade}">
+                                         value="#{atividadeASerPropostaMB.atividadeASerProposta.periodicidade}"
+                                         style="width: 150px;">
 
                             <f:selectItems value="#{outroTipoAtividadeMB.periodicidade}" 
                                            var="periodicidadeAtividadeAPropor" 
@@ -3408,7 +3465,8 @@
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
                         <p:selectOneMenu id="selectEdicaoPeriodicidadeAtividadeAPropor" 
-                                         value="#{atividadeASerPropostaMB.atividadeASerPropostaSelecionadaParaAtividadeASerProposta.periodicidade}">
+                                         value="#{atividadeASerPropostaMB.atividadeASerPropostaSelecionadaParaAtividadeASerProposta.periodicidade}"
+                                         style="width: 150px;">
 
                             <f:selectItems value="#{atividadeASerPropostaMB.periodicidade}" 
                                            var="periodicidadeAtividadeAPropor" 
@@ -3441,7 +3499,7 @@
                                 </f:facet>
                                 <h:outputText value="#{atividadeAPropor.rotulo}" 
                                               styleClass="text01"
-                                              style="font-size: large;"/>
+                                              style="font-size: large; width: 200px;"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
