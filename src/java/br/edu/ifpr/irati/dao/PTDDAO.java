@@ -159,7 +159,7 @@ public class PTDDAO implements IPTDDAO {
         String estadoConcluido = "CONCLUÍDO";
         String estadoArquivado = "ARQUIVADO";
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from ptd p where p.estadoPTD like '" + estadoConcluido + "' or like '" + estadoArquivado + "' ";
+        String hql = "from ptd p where p.estadoPTD like '" + estadoConcluido + "' or p.estadoPTD like '" + estadoArquivado + "' ";
         Query query = session.createQuery(hql);
         List<PTD> results = query.list();
         List<PTD> filtrados = new ArrayList<>();
@@ -181,7 +181,7 @@ public class PTDDAO implements IPTDDAO {
         String estadoConcluido = "CONCLUÍDO";
         String estadoArquivado = "ARQUIVADO";
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from ptd p where p.estadoPTD like '" + estadoConcluido + "' or like '" + estadoArquivado + "' ";
+        String hql = "from ptd p where p.estadoPTD like '"+ estadoConcluido +"' or p.estadoPTD like '" + estadoArquivado + "' ";
         Query query = session.createQuery(hql);
         List<PTD> results = query.list();
         List<PTD> filtrados = new ArrayList<>();
