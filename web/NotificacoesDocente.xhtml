@@ -69,10 +69,10 @@
                               styleClass="text01"
                               style="color: white; float: right; font-weight: normal; font-size: large;"/>
 
-                <p:commandButton id="addPTD"
+                <p:commandButton value="PTD em branco"
                                  styleClass="opMenu"
-                                 icon="/img/Search/searchLarger_24.png"
-                                 value="Editar PTD"/>
+                                 ajax="false" 
+                                 action="#{pTDMB.abrirCriarCorrigirPTDEmBranco(usuarioMB.usuarioLogado)}"/>
 
                 <p:commandButton styleClass="opMenu"
                                  icon="/img/Search/searchLarger_24.png"
@@ -80,46 +80,6 @@
                                  ajax="false" 
                                  actionListener="#{pTDASerMostradoMB.abrirTelaBuscarPTDs()}"
                                  action="/BuscarPTDs"/>
-
-                <!-- Caixa de "novo" PTD -->
-                <p:overlayPanel id="addPanel" 
-                                for="addPTD" 
-                                hideEffect="fade" 
-                                style="padding: 0px;">
-                    <p:commandButton value="PTD em branco"
-                                     styleClass="opMenu"
-                                     onclick="PF('confirmarCriacaoPTDEmBrancoDialog').show();"/>
-                    <br/>
-                    <p:commandButton value="Recuperar último"
-                                     styleClass="opMenu"
-                                     ajax="false" 
-                                     action="#{pTDMB.abrirCriarCorrigirPTDAPartirDoUltimoArquivado(usuarioMB.usuarioLogado)}"/>
-                    <br/>
-                    <p:commandButton value="Continuar editando"
-                                     styleClass="opMenu"
-                                     ajax="false" 
-                                     action="#{pTDMB.abrirCriarCorrigirPTDContinuarEdicao(usuarioMB.usuarioLogado)}"/>
-                </p:overlayPanel>
-
-                <!-- Caixa de aviso de substituição de PTD -->
-                <p:dialog header="Confirmar criação" 
-                          widgetVar="confirmarCriacaoPTDEmBrancoDialog" 
-                          modal="true" 
-                          showEffect="fade" 
-                          hideEffect="fade" 
-                          resizable="false">
-
-                    <h:outputText value="Ao criar um PTD em branco, você substitui qualquer outro que estava em edição." 
-                                  styleClass="text01"
-                                  style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
-                    <br/>
-
-                    <p:commandButton styleClass="botaoAzul" 
-                                     value="Estou ciente."
-                                     ajax="false" 
-                                     action="#{pTDMB.abrirCriarCorrigirPTDEmBranco(usuarioMB.usuarioLogado)}"/>
-
-                </p:dialog>
 
             </h:form>
         </div>
@@ -164,9 +124,10 @@
                                                   style="font-size: large; width: 90%;"/>
                                     <br/>
                                     <p:commandButton styleClass="botaoAzul" 
-                                                     value="Colocar em edição"
+                                                     value="Abrir"
                                                      ajax="false" 
-                                                     actionListener="#{pTDMB.abrirCriarCorrigirPTDAPartirDeUmReprovado(ptdReprovado)}"/>
+                                                     actionListener="#{pTDMB.abrirMostrarPTDParaDocente(ptdReprovado)}"
+                                                     action="/MostrarPTDParaDocente"/>
                                     <p:commandButton styleClass="botaoVermelho" 
                                                      value="Descartar"
                                                      ajax="false" 
@@ -213,8 +174,8 @@
                                     <p:commandButton styleClass="botaoAzul" 
                                                      value="Abrir"
                                                      ajax="false"
-                                                     actionListener="#{pTDMB.abrirMostrarPTDAprovado(ptdAprovado)}"
-                                                     action="/MostrarPTDAprovado"/>
+                                                     actionListener="#{pTDMB.abrirMostrarPTDParaDocente(ptdAprovado)}"
+                                                     action="/MostrarPTDParaDocente"/>
                                     <p:commandButton styleClass="botaoAzul" 
                                                      value="Concluir"
                                                      onclick="PF('123Dialog').show();"
@@ -283,7 +244,7 @@
                                     <p:commandButton styleClass="botaoAzul" 
                                                      value="Abrir"
                                                      ajax="false"
-                                                     actionListener="#{pTDMB.abrirMostrarPTDAprovado(ptdConcluido)}"
+                                                     actionListener="#{pTDMB.abrirMostrarPTDParaDocente(ptdConcluido)}"
                                                      action="/MostrarPTDAprovado"/>
                                     <p:commandButton styleClass="botaoAzul" 
                                                      value="Imprimir"

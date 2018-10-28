@@ -158,7 +158,7 @@ public class PTDMB {
 
     }
 
-    public void abrirMostrarPTDAprovado(PTD ptd) {
+    public void abrirMostrarPTDParaDocente(PTD ptd) {
         ptdAprovado = ptd;
     }
 
@@ -248,11 +248,11 @@ public class PTDMB {
             ptdE.setEstadoPTD("CANCELADO");
             ptdDAOGenerico.alterar(ptdE);
         }
-        List<PTD> ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovadosPorProfessor(usuario.getIdUsuario());
+        List<PTD> ptdsAprovados = ptdDAOEspecifico.buscarPTDsConcluidosPorProfessor(usuario.getIdUsuario());
 
         limparVariáveis();
 
-        if (ptdsAprovados.isEmpty() != true) {
+        if (!ptdsAprovados.isEmpty()) {
 
             Dao<Administracao> administracaoDAO = new GenericDAO<>(PTD.class);
             Dao<TipoAdministracao> tipoAdministracaoDAO = new GenericDAO<>(TipoAdministracao.class);
@@ -273,48 +273,101 @@ public class PTDMB {
             Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
 
             setPtd(ptdsAprovados.get(ptdsAprovados.size() - 1));
-            getPtd().setIdPTD(0);
-            getPtd().setEstadoPTD("EDICAO");
+            PTD ptdAux = new PTD();
+            ptdAux.setIdPTD(0);
+            ptdAux.setEstadoPTD("EDICAO");
+            ptdAux.setProfessor(ptd.getProfessor());
+            ptdAux.setDiretorEnsino(null);
 
             for (Administracao adm : ptd.getAdministrativas()) {
                 adm.setIdAdministracao(0);
-                administracaoDAO.salvar(adm);
-                List<Administracao> as = administracaoDAO.buscarTodos(Administracao.class);
-                adm = as.get(as.size() - 1);
-                for (Horario h : adm.getHorariosAdministracao()) {
+                List<Horario> horariosAux = adm.getHorariosAdministracao();
+                adm.setHorariosAdministracao(new ArrayList<>());
+                for(Horario h : horariosAux){
                     h.setIdHorario(0);
+                    adm.getHorariosAdministracao().add(h);
                     horarioDAO.salvar(h);
-                    List<Horario> hs = horarioDAO.buscarTodos(Horario.class);
-                    h = hs.get(hs.size() - 1);
                 }
+                administracaoDAO.salvar(adm);
+                ptdAux.getAdministrativas().add(adm);
             }
             for (Apoio apoio : ptd.getApoios()) {
                 apoio.setIdApoio(0);
+                List<Horario> horariosAux = apoio.getHorariosApoio();
+                apoio.setHorariosApoio(new ArrayList<>());
+                for(Horario h : horariosAux){
+                    h.setIdHorario(0);
+                    apoio.getHorariosApoio().add(h);
+                    horarioDAO.salvar(h);
+                }
                 apoioDAO.salvar(apoio);
+                ptdAux.getApoios().add(apoio);
             }
             for (AtividadeASerProposta aasp : ptd.getAtividadesASeremPropostas()) {
                 aasp.setIdAtividadeASerProposta(0);
+                List<Horario> horariosAux = aasp.getHorariosAtividadesASerProposta();
+                aasp.setHorariosAtividadesASerProposta(new ArrayList<>());
+                for(Horario h : horariosAux){
+                    h.setIdHorario(0);
+                    aasp.getHorariosAtividadesASerProposta().add(h);
+                    horarioDAO.salvar(h);
+                }
                 aASPropostaDAO.salvar(aasp);
+                ptdAux.getAtividadesASeremPropostas().add(aasp);
             }
             for (Aula al : ptd.getAulas()) {
                 al.setIdAula(0);
+                List<Horario> horariosAux = al.getHorariosAula();
+                al.setHorariosAula(new ArrayList<>());
+                for(Horario h : horariosAux){
+                    h.setIdHorario(0);
+                    al.getHorariosAula().add(h);
+                    horarioDAO.salvar(h);
+                }
                 aulaDAO.salvar(al);
+                ptdAux.getAulas().add(al);
             }
             for (ManutencaoEnsino me : ptd.getManutencoesEnsino()) {
                 me.setIdManutencao(0);
+                List<Horario> horariosAux = me.getHorariosManutecao();
+                me.setHorariosManutecao(new ArrayList<>());
+                for(Horario h : horariosAux){
+                    h.setIdHorario(0);
+                    me.getHorariosManutecao().add(h);
+                    horarioDAO.salvar(h);
+                }
                 manutencaoDAO.salvar(me);
+                ptdAux.getManutencoesEnsino().add(me);
             }
             for (OutroTipoAtividade ota : ptd.getOutrosTiposAtividades()) {
                 ota.setIdOutroTipoAtividade(0);
+                List<Horario> horariosAux = ota.getHorariosOutroTipoAtividade();
+                ota.setHorariosOutroTipoAtividade(new ArrayList<>());
+                for(Horario h : horariosAux){
+                    h.setIdHorario(0);
+                    ota.getHorariosOutroTipoAtividade().add(h);
+                    horarioDAO.salvar(h);
+                }
                 oTAtividadeDAO.salvar(ota);
+                ptdAux.getOutrosTiposAtividades().add(ota);
             }
             for (Participacao part : ptd.getParticipacoes()) {
                 part.setIdParticipacao(0);
+                List<Horario> horariosAux = part.getHorariosParticipacao();
+                part.setHorariosParticipacao(new ArrayList<>());
+                for(Horario h : horariosAux){
+                    h.setIdHorario(0);
+                    part.getHorariosParticipacao().add(h);
+                    horarioDAO.salvar(h);
+                }
                 participacaoDAO.salvar(part);
+                ptdAux.getParticipacoes().add(part);
             }
-
-            ptdDAOGenerico.salvar(getPtd());
-            setPtd(ptdDAOEspecifico.buscarPTDsEmEdicaoPorProfessor(usuario.getIdUsuario()).get(0));
+            
+            ptd = new PTD();
+            ptdDAOGenerico.salvar(ptdAux);
+            List<PTD> ptds = ptdDAOEspecifico.buscarPTDsEmEdicaoPorProfessor(usuario.getIdUsuario());
+            ptd = ptds.get(ptds.size() - 1);
 
             errosTabelaAdministrativas = new ArrayList<>();
             errosTabelaApoioEnsino = new ArrayList<>();
@@ -340,9 +393,15 @@ public class PTDMB {
             ptdE.setEstadoPTD("CANCELADO");
             ptdDAOGenerico.alterar(ptdE);
         }
+        PTD ptdAux = ptdReprovado;
+        ptdAux.setEstadoPTD("EDICAO");
+        
+        ptdReprovado.setEstadoPTD("CANCELADO");
+        ptdDAOGenerico.alterar(ptdReprovado);
+        ptdDAOGenerico.salvar(ptdAux);
+        
         limparVariáveis();
 
-        ptdReprovado.setEstadoPTD("EDICAO");
         ptdDAOGenerico.alterar(ptdReprovado);
         setPtd(ptdDAOEspecifico.buscarPTDsEmEdicaoPorProfessor(ptdReprovado.getProfessor().getIdUsuario()).get(0));
     }
