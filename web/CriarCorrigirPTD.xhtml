@@ -39,9 +39,9 @@
             allDayText: 'Todo o Dia'
         };
     </script>
-    
+
     <h:body styleClass="body">
-        
+
         <!-- Barra de menu -->
         <div id="barraMenu">
             <font face="Calibri" 
@@ -111,13 +111,12 @@
                               hideEffect="fade" 
                               resizable="false">
 
-                        <h:outputText value="Deseja manter as informações inseridas nesse documento?" 
+                        <h:outputText value="Ao sair as informações preenchidas são descartadas. Deseja mesmo sair?" 
                                       styleClass="text01"
                                       style="font-size: large; width: 400px;"/>
                         <p:commandButton styleClass="botaoCinza" 
-                                         value="Manter e sair" 
-                                         ajax="false" 
-                                         action="#{pTDMB.abrirNotificacoesDocente(usuarioMB.usuarioLogado.idUsuario)}"/>
+                                         value="Manter e ficar" 
+                                         ajax="false"/>
 
                         <p:commandButton value="Descartar e sair" 
                                          ajax="false" 
@@ -134,15 +133,12 @@
                               hideEffect="fade" 
                               resizable="false">
 
-                        <h:outputText value="Deseja manter as informações inseridas nesse documento?" 
+                        <h:outputText value="Ao sair as informações preenchidas são descartadas. Deseja mesmo sair?" 
                                       styleClass="text01"
                                       style="font-size: large; width: 400px;"/>
                         <p:commandButton styleClass="botaoCinza" 
-                                         value="Manter e sair" 
-                                         ajax="false" 
-                                         immediate="true"
-                                         actionListener="#{usuarioMB.realizarLogout()}"
-                                         action="/Login?faces-redirect=true"/>
+                                         value="Manter e ficar" 
+                                         ajax="false" />
 
                         <p:commandButton value="Descartar e sair" 
                                          ajax="false"
@@ -151,7 +147,7 @@
                                          styleClass="botaoVermelho"/>
 
                     </p:dialog>
-                    
+
                     <h:outputText value="1. Identificação do docente" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
@@ -163,7 +159,7 @@
                             <h:outputText value="DOCENTE"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
-                            <h:outputText value="#{pTDAvaliacaoMB.ptdEmAvaliacao.professor.nomeCompleto}"  
+                            <h:outputText value="#{pTDMB.ptd.professor.nomeCompleto}"  
                                           styleClass="text01"
                                           style="font-size: large; width: 300px;"/>
                         </h:panelGrid>
@@ -172,25 +168,25 @@
                             <h:outputText value="REGIME DE TRABALHO"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 190px;"/>
-                            <h:outputText value="#{pTDAvaliacaoMB.ptdEmAvaliacao.professor.regimeTrabalho}"  
+                            <h:outputText value="#{pTDMB.ptd.professor.regimeTrabalho}"  
                                           styleClass="text01"
                                           style="font-size: large; width: 100px;"/>
                             <h:outputText value="SIAPE"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 170px;"/>
-                            <h:outputText value="#{pTDAvaliacaoMB.ptdEmAvaliacao.professor.matriculaSIAPE}"  
+                            <h:outputText value="#{pTDMB.ptd.professor.matriculaSIAPE}"  
                                           styleClass="text01"
                                           style="font-size: large; width: 100px;"/>
                             <h:outputText value="CONTRATAÇÃO"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 190px;"/>
-                            <h:outputText value="#{pTDAvaliacaoMB.ptdEmAvaliacao.professor.tipoContrato}"  
+                            <h:outputText value="#{pTDMB.ptd.professor.tipoContrato}"  
                                           styleClass="text01"
                                           style="font-size: large; width: 100px;"/>
                             <h:outputText value="DATA CONTRATAÇÃO"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 170px;"/>
-                            <h:outputText value="#{pTDAvaliacaoMB.ptdEmAvaliacao.professor.dataContratacao}"  
+                            <h:outputText value="#{pTDMB.ptd.professor.dataContratacao}"  
                                           styleClass="text01"
                                           style="font-size: large; width: 100px;">
                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
@@ -550,7 +546,9 @@
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoErro"/>
                                 </h:panelGrid>
-                                <h:dataTable  value="#{pTDMB.errosTabelaAula}" 
+
+                                <h:dataTable  id="errosAula"
+                                              value="#{pTDMB.errosTabelaAula}" 
                                               var="erroAula" 
                                               style="width: auto;"
                                               headerClass="text-center"
@@ -951,7 +949,8 @@
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoErro"/>
                                 </h:panelGrid>
-                                <h:dataTable  value="#{pTDMB.errosTabelaManuEnsino}" 
+                                <h:dataTable  id="errosManu"
+                                              value="#{pTDMB.errosTabelaManuEnsino}" 
                                               var="erroManuEnsino" 
                                               style="width: auto;"
                                               headerClass="text-center"
@@ -1354,7 +1353,8 @@
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoErro"/>
                                 </h:panelGrid>
-                                <h:dataTable  value="#{pTDMB.errosTabelaApoioEnsino}" 
+                                <h:dataTable  id="errosApoio"
+                                              value="#{pTDMB.errosTabelaApoioEnsino}" 
                                               var="erroApoioEnsino" 
                                               style="width: auto;"
                                               headerClass="text-center"
@@ -1890,7 +1890,8 @@
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoErro"/>
                                 </h:panelGrid>
-                                <h:dataTable  value="#{pTDMB.errosTabelaPesquisaExtensaoAutor}" 
+                                <h:dataTable  id="errosPPEAutor"
+                                              value="#{pTDMB.errosTabelaPesquisaExtensaoAutor}" 
                                               var="erroPesquisaExtensaoAutor" 
                                               style="width: auto;"
                                               headerClass="text-center"
@@ -2343,7 +2344,8 @@
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoErro"/>
                                 </h:panelGrid>
-                                <h:dataTable  value="#{pTDMB.errosTabelaPesquisaExtensaoColaborador}" 
+                                <h:dataTable  id="errosPPEColab"
+                                              value="#{pTDMB.errosTabelaPesquisaExtensaoColaborador}" 
                                               var="erroPesquisaExtensaoColab" 
                                               style="width: auto;"
                                               headerClass="text-center"
@@ -2750,7 +2752,8 @@
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoErro"/>
                                 </h:panelGrid>
-                                <h:dataTable  value="#{pTDMB.errosTabelaAdministrativas}" 
+                                <h:dataTable  id="errosAdm"
+                                              value="#{pTDMB.errosTabelaAdministrativas}" 
                                               var="erroAdministrativa" 
                                               style="width: auto;"
                                               headerClass="text-center"
@@ -3199,7 +3202,8 @@
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoErro"/>
                                 </h:panelGrid>
-                                <h:dataTable  value="#{pTDMB.errosTabelaOutrasAtividades}" 
+                                <h:dataTable  id="errosOTAs"
+                                              value="#{pTDMB.errosTabelaOutrasAtividades}" 
                                               var="erroOutrasAtividades" 
                                               style="width: auto;"
                                               headerClass="text-center"
@@ -3648,7 +3652,8 @@
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoErro"/>
                                 </h:panelGrid>
-                                <h:dataTable  value="#{pTDMB.errosTabelaAtividadesASeremPropostas}" 
+                                <h:dataTable  id="errosAASPs"
+                                              value="#{pTDMB.errosTabelaAtividadesASeremPropostas}" 
                                               var="erroAtividadesASeremPropostas" 
                                               style="width: auto;"
                                               headerClass="text-center"

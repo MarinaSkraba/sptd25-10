@@ -7,7 +7,7 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>PTD Aprovado</title>
+        <title>PTD</title>
         <link rel="stylesheet" type="text/css" href="css/css.css"/>
         <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     </h:head>
@@ -77,11 +77,40 @@
 
                 <h:form id="PTD">
 
-                    <br> </br>
+                    <br/>
 
-                    <h:outputText value="1. Identificação do docente" 
+                    <h:outputText value="PLANO DE TRABALHO DOCENTE - #{pTDASerMostradoMB.ptdAMostrar.dataAvaliacaoPTD}" 
                                   styleClass="text01" 
-                                  style="font-size: 22pt;"/>
+                                  style="font-size: large; font-weight: bold;">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+
+                    <br/>
+
+                    <table style="width: 100%;" border="1" cellspacing="0" cellpadding="2">
+                        <tr>
+                            <td>
+                                <h:outputText value="DOCENTE: #{pTDMB.ptdAprovado.professor.nomeCompleto}"  
+                                              styleClass="text01"
+                                              style="font-size: large;margin: 0px; padding: 5px; width: 300px;"/>
+                                <h:outputText value=""  
+                                              styleClass="text01"
+                                              style="font-size: large; width: 300px;"/>
+                            </td>
+                            <td>
+                                <h:outputText value="SIAPE"  
+                                              styleClass="text01"
+                                              style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 170px;"/>
+                                <h:outputText value="#{pTDMB.ptdAprovado.professor.matriculaSIAPE}"  
+                                              styleClass="text01"
+                                              style="font-size: large; width: 100px;"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h:outputText value="1. IDENTIFICAÇÃO DO DOCENTE" 
+                                  styleClass="text01" 
+                                  style="font-size: large; font-weight: bold;"/>
 
                     <br/>
                     <!-- Tabela informações docente -->
@@ -89,12 +118,7 @@
                         <ui:insert name="pdf" />
                         <center>
                             <h:panelGrid columns="2">
-                                <h:outputText value="DOCENTE"  
-                                              styleClass="text01"
-                                              style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
-                                <h:outputText value="#{pTDMB.ptdAprovado.professor.nomeCompleto}"  
-                                              styleClass="text01"
-                                              style="font-size: large; width: 300px;"/>
+
                             </h:panelGrid>
                             <h:panelGrid columns="4">
 
@@ -104,12 +128,7 @@
                                 <h:outputText value="#{pTDMB.ptdAprovado.professor.regimeTrabalho}"  
                                               styleClass="text01"
                                               style="font-size: large; width: 100px;"/>
-                                <h:outputText value="SIAPE"  
-                                              styleClass="text01"
-                                              style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 170px;"/>
-                                <h:outputText value="#{pTDMB.ptdAprovado.professor.matriculaSIAPE}"  
-                                              styleClass="text01"
-                                              style="font-size: large; width: 100px;"/>
+                                
                                 <h:outputText value="CONTRATAÇÃO"  
                                               styleClass="text01"
                                               style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 190px;"/>
@@ -248,7 +267,7 @@
                             </h:dataTable>
                         </div>
                         <center>
-                            <div id="justificativaIrregularidade">
+                            <div id="justificativaIrregularidade"  style="opacity: #{pTDASerMostradoMB.verificarConteúdoJustificativaParaOpacidade(pTDAvaliacaoMB.ptdEmAvaliacao.campoJustificativaAtividadeEnsino)};">
                                 <h:outputText value="#{pTDMB.ptdAprovado.campoJustificativaAtividadeEnsino}" 
                                               styleClass="text01"
 
@@ -344,7 +363,7 @@
                             </h:dataTable>
                         </div>
                         <center>
-                            <div id="justificativaIrregularidade">
+                            <div id="justificativaIrregularidade"  style="opacity: #{pTDASerMostradoMB.verificarConteúdoJustificativaParaOpacidade(pTDAvaliacaoMB.ptdEmAvaliacao.campoJustificativaManutencaoEnsino)};">
                                 <h:outputText value="#{pTDMB.ptdAprovado.campoJustificativaManutencaoEnsino}" 
                                               styleClass="text01"
                                               style="font-size: large;"/>
@@ -441,7 +460,7 @@
                             </h:dataTable>
                         </div>
                         <center>
-                            <div id="justificativaIrregularidade">
+                            <div id="justificativaIrregularidade" style="opacity: #{pTDASerMostradoMB.verificarConteúdoJustificativaParaOpacidade(pTDAvaliacaoMB.ptdEmAvaliacao.campoJustificativaApoioEnsino)};">
                                 <h:outputText value="#{pTDMB.ptdAprovado.campoJustificativaApoioEnsino}" 
                                               styleClass="text01"
                                               style="font-size: large;"/>
@@ -576,13 +595,6 @@
                                 </h:column>
                             </h:dataTable>
                         </div>
-                        <center>
-                            <div id="justificativaIrregularidade">
-                                <h:outputText value="#{pTDMB.ptdAprovado.campoJustificativaProjetoPesquisaExtensao}" 
-                                              styleClass="text01"
-                                              style="font-size: large;"/>
-                            </div>
-                        </center>
 
                         <br/>
 
@@ -704,7 +716,7 @@
                             </h:dataTable>
                         </div>
                         <center>
-                            <div id="justificativaIrregularidade">
+                            <div id="justificativaIrregularidade" style="opacity: #{pTDASerMostradoMB.verificarConteúdoJustificativaParaOpacidade(pTDAvaliacaoMB.ptdEmAvaliacao.campoJustificativaProjetoPesquisaExtensao)};">
                                 <h:outputText value="#{pTDMB.ptdAprovado.campoJustificativaProjetoPesquisaExtensao}" 
                                               styleClass="text01"
                                               style="font-size: large;"/>
@@ -808,7 +820,7 @@
                             </h:dataTable>
                         </div>
                         <center>
-                            <div id="justificativaIrregularidade">
+                            <div id="justificativaIrregularidade" style="opacity: #{pTDASerMostradoMB.verificarConteúdoJustificativaParaOpacidade(pTDAvaliacaoMB.ptdEmAvaliacao.campoJustificativaAdministracao)};">
                                 <h:outputText value="#{pTDMB.ptdAprovado.campoJustificativaAdministracao}" 
                                               styleClass="text01"
                                               style="font-size: large;"/>
@@ -923,7 +935,7 @@
                             </h:dataTable>
                         </div>
                         <center>
-                            <div id="justificativaIrregularidade">
+                            <div id="justificativaIrregularidade" style="opacity: #{pTDASerMostradoMB.verificarConteúdoJustificativaParaOpacidade(pTDAvaliacaoMB.ptdEmAvaliacao.campoJustificativaOutrasAtividades)};">
                                 <h:outputText value="#{pTDMB.ptdAprovado.campoJustificativaOutrasAtividades}" 
                                               styleClass="text01"
                                               style="font-size: large;"/>
@@ -1035,7 +1047,7 @@
                         </div>
 
                         <center>
-                            <div id="justificativaIrregularidade">
+                            <div id="justificativaIrregularidade" style="opacity: #{pTDASerMostradoMB.verificarConteúdoJustificativaParaOpacidade(pTDAvaliacaoMB.ptdEmAvaliacao.campoJustificativaSeremPropostas)};">
                                 <h:outputText value="#{pTDMB.ptdAprovado.campoJustificativaSeremPropostas}" 
                                               styleClass="text01"
                                               style="font-size: large;"/>
@@ -1118,7 +1130,7 @@
                         </center>
 
                         <center>
-                            <div id="justificativaIrregularidade">
+                            <div id="justificativaIrregularidade"  style="opacity: #{pTDASerMostradoMB.verificarConteúdoJustificativaParaOpacidade(pTDAvaliacaoMB.ptdEmAvaliacao.campoJustificativaGeral)};">
                                 <h:outputText value="#{pTDMB.ptdAprovado.campoJustificativaGeral}" 
                                               styleClass="text01"
                                               style="font-size: large;"/>
@@ -1129,30 +1141,30 @@
 
                         <br/>
                     </p:outputPanel>
-                        <p:commandButton value="Imprimir PTD" styleClass="botaoAzul">
-                            <p:printer target="pdf" />
-                        </p:commandButton>
+                    <p:commandButton value="Imprimir PTD" styleClass="botaoAzul" style="font-size: large;">
+                        <p:printer target="pdf" />
+                    </p:commandButton>
+                    <br/>
+
+                    <!-- Caixa de reprovação de PTD -->
+                    <p:dialog header="Reprovar PTD" 
+                              widgetVar="reprovarPTDDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="OBSERVAÇÕES" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
                         <br/>
+                        <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptdAprovado.campoObservacoesDiretorEnsino}"/>
+                        <br/>
+                        <p:commandButton value="Enviar"
+                                         onclick="PF('confirmacaoReprovacaoDialog').show();"
+                                         styleClass="botaoAzul"/>
 
-                        <!-- Caixa de reprovação de PTD -->
-                        <p:dialog header="Reprovar PTD" 
-                                  widgetVar="reprovarPTDDialog" 
-                                  modal="true" 
-                                  showEffect="fade" 
-                                  hideEffect="fade" 
-                                  resizable="false">
-
-                            <h:outputText value="OBSERVAÇÕES" 
-                                          styleClass="text01"
-                                          style="margin: 10px 25px -10px 25px;"/>
-                            <br/>
-                            <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptdAprovado.campoObservacoesDiretorEnsino}"/>
-                            <br/>
-                            <p:commandButton value="Enviar"
-                                             onclick="PF('confirmacaoReprovacaoDialog').show();"
-                                             styleClass="botaoAzul"/>
-
-                        </p:dialog>
+                    </p:dialog>
 
 
                 </h:form>

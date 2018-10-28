@@ -59,36 +59,6 @@
                                  ajax="false"
                                  style="float: left;"/>
 
-                <p:commandButton styleClass="opMenu" 
-                                 style="float: left;" 
-                                 value="Novo Diretor" 
-                                 onclick="PF('addDiretorDialog').show();"/>
-                
-                <!-- Caixa para adicionar novo diretor -->
-
-                <p:dialog header="Cadastrar Novo Diretor" 
-                          widgetVar="addDiretorDialog" 
-                          modal="true" 
-                          showEffect="fade" 
-                          hideEffect="fade" 
-                          resizable="false"> 
-                    
-                    <h:outputText value="EMAIL DO NOVO DIRETOR" 
-                                  styleClass="text01"
-                                  style="margin: 10px 25px -10px 25px;"/>
-                    <br/>
-
-                    <p:inputText value="#{diretorEnsinoMB.diretorEnsino.email}"/>
-
-                    <br/>
-                    <p:commandButton value="Salvar" 
-                                     styleClass="botaoAzul"
-                                     action="#{diretorEnsinoMB.salvarDiretorEnsino()}"
-                                     ajax="false"/>
-
-
-                </p:dialog>
-
                 <p:commandButton id="logout"
                                  image="img/fundo_login.png" 
                                  styleClass="imgLogado"/>

@@ -24,7 +24,7 @@ import org.primefaces.component.export.PDFOptions;
 @SessionScoped
 public class PTDASerMostradoMB {
 
-    private PTD ptdConcluido;
+    private PTD ptdAMostrar;
     private List<PTD> ptdsResultadoBusca;
     private List<Participacao> participacoesAutorPTDConcluido;
     private List<Participacao> participacoesColabPTDConcluido;
@@ -39,7 +39,7 @@ public class PTDASerMostradoMB {
 
     public PTDASerMostradoMB() {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
-        ptdConcluido = new PTD();
+        ptdAMostrar = new PTD();
         ptdsResultadoBusca = new ArrayList<>();
         ptdsResultadoBusca = ptdDAOEspecifico.buscarPTDsConcluidos();
         participacoesAutorPTDConcluido = new ArrayList<>();
@@ -47,6 +47,14 @@ public class PTDASerMostradoMB {
         textoBusca = "";
         filtroBusca = "";
         filtroTipoPTD = "";
+    }
+    
+    public int verificarConteúdoJustificativaParaOpacidade(String texto) {
+        if (texto.equalsIgnoreCase("")) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
     public void mostrarTodos() {
@@ -125,13 +133,13 @@ public class PTDASerMostradoMB {
 
     public void abrirMostrarPTD(PTD ptd) {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
-        setPtdConcluido(ptdDAOGenerico.buscarPorId(ptd.getIdPTD()));
+        setPtdAMostrar(ptdDAOGenerico.buscarPorId(ptd.getIdPTD()));
     }
 
     public void atualizarListasParticipacoesPTD() {
         setParticipacoesAutorPTDConcluido(new ArrayList<>());
         setParticipacoesColabPTDConcluido(new ArrayList<>());
-        for (Participacao part : getPtdConcluido().getParticipacoes()) {
+        for (Participacao part : getPtdAMostrar().getParticipacoes()) {
             if (part.getRotulo().equalsIgnoreCase("Autor")) {
                 getParticipacoesAutorPTDConcluido().add(part);
             } else {
@@ -155,17 +163,17 @@ public class PTDASerMostradoMB {
     }
 
     /**
-     * @return the ptdConcluido
+     * @return the ptdAMostrar
      */
-    public PTD getPtdConcluido() {
-        return ptdConcluido;
+    public PTD getPtdAMostrar() {
+        return ptdAMostrar;
     }
 
     /**
-     * @param ptdConcluido the ptdConcluido to set
+     * @param ptdAMostrar the ptdAMostrar to set
      */
-    public void setPtdConcluido(PTD ptdConcluido) {
-        this.ptdConcluido = ptdConcluido;
+    public void setPtdAMostrar(PTD ptdAMostrar) {
+        this.ptdAMostrar = ptdAMostrar;
     }
 
     /**

@@ -160,11 +160,11 @@ public class HorarioMB {
             cargaHorariosTotal = cargaHorariosTotal + (horasTermino - horasInicio);
             if (minutoTermino > minutoInicio) {
                 minTotal = minutoTermino - minutoInicio;
-                cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / 60);
+                cargaHorariosTotal = cargaHorariosTotal + (minTotal / 60);
             }
             if (minutoTermino < minutoInicio) {
                 minTotal = (60 - minutoInicio) + minutoTermino;
-                cargaHorariosTotal = (cargaHoraNovoHorario + (minTotal / 60)) - 1;
+                cargaHorariosTotal = (cargaHorariosTotal + (minTotal / 60)) - 1;
             }
         }
         
