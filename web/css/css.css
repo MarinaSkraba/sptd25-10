@@ -688,7 +688,11 @@ body{
     background-color: #DCDCDC;
 }
 
-@page { margin: 0; }
+@page { 
+    margin: 5px;
+    size: landscape;
+
+}
 
 
 
