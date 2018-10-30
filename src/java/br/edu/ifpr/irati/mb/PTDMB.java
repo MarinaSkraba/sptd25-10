@@ -106,6 +106,11 @@ public class PTDMB {
 
     }
 
+    /*
+    Acessa as informações da variável 'ptd' que representa o PTD em edição e separa
+    nas listas de participações para serem mostradas nas tabelas de participação da 
+    tela de criação e edição de PTDs
+    */
     public void atualizarListasParticipacoesPTDEdicao() {
         participacoesAutorPTDEdicao = new ArrayList<>();
         participacoesColabPTDEdicao = new ArrayList<>();
@@ -117,7 +122,11 @@ public class PTDMB {
             }
         }
     }
-
+    
+    /*
+    Acessa as informações da variável 'ptdAprovado' e separa nas listas de participações 
+    para serem mostradas nas tabelas de participação da tela 'MostrarPTDAprovado'
+    */
     public void atualizarListasParticipacoesPTDAprovado() {
         setParticipacoesAutorPTDAprovado(new ArrayList<>());
         setParticipacoesColabPTDAprovado(new ArrayList<>());
@@ -130,6 +139,10 @@ public class PTDMB {
         }
     }
     
+    /*
+    Acessa as informações da variável 'ptdConcluido' e separa nas listas de participações 
+    para serem mostradas nas tabelas de participação da tela 'MostrarPTD'
+    */
     public void atualizarListasParticipacoesPTDConcluido() {
         setParticipacoesAutorPTDConcluido(new ArrayList<>());
         setParticipacoesColabPTDConcluido(new ArrayList<>());
@@ -142,14 +155,26 @@ public class PTDMB {
         }
     }
     
-    public String sairTelaMostrarPTD(Usuario usuario){
-        if(saidaTelaMostrarPTDAux.equalsIgnoreCase("")){
+    /*
+    Considerando que a tela 'MostrarPTD' pode ser acessada por dois caiminhos diferentes -
+    através da tela de busca e da tela de notificações do professor - o método identifica
+    o conteúdo de uma variável auxiliar para executar a função 'voltar' daquela tela
+    */
+    public String sairTelaMostrarPTD(Usuario usuario) {
+        if (saidaTelaMostrarPTDAux.equalsIgnoreCase("")) {
             return "/BuscarPTDs?faces-redirect=true";
         } else {
             return abrirNotificacoesDocente(usuario.getIdUsuario());
         }
     }
 
+    /*
+    Considerando que a tela 'BuscarPTDs' pode ser acessada por diferentes caminhos -
+    através da tela de notificações do professor, do docente e da tela 'index' -  o
+    método identica se há um usuário logado no sistema e se, no caso de haver um, que
+    tipo de usuário está logado, para, dessa forma, encaminhar para as respectivas 
+    telas anteriores como ação do botão 'voltar'
+    */
     public String sairTelaBuscarPTDs(Usuario usuario) {
         if (usuario.getIdUsuario() != 0) {
             if (usuario instanceof Professor) {
@@ -162,6 +187,12 @@ public class PTDMB {
         }
     }
 
+    /*
+    No cenário em que os métodos de recuperação do último PTD em edição, de continuação
+    de edição do último PTD em estado de edição e de recuperação de um PTD reprovado
+    funcionam, o método prepararia a tela de criação e edição de PTDs para receber um
+    PTD diferente
+    */
     public void limparVariáveis() {
         errosTabelaAdministrativas = new ArrayList<>();
         errosTabelaApoioEnsino = new ArrayList<>();
@@ -175,6 +206,13 @@ public class PTDMB {
         cargaHorariaTotalPTDPTDEdicao = 0;
     }
 
+    /*
+    Devido ao fato das telas de notificações para docentes e para diretor de ensino são
+    telas de apresentação de dados, na tela de login, depois do ManagedBean de usuário
+    ter identificado o tipo de usuário, esse método é chamado para reconhecer qual tela
+    deve ser carregada, encaminhando os métodos que prepararão os dados que serão 
+    apresentados
+    */
     public String concluirLogin(String tela, int idUsuario) {
         if (tela.equalsIgnoreCase("/NotificacoesDocente?faces-redirect=true")) {
             return abrirNotificacoesDocente(idUsuario);
@@ -186,15 +224,26 @@ public class PTDMB {
 
     }
 
+    /*
+    Prepara as informações que serão utilizadas na tela 'MostrarPTD' setando o PTD, cuja
+    consulta foi solicitada, e uma variável auxiliar utilizada no método 'sairTelaMostrarPTD'
+    */
     public void abrirMostrarPTD(PTD ptd, String s) {
         ptdConcluido = ptd;
         saidaTelaMostrarPTDAux = s;
     }
-    
+
+    /*
+    Prepara as informações que serão utilizadas na tela 'MostrarPTDAprovado'
+    */
     public void abrirMostrarPTDAprovado(PTD ptd) {
         ptdAprovado = ptd;
     }
 
+    /*
+    Prepara as informações que serão disponibilizadas na tela de notificações referente
+    ao professor
+    */
     public String abrirNotificacoesDocente(int idUsuario) {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         ptdsReprovados = ptdDAOEspecifico.buscarPTDsReprovadosPorProfessor(idUsuario);
@@ -204,6 +253,10 @@ public class PTDMB {
         return "/NotificacoesDocente?faces-redirect=true";
     }
 
+    /*
+    Prepara as informações que serão disponibilizadas na tela de notificações referente
+    ao diretor de ensino
+    */
     public String abrirNotificacoesDiretorEnsino(int idUsuario) {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         Dao<DiretorEnsino> diretorDAO = new GenericDAO(DiretorEnsino.class);
@@ -225,11 +278,21 @@ public class PTDMB {
         return "/NotificacoesDiretorEnsino?faces-redirect=true";
     }
 
+    /*
+    Concentra a chamada dos métodos de conferência/verificação para a tela de criação
+    e edição de PTDs
+    */
     public void realizarConferencias() {
         verificarErros();
         verificarCargaHorariaPTDEdicao();
     }
 
+    /*
+    Realiza a chamada da tela de criação e edição de PTDs criando um PTD em branco, com
+    status em 'EDICAO'. Considerando o caso em que os métodos de recuperação/recarregamento
+    de PTD funcionam, o método busca PTDs que estejam em estado de edição e os coloca em 
+    estado 'CANCELADO'
+    */
     public String abrirCriarCorrigirPTDEmBranco(Usuario usuario) {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
         Dao<Professor> professorDAOGenerico = new GenericDAO<>(Professor.class);
@@ -260,6 +323,10 @@ public class PTDMB {
         return "/CriarCorrigirPTD?faces-redirect=true";
     }
 
+    /*
+    Verifica a existência de PTDs no estado de edição e coloca o resultado na variável de 
+    ptd que é utilizada na tela de criação e edição de PTDs
+    */
     public String abrirCriarCorrigirPTDContinuarEdicao(Usuario usuario) {
 
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
@@ -273,6 +340,11 @@ public class PTDMB {
 
     }
 
+    /*
+    Realiza uma busca dos PTDs concluídos pelo professor para encontrar o PTD vigente, 
+    recupera suas informações e as cadastra fazendo parte de um novo PTD, este em 
+    edição
+    */
     public String abrirCriarCorrigirPTDAPartirDoUltimoArquivado(Usuario usuario) {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
@@ -316,7 +388,7 @@ public class PTDMB {
                 adm.setIdAdministracao(0);
                 List<Horario> horariosAux = adm.getHorariosAdministracao();
                 adm.setHorariosAdministracao(new ArrayList<>());
-                for(Horario h : horariosAux){
+                for (Horario h : horariosAux) {
                     h.setIdHorario(0);
                     adm.getHorariosAdministracao().add(h);
                     horarioDAO.salvar(h);
@@ -328,7 +400,7 @@ public class PTDMB {
                 apoio.setIdApoio(0);
                 List<Horario> horariosAux = apoio.getHorariosApoio();
                 apoio.setHorariosApoio(new ArrayList<>());
-                for(Horario h : horariosAux){
+                for (Horario h : horariosAux) {
                     h.setIdHorario(0);
                     apoio.getHorariosApoio().add(h);
                     horarioDAO.salvar(h);
@@ -340,7 +412,7 @@ public class PTDMB {
                 aasp.setIdAtividadeASerProposta(0);
                 List<Horario> horariosAux = aasp.getHorariosAtividadesASerProposta();
                 aasp.setHorariosAtividadesASerProposta(new ArrayList<>());
-                for(Horario h : horariosAux){
+                for (Horario h : horariosAux) {
                     h.setIdHorario(0);
                     aasp.getHorariosAtividadesASerProposta().add(h);
                     horarioDAO.salvar(h);
@@ -352,7 +424,7 @@ public class PTDMB {
                 al.setIdAula(0);
                 List<Horario> horariosAux = al.getHorariosAula();
                 al.setHorariosAula(new ArrayList<>());
-                for(Horario h : horariosAux){
+                for (Horario h : horariosAux) {
                     h.setIdHorario(0);
                     al.getHorariosAula().add(h);
                     horarioDAO.salvar(h);
@@ -364,7 +436,7 @@ public class PTDMB {
                 me.setIdManutencao(0);
                 List<Horario> horariosAux = me.getHorariosManutecao();
                 me.setHorariosManutecao(new ArrayList<>());
-                for(Horario h : horariosAux){
+                for (Horario h : horariosAux) {
                     h.setIdHorario(0);
                     me.getHorariosManutecao().add(h);
                     horarioDAO.salvar(h);
@@ -376,7 +448,7 @@ public class PTDMB {
                 ota.setIdOutroTipoAtividade(0);
                 List<Horario> horariosAux = ota.getHorariosOutroTipoAtividade();
                 ota.setHorariosOutroTipoAtividade(new ArrayList<>());
-                for(Horario h : horariosAux){
+                for (Horario h : horariosAux) {
                     h.setIdHorario(0);
                     ota.getHorariosOutroTipoAtividade().add(h);
                     horarioDAO.salvar(h);
@@ -388,7 +460,7 @@ public class PTDMB {
                 part.setIdParticipacao(0);
                 List<Horario> horariosAux = part.getHorariosParticipacao();
                 part.setHorariosParticipacao(new ArrayList<>());
-                for(Horario h : horariosAux){
+                for (Horario h : horariosAux) {
                     h.setIdHorario(0);
                     part.getHorariosParticipacao().add(h);
                     horarioDAO.salvar(h);
@@ -396,7 +468,7 @@ public class PTDMB {
                 participacaoDAO.salvar(part);
                 ptdAux.getParticipacoes().add(part);
             }
-            
+
             ptd = new PTD();
             ptdDAOGenerico.salvar(ptdAux);
             List<PTD> ptds = ptdDAOEspecifico.buscarPTDsEmEdicaoPorProfessor(usuario.getIdUsuario());
@@ -418,6 +490,10 @@ public class PTDMB {
         }
     }
 
+    /*
+    Conforme solicitação de um usuário docente, no método é criado um novo PTD em estado 
+    de edição recuperando as informações do PTD reprovado selecionado
+    */
     public void abrirCriarCorrigirPTDAPartirDeUmReprovado(PTD ptdReprovado) {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
@@ -428,17 +504,20 @@ public class PTDMB {
         }
         PTD ptdAux = ptdReprovado;
         ptdAux.setEstadoPTD("EDICAO");
-        
+
         ptdReprovado.setEstadoPTD("CANCELADO");
         ptdDAOGenerico.alterar(ptdReprovado);
         ptdDAOGenerico.salvar(ptdAux);
-        
+
         limparVariáveis();
 
         ptdDAOGenerico.alterar(ptdReprovado);
         setPtd(ptdDAOEspecifico.buscarPTDsEmEdicaoPorProfessor(ptdReprovado.getProfessor().getIdUsuario()).get(0));
     }
 
+    /*
+    
+    */
     public String cancelarPTD(PTD ptdACancelar, int idUsuario, String telaFutura) {
 
         Dao<Administracao> administracaoDAO = new GenericDAO<>(PTD.class);
@@ -557,6 +636,21 @@ public class PTDMB {
 
     }
 
+    /*
+    Altera um PTD reprovado mudando seu estado para 'CANCELADO'
+    */
+    public void descartarPTD(PTD ptdADescartar) {
+
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+        ptdADescartar.setEstadoPTD("CANCELADO");
+        ptdDAO.alterar(ptdADescartar);
+
+    }
+
+    /*
+    Altera um PTD em edição mudando seu estado para 'AVALIACAO' e alterando sua carga 
+    horária total calculada no método de calculo de 'verificarCargaHorariaPTDEdicao'
+    */
     public String submeterPTD(int idUsuario) {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
         getPtd().setEstadoPTD("AVALIACAO");
@@ -565,6 +659,13 @@ public class PTDMB {
         return abrirNotificacoesDocente(idUsuario);
     }
 
+    /*
+    Todas os erros de dados e irregularidades legais ao serem identificados são adicionados
+    em listas específicas, que através desse método apontam para caixas de dialogo na 
+    interface. Quando houverem erros não será permitida a submissão do PTD, e no caso de
+    irregularidades, a submissão será permitida se houverem justificativas/comentários 
+    nas tabelas referêntes ao que foi apontado
+    */
     public String verificarPossibilidadeSubmissao() {
 
         String nomeCaixaDialogo = "";
@@ -649,6 +750,10 @@ public class PTDMB {
 
     }
 
+    /*
+    Verifica a ocorrência de erros que caracterizam falhas no momento de inserção de 
+    dados inseridos
+    */
     public void verificarErros() {
         errosTabelaAdministrativas = new ArrayList();
         errosTabelaApoioEnsino = new ArrayList();
@@ -1416,6 +1521,11 @@ public class PTDMB {
         }
     }
 
+    /*
+    As caixas das listas de erros e irregularidades só são mostradas caso das listas
+    não estarem vazias, assim a visibilidade (no caso a opacidade) das caixas é dada
+    pelo resultado dessa verificação
+    */
     public int verificarConteúdoListaParaOpacidade(List<String> lista) {
         if (lista.isEmpty()) {
             return 0;
@@ -1424,6 +1534,11 @@ public class PTDMB {
         }
     }
 
+    /*
+    Percorre as listas de horários dentro das atividades das listas de atividades do
+    PTD em edição alterando a carga horária total de cada seção identificando irregularidas
+    perante a legislação durante a passagem pelas listas
+    */
     public void verificarCargaHorariaPTDEdicao() {
 
         irregularidadesPTDEdicao = new ArrayList<>();
@@ -1643,12 +1758,20 @@ public class PTDMB {
 
     }
 
+    /*
+    
+    */
     public String salvarJustificativasEComentários() {
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
+    /*
+    Altera o estado do atual PTD concluído de um professor e mudao o estado do PTD 
+    aprovado selecionado para 'CONCLUÍDO' o que faz com que o PTD seja considerado o 
+    atual PTD de um professor (o PTD vigente).
+    */
     public void concluirPTD(PTD ptd) {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
         ptd.setEstadoPTD("CONCLUÍDO");
@@ -2024,7 +2147,8 @@ public class PTDMB {
     }
 
     /**
-     * @param participacoesAutorPTDConcluido the participacoesAutorPTDConcluido to set
+     * @param participacoesAutorPTDConcluido the participacoesAutorPTDConcluido
+     * to set
      */
     public void setParticipacoesAutorPTDConcluido(List<Participacao> participacoesAutorPTDConcluido) {
         this.participacoesAutorPTDConcluido = participacoesAutorPTDConcluido;
@@ -2038,7 +2162,8 @@ public class PTDMB {
     }
 
     /**
-     * @param participacoesColabPTDConcluido the participacoesColabPTDConcluido to set
+     * @param participacoesColabPTDConcluido the participacoesColabPTDConcluido
+     * to set
      */
     public void setParticipacoesColabPTDConcluido(List<Participacao> participacoesColabPTDConcluido) {
         this.participacoesColabPTDConcluido = participacoesColabPTDConcluido;
