@@ -45,14 +45,14 @@ public class DiretorEnsinoMB {
         String senhaSHA512 = "";
         Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
         diretorEnsino.setEstadoUsuario("AHabilitar");
-        senhaSHA512 = Digest.hashString(diretorEnsino.getSenhaAlfanumerica(), "SHA-512");
+        senhaSHA512 = Digest.hashString(getDiretorEnsino().getSenhaAlfanumerica(), "SHA-512");
         diretorEnsino.setSenhaAlfanumerica(senhaSHA512);
         diretorEnsinoDAO.salvar(diretorEnsino);
         diretorEnsino = new DiretorEnsino();
         return "/Login?faces-redirect=true";
 
     }
-    
+
     public String verificarPossibilidadeCadastroDiretorEnsino() {
 
         String nomeCaixaRetorno = "";
@@ -66,7 +66,7 @@ public class DiretorEnsinoMB {
 
             nomeCaixaRetorno = "confirmarCadastroDiretorEnsinoDialog";
             return nomeCaixaRetorno;
-            
+
         }
 
     }
@@ -84,7 +84,7 @@ public class DiretorEnsinoMB {
 
             nomeCaixaRetorno = "confirmarEdicaoDiretorEnsinoDialog";
             return nomeCaixaRetorno;
-            
+
         }
 
     }
@@ -93,6 +93,7 @@ public class DiretorEnsinoMB {
 
         String senhaSHA512 = "";
         senhaSHA512 = Digest.hashString(diretorEnsinoSelecionado.getSenhaAlfanumerica(), "SHA-512");
+        diretorEnsinoSelecionado.setSenhaAlfanumerica(senhaSHA512);
         Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
         Usuario u = new Usuario(diretorEnsinoSelecionado.getIdUsuario(), diretorEnsinoSelecionado.getNomeCompleto(), diretorEnsinoSelecionado.getEmail(), diretorEnsinoSelecionado.getImagemPerfil(), senhaSHA512, "Habilitado");
         Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
@@ -101,14 +102,14 @@ public class DiretorEnsinoMB {
         setDiretorEnsino(new DiretorEnsino());
 
     }
-    
-    public String habilitarDiretorEnsino(DiretorEnsino diretorEnsino){
-        
+
+    public String habilitarDiretorEnsino(DiretorEnsino diretorEnsino) {
+
         Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
         diretorEnsino.setEstadoUsuario("Habilitado");
         diretorEnsinoDAO.alterar(diretorEnsino);
         return "/Login?faces-redirect=true";
-        
+
     }
 
     public void desabilitarDiretorEnsino(DiretorEnsino diretorEnsino) {
@@ -170,7 +171,7 @@ public class DiretorEnsinoMB {
      */
     public List<String> getErrosEdicaoDiretorEnsino() {
         errosEdicaoDiretorEnsino = new ArrayList<>();
-        
+
         if (getDiretorEnsinoSelecionado().getSenhaAlfanumerica().length() < 8 | getDiretorEnsinoSelecionado().getSenhaAlfanumerica().length() > 16) {
 
             errosEdicaoDiretorEnsino.add("Sua senha deve conter entre  8 a 16 caracteres");
@@ -220,7 +221,6 @@ public class DiretorEnsinoMB {
     /**
      * @return the confirmacaoSenha
      */
-
     /**
      * @return the diretorEnsinoSelecionado
      */
@@ -254,7 +254,7 @@ public class DiretorEnsinoMB {
      */
     public List<String> getErrosCadastroDiretorEnsino() {
         errosCadastroDiretorEnsino = new ArrayList<>();
-        
+
         if (getDiretorEnsino().getSenhaAlfanumerica().length() < 8 | getDiretorEnsino().getSenhaAlfanumerica().length() > 16) {
 
             errosCadastroDiretorEnsino.add("Sua senha deve conter entre  8 a 16 caracteres");
