@@ -131,7 +131,8 @@
                                     <p:commandButton styleClass="botaoVermelho" 
                                                      value="Descartar"
                                                      ajax="false" 
-                                                     action="#{pTDMB.cancelarPTD(pTDMB.ptd, usuarioMB.usuarioLogado.idUsuario, 'notificacoes')}"/>
+                                                     actionListener="#{pTDMB.descartarPTD(pTDMB.ptd)}"
+                                                     action="#{pTDMB.abrirNotificacoesDocente(usuarioMB.usuarioLogado.idUsuario)}"/>
                                     <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
                                 </h:panelGrid>
                             </h:column>
