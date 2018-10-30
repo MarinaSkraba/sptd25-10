@@ -126,7 +126,7 @@
                                     <p:commandButton styleClass="botaoAzul" 
                                                      value="Abrir"
                                                      ajax="false" 
-                                                     actionListener="#{pTDMB.abrirMostrarPTDParaDocente(ptdReprovado)}"
+                                                     actionListener="#{pTDMB.abrirMostrarPTD(ptdReprovado, 'ParaDocente')}"
                                                      action="MostrarPTD"/>
                                     <p:commandButton styleClass="botaoVermelho" 
                                                      value="Descartar"
@@ -174,8 +174,8 @@
                                     <p:commandButton styleClass="botaoAzul" 
                                                      value="Abrir"
                                                      ajax="false"
-                                                     actionListener="#{pTDMB.abrirMostrarPTDParaDocente(ptdAprovado)}"
-                                                     action="/MostrarPTDParaDocente"/>
+                                                     actionListener="#{pTDMB.abrirMostrarPTD(ptdAprovado, 'ParaDocente')}"
+                                                     action="/MostrarPTDAprovado"/>
                                     <p:commandButton styleClass="botaoAzul" 
                                                      value="Concluir"
                                                      onclick="PF('123Dialog').show();"
@@ -244,11 +244,8 @@
                                     <p:commandButton styleClass="botaoAzul" 
                                                      value="Abrir"
                                                      ajax="false"
-                                                     actionListener="#{pTDMB.abrirMostrarPTDParaDocente(ptdConcluido)}"
-                                                     action="/MostrarPTDAprovado"/>
-                                    <p:commandButton styleClass="botaoAzul" 
-                                                     value="Imprimir"
-                                                     ajax="false"/>
+                                                     actionListener="#{pTDMB.abrirMostrarPTD(ptdConcluido, 'ParaDocente')}"
+                                                     action="/MostrarPTD"/>
                                     <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
                                 </h:panelGrid>
                             </h:column>

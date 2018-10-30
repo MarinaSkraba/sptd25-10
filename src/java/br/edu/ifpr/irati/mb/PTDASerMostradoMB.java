@@ -24,10 +24,7 @@ import org.primefaces.component.export.PDFOptions;
 @SessionScoped
 public class PTDASerMostradoMB {
 
-    private PTD ptdAMostrar;
     private List<PTD> ptdsResultadoBusca;
-    private List<Participacao> participacoesAutorPTDConcluido;
-    private List<Participacao> participacoesColabPTDConcluido;
     private String textoBusca;
     private String filtroBusca;
     private String filtroTipoPTD;
@@ -39,11 +36,8 @@ public class PTDASerMostradoMB {
 
     public PTDASerMostradoMB() {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
-        ptdAMostrar = new PTD();
         ptdsResultadoBusca = new ArrayList<>();
         ptdsResultadoBusca = ptdDAOEspecifico.buscarPTDsConcluidos();
-        participacoesAutorPTDConcluido = new ArrayList<>();
-        participacoesColabPTDConcluido = new ArrayList<>();
         textoBusca = "";
         filtroBusca = "";
         filtroTipoPTD = "";
@@ -131,22 +125,6 @@ public class PTDASerMostradoMB {
         setPtdsResultadoBusca(ptdDAOEspecifico.buscarPTDsConcluidos());
     }
 
-    public void abrirMostrarPTD(PTD ptd) {
-        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
-        setPtdAMostrar(ptdDAOGenerico.buscarPorId(ptd.getIdPTD()));
-    }
-
-    public void atualizarListasParticipacoesPTD() {
-        setParticipacoesAutorPTDConcluido(new ArrayList<>());
-        setParticipacoesColabPTDConcluido(new ArrayList<>());
-        for (Participacao part : getPtdAMostrar().getParticipacoes()) {
-            if (part.getRotulo().equalsIgnoreCase("Autor")) {
-                getParticipacoesAutorPTDConcluido().add(part);
-            } else {
-                getParticipacoesColabPTDConcluido().add(part);
-            }
-        }
-    }
 
     /**
      * @return the ptdsResultadoBusca
@@ -161,53 +139,7 @@ public class PTDASerMostradoMB {
     public void setPtdsResultadoBusca(List<PTD> ptdsResultadoBusca) {
         this.ptdsResultadoBusca = ptdsResultadoBusca;
     }
-
-    /**
-     * @return the ptdAMostrar
-     */
-    public PTD getPtdAMostrar() {
-        return ptdAMostrar;
-    }
-
-    /**
-     * @param ptdAMostrar the ptdAMostrar to set
-     */
-    public void setPtdAMostrar(PTD ptdAMostrar) {
-        this.ptdAMostrar = ptdAMostrar;
-    }
-
-    /**
-     * @return the participacoesAutorPTDConcluido
-     */
-    public List<Participacao> getParticipacoesAutorPTDConcluido() {
-        atualizarListasParticipacoesPTD();
-        return participacoesAutorPTDConcluido;
-    }
-
-    /**
-     * @param participacoesAutorPTDConcluido the participacoesAutorPTDConcluido
-     * to set
-     */
-    public void setParticipacoesAutorPTDConcluido(List<Participacao> participacoesAutorPTDConcluido) {
-        this.participacoesAutorPTDConcluido = participacoesAutorPTDConcluido;
-    }
-
-    /**
-     * @return the participacoesColabPTDConcluido
-     */
-    public List<Participacao> getParticipacoesColabPTDConcluido() {
-        atualizarListasParticipacoesPTD();
-        return participacoesColabPTDConcluido;
-    }
-
-    /**
-     * @param participacoesColabPTDConcluido the participacoesColabPTDConcluido
-     * to set
-     */
-    public void setParticipacoesColabPTDConcluido(List<Participacao> participacoesColabPTDConcluido) {
-        this.participacoesColabPTDConcluido = participacoesColabPTDConcluido;
-    }
-
+    
     /**
      * @return the textoBusca
      */

@@ -244,8 +244,8 @@ body{
     border-style: solid;
     border-width: thin;
     display: flex;
-    align-items: center;
     flex-direction: row;
+    align-items: center;
     justify-content: center;
 }
 #mostrarTabela{

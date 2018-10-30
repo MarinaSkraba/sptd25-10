@@ -43,6 +43,7 @@ import javax.swing.text.Document;
 public class PTDMB {
 
     private PTD ptd;
+    private PTD ptdConcluido;
     private PTD ptdAprovado;
     private List<PTD> ptdsEmAvaliacao;
     private List<PTD> ptdsReprovados;
@@ -54,6 +55,8 @@ public class PTDMB {
     private List<Participacao> participacoesColabPTDEdicao;
     private List<Participacao> participacoesAutorPTDAprovado;
     private List<Participacao> participacoesColabPTDAprovado;
+    private List<Participacao> participacoesAutorPTDConcluido;
+    private List<Participacao> participacoesColabPTDConcluido;
     private List<Professor> professoresAHabilitar;
     private List<DiretorEnsino> diretoresAHabilitar;
     private String estadoCargaHorariaPTD;
@@ -67,12 +70,14 @@ public class PTDMB {
     private List<String> errosTabelaAtividadesASeremPropostas;
     private List<String> irregularidadesPTDEdicao;
     private double cargaHorariaTotalPTDPTDEdicao;
+    private String saidaTelaMostrarPTDAux;
 
     public PTDMB() {
 
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         ptd = new PTD();
         ptdAprovado = new PTD();
+        ptdConcluido = new PTD();
         ptdsEmAvaliacao = new ArrayList<>();
         ptdsReprovados = new ArrayList<>();
         ptdsEmEdicao = new ArrayList();
@@ -83,6 +88,8 @@ public class PTDMB {
         participacoesColabPTDEdicao = new ArrayList<>();
         participacoesAutorPTDAprovado = new ArrayList<>();
         participacoesColabPTDAprovado = new ArrayList<>();
+        participacoesAutorPTDConcluido = new ArrayList<>();
+        participacoesColabPTDConcluido = new ArrayList<>();
         professoresAHabilitar = new ArrayList<>();
         diretoresAHabilitar = new ArrayList<>();
         this.estadoCargaHorariaPTD = "";
@@ -95,6 +102,7 @@ public class PTDMB {
         errosTabelaOutrasAtividades = new ArrayList<>();
         errosTabelaAtividadesASeremPropostas = new ArrayList<>();
         irregularidadesPTDEdicao = new ArrayList<>();
+        saidaTelaMostrarPTDAux = "";
 
     }
 
@@ -119,6 +127,26 @@ public class PTDMB {
             } else {
                 participacoesColabPTDAprovado.add(part);
             }
+        }
+    }
+    
+    public void atualizarListasParticipacoesPTDConcluido() {
+        setParticipacoesAutorPTDConcluido(new ArrayList<>());
+        setParticipacoesColabPTDConcluido(new ArrayList<>());
+        for (Participacao part : ptdConcluido.getParticipacoes()) {
+            if (part.getRotulo().equalsIgnoreCase("Autor")) {
+                participacoesAutorPTDConcluido.add(part);
+            } else {
+                participacoesColabPTDConcluido.add(part);
+            }
+        }
+    }
+    
+    public String sairTelaMostrarPTD(Usuario usuario){
+        if(saidaTelaMostrarPTDAux.equalsIgnoreCase("")){
+            return "/BuscarPTDs?faces-redirect=true";
+        } else {
+            return abrirNotificacoesDocente(usuario.getIdUsuario());
         }
     }
 
@@ -158,7 +186,12 @@ public class PTDMB {
 
     }
 
-    public void abrirMostrarPTDParaDocente(PTD ptd) {
+    public void abrirMostrarPTD(PTD ptd, String s) {
+        ptdConcluido = ptd;
+        saidaTelaMostrarPTDAux = s;
+    }
+    
+    public void abrirMostrarPTDAprovado(PTD ptd) {
         ptdAprovado = ptd;
     }
 
@@ -1869,18 +1902,18 @@ public class PTDMB {
     }
 
     /**
-     * @return the ptdAprovado
+     * @return the ptdConcluido
      */
-    public PTD getPtdAprovado() {
-        atualizarListasParticipacoesPTDAprovado();
-        return ptdAprovado;
+    public PTD getPtdConcluido() {
+        atualizarListasParticipacoesPTDConcluido();
+        return ptdConcluido;
     }
 
     /**
-     * @param ptdAprovado the ptdAprovado to set
+     * @param ptdConcluido the ptdConcluido to set
      */
-    public void setPtdAprovado(PTD ptdAprovado) {
-        this.ptdAprovado = ptdAprovado;
+    public void setPtdConcluido(PTD ptdConcluido) {
+        this.ptdConcluido = ptdConcluido;
     }
 
     /**
@@ -1967,6 +2000,62 @@ public class PTDMB {
      */
     public void setPtdsArquivados(List<PTD> ptdsArquivados) {
         this.ptdsArquivados = ptdsArquivados;
+    }
+
+    /**
+     * @return the saidaTelaMostrarPTDAux
+     */
+    public String getSaidaTelaMostrarPTDAux() {
+        return saidaTelaMostrarPTDAux;
+    }
+
+    /**
+     * @param saidaTelaMostrarPTDAux the saidaTelaMostrarPTDAux to set
+     */
+    public void setSaidaTelaMostrarPTDAux(String saidaTelaMostrarPTDAux) {
+        this.saidaTelaMostrarPTDAux = saidaTelaMostrarPTDAux;
+    }
+
+    /**
+     * @return the participacoesAutorPTDConcluido
+     */
+    public List<Participacao> getParticipacoesAutorPTDConcluido() {
+        return participacoesAutorPTDConcluido;
+    }
+
+    /**
+     * @param participacoesAutorPTDConcluido the participacoesAutorPTDConcluido to set
+     */
+    public void setParticipacoesAutorPTDConcluido(List<Participacao> participacoesAutorPTDConcluido) {
+        this.participacoesAutorPTDConcluido = participacoesAutorPTDConcluido;
+    }
+
+    /**
+     * @return the participacoesColabPTDConcluido
+     */
+    public List<Participacao> getParticipacoesColabPTDConcluido() {
+        return participacoesColabPTDConcluido;
+    }
+
+    /**
+     * @param participacoesColabPTDConcluido the participacoesColabPTDConcluido to set
+     */
+    public void setParticipacoesColabPTDConcluido(List<Participacao> participacoesColabPTDConcluido) {
+        this.participacoesColabPTDConcluido = participacoesColabPTDConcluido;
+    }
+
+    /**
+     * @return the ptdAprovado
+     */
+    public PTD getPtdAprovado() {
+        return ptdAprovado;
+    }
+
+    /**
+     * @param ptdAprovado the ptdAprovado to set
+     */
+    public void setPtdAprovado(PTD ptdAprovado) {
+        this.ptdAprovado = ptdAprovado;
     }
 
 }
