@@ -1732,11 +1732,11 @@ public class PTDMB {
                 + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor()
                 + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab();
         double regime = 20;
-        if ((getPtd().getProfessor().getRegimeTrabalho().equals("40h") | getPtd().getProfessor().getRegimeTrabalho().equals("Dedicação Exclusiva")) && cargaHorariaTotalPTDAux != 40) {
+        if ((getPtd().getProfessor().getRegimeTrabalho().equals("40h") | getPtd().getProfessor().getRegimeTrabalho().equals("Dedicação Exclusiva")) &&((cargaHorariaTotalPTDAux < 39.5| cargaHorariaTotalPTDAux > 40.5)) ) {
 
             irregularidadesPTDEdicao.add("A carga horária do PTD diverge com seu regime de trabalho de 40h");
 
-        } else if (getPtd().getProfessor().getRegimeTrabalho().equals("20h") && cargaHorariaTotalPTDAux != 20) {
+        } else if (getPtd().getProfessor().getRegimeTrabalho().equals("20h") && ((cargaHorariaTotalPTDAux < 19.5|cargaHorariaTotalPTDAux > 20.5))) {
 
             irregularidadesPTDEdicao.add("A carga horária do PTD diverge com seu regime de trabalho de 20h");
 
