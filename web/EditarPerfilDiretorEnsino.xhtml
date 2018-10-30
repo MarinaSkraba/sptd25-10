@@ -5,7 +5,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Edição de perfil</title>
+        <title>Edição de diretor</title>
         <link rel="stylesheet" type="text/css" href="css/css.css"/>
         <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     </h:head>
@@ -56,36 +56,9 @@
                                  iconPos="right"
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Voltar"
-                                 action="/PerfilDocente"
+                                 action="PerfilDiretorEnsino"
                                  ajax="false"
                                  style="float: left;"/>
-
-                <p:commandButton id="logout"
-                                 image="img/fundo_login.png" 
-                                 styleClass="imgLogado"/>
-
-                <!-- Informações e Logout -->
-                <p:overlayPanel id="Usuário" 
-                                for="logout" 
-                                hideEffect="fade" 
-                                style="padding: 0px;">
-                    <h:outputText value="#{usuarioMB.usuarioLogado.email}" 
-                                  styleClass="text01"
-                                  style="color: #1785ad; font-weight: normal; font-size: large; margin: 0px;"/>
-                    <br/>
-                    <p:commandButton value="Sair"
-                                     styleClass="opVermelhaMenu"
-                                     style="margin: 0px;"
-                                     ajax="false" 
-                                     immediate="true"
-                                     actionListener="#{usuarioMB.realizarLogout()}"
-                                     action="/Login?faces-redirect=true"/>
-                </p:overlayPanel>
-
-                <h:outputText value="#{usuarioMB.usuarioLogado.nomeCompleto}" 
-                              styleClass="text01"
-                              style="color: white; float: right; font-weight: normal; font-size: large;"/>
-
             </h:form>
         </div>
 
@@ -95,12 +68,13 @@
               color="#A8A8A8" 
               style="margin: 20px; font-weight: 100;" 
               styleClass="text">
-            Editar Perfil
+            Edição Diretor de Ensino
         </font>
 
         <div id="screen">
 
             <h:form style="width: 100%;">
+
                 <center>
                     <div id="contentEstilizado">
 
@@ -134,20 +108,22 @@
                                         style="margin: 5px; font-size: large;"
                                         styleClass="text01"/>
                         </h:panelGrid>
-                        <br/>
 
                         <p:commandButton id="botaoAcao"
                                          update="botaoAcao"
                                          styleClass="botaoAzul" 
                                          style="border-radius: 30px; font-size: large; margin-left: 10px;" 
                                          value="Editar"
-                                         onclick="PF('#{diretorEnsinoMB.verificarPossibilidadeAtualizacaoDiretorEnsino()}')"/>
-                        
+                                         onclick="PF('#{diretorEnsinoMB.verificarPossibilidadeAtualizacaoDiretorEnsino()}').show();"/>
+
                     </div>
+
                 </center>
 
+                <!-- Temporizador -->
+                <p:poll interval="1" update="erros"/>
 
-                <!-- Caixa de confirmação de edição -->
+                <!-- Caixa de confirmação de cadastro -->
                 <p:dialog header="Confirmar edição" 
                           widgetVar="confirmarEdicaoDiretorEnsinoDialog" 
                           modal="true" 
@@ -155,9 +131,9 @@
                           hideEffect="fade" 
                           resizable="false">
 
-                    <h:outputText value="Você realmente deseja alterar suas informações?" 
+                    <h:outputText value="Edição concluída" 
                                   styleClass="text01"
-                                  style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                                  style="margin: 10px; font-size: large; width: 400px;"/>
                     <br/>
 
                     <p:commandButton styleClass="botaoAzul" 
@@ -169,15 +145,15 @@
 
                 <!-- Caixa de aviso de erro -->
                 <p:dialog header="Não permitido" 
-                          widgetVar="erroEdicaoDocenteDialog" 
+                          widgetVar="erroEdicaoDiretorEnsinoDialog" 
                           modal="true" 
                           showEffect="fade" 
                           hideEffect="fade" 
                           resizable="false">
 
-                    <h:outputText value="O cadastro ainda não pode ser concluído por causa dos seguintes " 
+                    <h:outputText value="A alteração não pode ser efetivada devido aos erros indicados" 
                                   styleClass="text01"
-                                  style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                                  style="margin: 10px; font-size: large; width: 400px;"/>
                     <br/>
 
                     <h:dataTable  id="erros"
@@ -196,8 +172,7 @@
                                           style="font-size: large; color: #C92345; width: 400px;"/>
                         </h:column>
                     </h:dataTable>
-                    <br/>
-                    
+
                 </p:dialog>
 
             </h:form>
