@@ -129,7 +129,7 @@ public class PTDMB {
             }
         }
     }
-
+    
     public void atualizarListasParticipacoesPTDConcluido() {
         setParticipacoesAutorPTDConcluido(new ArrayList<>());
         setParticipacoesColabPTDConcluido(new ArrayList<>());
@@ -141,9 +141,9 @@ public class PTDMB {
             }
         }
     }
-
-    public String sairTelaMostrarPTD(Usuario usuario) {
-        if (saidaTelaMostrarPTDAux.equalsIgnoreCase("")) {
+    
+    public String sairTelaMostrarPTD(Usuario usuario){
+        if(saidaTelaMostrarPTDAux.equalsIgnoreCase("")){
             return "/BuscarPTDs?faces-redirect=true";
         } else {
             return abrirNotificacoesDocente(usuario.getIdUsuario());
@@ -190,7 +190,7 @@ public class PTDMB {
         ptdConcluido = ptd;
         saidaTelaMostrarPTDAux = s;
     }
-
+    
     public void abrirMostrarPTDAprovado(PTD ptd) {
         ptdAprovado = ptd;
     }
@@ -316,7 +316,7 @@ public class PTDMB {
                 adm.setIdAdministracao(0);
                 List<Horario> horariosAux = adm.getHorariosAdministracao();
                 adm.setHorariosAdministracao(new ArrayList<>());
-                for (Horario h : horariosAux) {
+                for(Horario h : horariosAux){
                     h.setIdHorario(0);
                     adm.getHorariosAdministracao().add(h);
                     horarioDAO.salvar(h);
@@ -328,7 +328,7 @@ public class PTDMB {
                 apoio.setIdApoio(0);
                 List<Horario> horariosAux = apoio.getHorariosApoio();
                 apoio.setHorariosApoio(new ArrayList<>());
-                for (Horario h : horariosAux) {
+                for(Horario h : horariosAux){
                     h.setIdHorario(0);
                     apoio.getHorariosApoio().add(h);
                     horarioDAO.salvar(h);
@@ -340,7 +340,7 @@ public class PTDMB {
                 aasp.setIdAtividadeASerProposta(0);
                 List<Horario> horariosAux = aasp.getHorariosAtividadesASerProposta();
                 aasp.setHorariosAtividadesASerProposta(new ArrayList<>());
-                for (Horario h : horariosAux) {
+                for(Horario h : horariosAux){
                     h.setIdHorario(0);
                     aasp.getHorariosAtividadesASerProposta().add(h);
                     horarioDAO.salvar(h);
@@ -352,7 +352,7 @@ public class PTDMB {
                 al.setIdAula(0);
                 List<Horario> horariosAux = al.getHorariosAula();
                 al.setHorariosAula(new ArrayList<>());
-                for (Horario h : horariosAux) {
+                for(Horario h : horariosAux){
                     h.setIdHorario(0);
                     al.getHorariosAula().add(h);
                     horarioDAO.salvar(h);
@@ -364,7 +364,7 @@ public class PTDMB {
                 me.setIdManutencao(0);
                 List<Horario> horariosAux = me.getHorariosManutecao();
                 me.setHorariosManutecao(new ArrayList<>());
-                for (Horario h : horariosAux) {
+                for(Horario h : horariosAux){
                     h.setIdHorario(0);
                     me.getHorariosManutecao().add(h);
                     horarioDAO.salvar(h);
@@ -376,7 +376,7 @@ public class PTDMB {
                 ota.setIdOutroTipoAtividade(0);
                 List<Horario> horariosAux = ota.getHorariosOutroTipoAtividade();
                 ota.setHorariosOutroTipoAtividade(new ArrayList<>());
-                for (Horario h : horariosAux) {
+                for(Horario h : horariosAux){
                     h.setIdHorario(0);
                     ota.getHorariosOutroTipoAtividade().add(h);
                     horarioDAO.salvar(h);
@@ -388,7 +388,7 @@ public class PTDMB {
                 part.setIdParticipacao(0);
                 List<Horario> horariosAux = part.getHorariosParticipacao();
                 part.setHorariosParticipacao(new ArrayList<>());
-                for (Horario h : horariosAux) {
+                for(Horario h : horariosAux){
                     h.setIdHorario(0);
                     part.getHorariosParticipacao().add(h);
                     horarioDAO.salvar(h);
@@ -396,7 +396,7 @@ public class PTDMB {
                 participacaoDAO.salvar(part);
                 ptdAux.getParticipacoes().add(part);
             }
-
+            
             ptd = new PTD();
             ptdDAOGenerico.salvar(ptdAux);
             List<PTD> ptds = ptdDAOEspecifico.buscarPTDsEmEdicaoPorProfessor(usuario.getIdUsuario());
@@ -428,11 +428,11 @@ public class PTDMB {
         }
         PTD ptdAux = ptdReprovado;
         ptdAux.setEstadoPTD("EDICAO");
-
+        
         ptdReprovado.setEstadoPTD("CANCELADO");
         ptdDAOGenerico.alterar(ptdReprovado);
         ptdDAOGenerico.salvar(ptdAux);
-
+        
         limparVariáveis();
 
         ptdDAOGenerico.alterar(ptdReprovado);
@@ -1472,15 +1472,14 @@ public class PTDMB {
         }
         if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h") | getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
             if ((ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor()
-                    + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) > 16.5 | (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor()
-                    + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) < 15.5) {
+                    + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) != 16) {
                 if (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor()
-                        + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab() > 16.5) {
+                        + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab() > 16) {
 
                     getIrregularidadesPTDEdicao().add("A carga horária de projetos de pesquisa e/ou extensão"
                             + " como colaborador e autor é superior à 16 horas!");
 
-                } else if (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab() < 15.5 && ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab() > 1) {
+                } else if (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab() < 16 && ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab() > 1) {
 
                     getIrregularidadesPTDEdicao().add("A carga horária de projetos de pesquisa e/ou extensão"
                             + " como colaborador e autor é inferior à 16 horas!");
@@ -1491,11 +1490,11 @@ public class PTDMB {
         for (Apoio ap : getPtd().getApoios()) {
             ptd.setCargaHorariaSecaoApoioEnsino(ptd.getCargaHorariaSecaoApoioEnsino() + ap.getCargaHorariaSemanalApoio());
         }
-        if (ptd.getCargaHorariaSecaoApoioEnsino() > 4.5 | ptd.getCargaHorariaSecaoApoioEnsino() < 3.5) {
+        if (ptd.getCargaHorariaSecaoApoioEnsino() != 4) {
 
-            if (ptd.getCargaHorariaSecaoApoioEnsino() > 4.5 && (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) != 0) {
+            if (ptd.getCargaHorariaSecaoApoioEnsino() > 4 && (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) != 0) {
                 getIrregularidadesPTDEdicao().add("A carga horária é superior à 4 horas em Apoio ao Ensino!");
-            } else if (ptd.getCargaHorariaSecaoApoioEnsino() < 3.5) {
+            } else if (ptd.getCargaHorariaSecaoApoioEnsino() < 4) {
                 getIrregularidadesPTDEdicao().add("A carga horária é  inferior à 4 horas em Apoio ao Ensino!");
             }
 
@@ -1519,11 +1518,11 @@ public class PTDMB {
             }
 
         } else if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h") | getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
-            if (ptd.getCargaHorariaSecaoAulas() < 12) {
+            if (ptd.getCargaHorariaSecaoAulas() < 11.5) {
 
                 getIrregularidadesPTDEdicao().add("A carga horária é inferior à 12 horas em Aula!");
 
-            } else if (ptd.getCargaHorariaSecaoAulas() > 16) {
+            } else if (ptd.getCargaHorariaSecaoAulas() > 16.5) {
 
                 if (ptd.getCargaHorariaSecaoApoioEnsino() > 4 && (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) == 0) {
 
@@ -1563,13 +1562,13 @@ public class PTDMB {
             ptd.setCargaHorariaSecaoManutencaoEnsino(ptd.getCargaHorariaSecaoManutencaoEnsino() + me.getCargaHorariaSemanalManutencaoEnsino());
         }
 
-        if (ptd.getCargaHorariaSecaoManutencaoEnsino() > 4.5|ptd.getCargaHorariaSecaoManutencaoEnsino() < 3.5) {
-            if (ptd.getCargaHorariaSecaoManutencaoEnsino() < 3.5) {
+        if (ptd.getCargaHorariaSecaoManutencaoEnsino() != 4) {
+            if (ptd.getCargaHorariaSecaoManutencaoEnsino() < 4) {
 
                 getIrregularidadesPTDEdicao().add("A carga horária é inferior"
                         + " à 4 horas em Manutenção ao Ensino");
 
-            } else if (ptd.getCargaHorariaSecaoManutencaoEnsino() > 4.5) {
+            } else if (ptd.getCargaHorariaSecaoManutencaoEnsino() > 4) {
 
                 getIrregularidadesPTDEdicao().add("A carga horária é superior "
                         + "à 4 horas em Manutenção ao Ensino!");
@@ -2025,8 +2024,7 @@ public class PTDMB {
     }
 
     /**
-     * @param participacoesAutorPTDConcluido the participacoesAutorPTDConcluido
-     * to set
+     * @param participacoesAutorPTDConcluido the participacoesAutorPTDConcluido to set
      */
     public void setParticipacoesAutorPTDConcluido(List<Participacao> participacoesAutorPTDConcluido) {
         this.participacoesAutorPTDConcluido = participacoesAutorPTDConcluido;
@@ -2040,8 +2038,7 @@ public class PTDMB {
     }
 
     /**
-     * @param participacoesColabPTDConcluido the participacoesColabPTDConcluido
-     * to set
+     * @param participacoesColabPTDConcluido the participacoesColabPTDConcluido to set
      */
     public void setParticipacoesColabPTDConcluido(List<Participacao> participacoesColabPTDConcluido) {
         this.participacoesColabPTDConcluido = participacoesColabPTDConcluido;
