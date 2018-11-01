@@ -82,31 +82,39 @@
                                       styleClass="text01" />
                         <hr size="1px" style="color: #1785ad; width: 90%; opacity: 0.5; margin: 0; float: bottom;"/>
                         <br/>
-                        <h:panelGrid columns="2">
+                        <h:panelGrid columns="3">
                             <h:outputText value="Nome completo: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:inputText value="#{diretorEnsinoMB.diretorEnsinoSelecionado.nomeCompleto}"
+                            <p:inputText id="nome"
+                                         value="#{diretorEnsinoMB.diretorEnsinoSelecionado.nomeCompleto}"
                                          style="margin: 5px; font-size: large;"
                                          styleClass="text01"/>
+                            <p:watermark for="nome" value=" Insira seu nome completo"/>
                             <h:outputText value="Email: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:inputText value="#{diretorEnsinoMB.diretorEnsinoSelecionado.email}"
+                            <p:inputText id="email"
+                                         value="#{diretorEnsinoMB.diretorEnsinoSelecionado.email}"
                                          style="margin: 5px; font-size: large;"
                                          styleClass="text01"/>
+                            <p:watermark for="email" value=" Insira um email com o domínio @ifpr.edu.br"/>
                             <h:outputText value="Senha: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:password value="#{diretorEnsinoMB.diretorEnsinoSelecionado.senhaAlfanumerica}"
+                            <p:password id="senha"
+                                        value="#{diretorEnsinoMB.diretorEnsinoSelecionado.senhaAlfanumerica}"
                                         style="margin: 5px; font-size: large;"
                                         styleClass="text01"/>
+                            <p:watermark for="senha" value=" Insira uma senha entre 8 e 16 caracteres"/>
                             <h:outputText value="Confirmação senha: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:password value="#{diretorEnsinoMB.confirmacaoSenhaSelecionado}"
+                            <p:password id="confirmacaoSenha"
+                                        value="#{diretorEnsinoMB.confirmacaoSenhaSelecionado}"
                                         style="margin: 5px; font-size: large;"
                                         styleClass="text01"/>
+                            <p:watermark for="confirmacaoSenha" value=" Insira novamente a senha"/>
                         </h:panelGrid>
 
                         <!-- Temporizador -->
