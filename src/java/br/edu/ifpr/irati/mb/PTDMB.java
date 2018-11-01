@@ -643,6 +643,7 @@ public class PTDMB {
 
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdADescartar.setEstadoPTD("CANCELADO");
+        ptdADescartar.setDiretorEnsino(null);
         ptdDAO.alterar(ptdADescartar);
 
     }
