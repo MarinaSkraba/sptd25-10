@@ -47,9 +47,11 @@
 
                 <center>
                     <div id="panelPesquisaPTDs">
-                        <p:inputText value="#{pTDASerMostradoMB.textoBusca}" 
+                        <p:inputText id="barraBusca" 
+                                     value="#{pTDASerMostradoMB.textoBusca}" 
                                      style="width: 90%; color: black; font-weight: 100; font-size: large;"
                                      styleClass="caixaTexto"/>
+                        <p:watermark for="barraBusca" value=" Insira aqui sua pesquisa"/>
                     </div>
                     <div style="position: relative; display: flex; flex-direction: row; justify-content: center; align-items: center;">
                         <p:commandButton value="Nome professor" 
