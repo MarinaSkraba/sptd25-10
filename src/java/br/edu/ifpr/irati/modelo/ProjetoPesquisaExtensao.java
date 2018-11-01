@@ -26,7 +26,7 @@ public class ProjetoPesquisaExtensao implements Serializable {
     @Column(name = "estadoProjetoPesquisaExtensao", nullable = false, length = 10)
     private String estadoProjetoPesquisaExtensao;
 
-    @Column(name = "numeroProcesso", nullable = false, length = 20)
+    @Column(name = "numeroProcesso", nullable = false, length = 25)
     private String numeroProcesso;
 
     @Column(name = "tituloProcesso", nullable = false, length = 300)
