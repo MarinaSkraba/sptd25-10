@@ -125,7 +125,8 @@
                             <h:outputText value="Matrícula SIAPE: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:inputText value="#{professorMB.professor.matriculaSIAPE}"
+                            <p:inputMask mask="999.999-9"
+                                         value="#{professorMB.professor.matriculaSIAPE}"
                                          style="margin: 5px; font-size: large;"
                                          styleClass="text01"/>
                             <h:outputText value="Regime de trabalho: "
