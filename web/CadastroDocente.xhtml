@@ -82,7 +82,7 @@
                                       styleClass="text01" />
                         <hr size="1px" style="color: #1785ad; width: 90%; opacity: 0.5; margin: 0; float: bottom;"/>
                         <br/>
-                        <h:panelGrid columns="2">
+                        <h:panelGrid columns="3">
                             <h:outputText value="Nome completo: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
@@ -122,7 +122,8 @@
                         <hr size="1px" style="color: #1785ad; width: 90%; opacity: 0.5; margin: 0; float: bottom;"/>
                         <br/>
                         <h:panelGrid columns="2">
-                            <h:outputText value="Matrícula SIAPE: "
+                            <h:outputText id="siape" 
+                                          value="Matrícula SIAPE: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
                             <p:inputMask mask="999.999-9"

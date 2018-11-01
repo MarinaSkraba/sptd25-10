@@ -109,31 +109,39 @@
                                       styleClass="text01" />
                         <hr size="1px" style="color: #1785ad; width: 90%; opacity: 0.5; margin: 0; float: bottom;"/>
                         <br/>
-                        <h:panelGrid columns="2">
+                        <h:panelGrid columns="3">
                             <h:outputText value="Nome completo: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:inputText value="#{professorMB.professorSelecionado.nomeCompleto}"
+                            <p:inputText id="nome"
+                                         value="#{professorMB.professorSelecionado.nomeCompleto}"
                                          style="margin: 5px; font-size: large;"
                                          styleClass="text01"/>
+                            <p:watermark for="nome" value=" Insira seu nome"/>
                             <h:outputText value="Email: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:inputText value="#{professorMB.professorSelecionado.email}"
+                            <p:inputText id="email"
+                                         value="#{professorMB.professorSelecionado.email}"
                                          style="margin: 5px; font-size: large;"
                                          styleClass="text01"/>
+                            <p:watermark for="email" value=" Insira um email com o domínio @ifpr.edu.br"/>
                             <h:outputText value="Senha: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:password value="#{professorMB.professorSelecionado.senhaAlfanumerica}"
+                            <p:password id="senha"
+                                        value="#{professorMB.professorSelecionado.senhaAlfanumerica}"
                                         style="margin: 5px; font-size: large;"
                                         styleClass="text01"/>
+                            <p:watermark for="senha" value=" Insira uma senha entre 8 e 16 caracteres"/>
                             <h:outputText value="Confirmação senha: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:password value="#{professorMB.confirmacaoSenhaSelecionada}"
+                            <p:password id="confirmacaoSenha"
+                                        value="#{professorMB.confirmacaoSenhaSelecionada}"
                                         style="margin: 5px; font-size: large;"
                                         styleClass="text01"/>
+                            <p:watermark for="confirmacaoSenha" value=" Insira novamente a senha"/>
                         </h:panelGrid>
                         <br/>
                         <h:outputText value="Perfil Docente" 
@@ -144,7 +152,8 @@
                             <h:outputText value="Matrícula SIAPE: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:inputText value="#{professorMB.professorSelecionado.matriculaSIAPE}"
+                            <p:inputText id="siape"
+                                         value="#{professorMB.professorSelecionado.matriculaSIAPE}"
                                          style="margin: 5px; font-size: large;"
                                          styleClass="text01"/>
                             <h:outputText value="Regime de trabalho: "
