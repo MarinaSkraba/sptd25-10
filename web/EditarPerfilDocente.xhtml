@@ -144,7 +144,8 @@
                             <h:outputText value="Matrícula SIAPE: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:inputText value="#{professorMB.professorSelecionado.matriculaSIAPE}"
+                            <p:inputMask mask="999.999-9"
+                                         value="#{professorMB.professorSelecionado.matriculaSIAPE}"
                                          style="margin: 5px; font-size: large;"
                                          styleClass="text01"/>
                             <h:outputText value="Regime de trabalho: "
@@ -180,7 +181,9 @@
                             <p:calendar value="#{professorMB.professorSelecionado.dataContratacao}" 
                                         mode="popup" 
                                         locale="pt"
-                                        size="17"/>
+                                        size="17"
+                                        style="margin: 5px; font-size: large;"
+                                        styleClass="text01"/>
                         </h:panelGrid>
                         <br/>
 
