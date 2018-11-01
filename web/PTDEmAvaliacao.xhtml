@@ -1217,7 +1217,12 @@
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
                         <br/>
-                        <p:commandButton styleClass="botaoAzul" 
+
+                        <!-- Temporizador -->
+                        <p:poll interval="1" update="botaoAcao"/>
+
+                        <p:commandButton id="botaoAcao"
+                                         styleClass="botaoAzul" 
                                          value="Confirmar"
                                          onclick="PF('#{pTDAvaliacaoMB.verificarPossibilidadeReprovacao()}').show();"/>
 

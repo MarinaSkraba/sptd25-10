@@ -109,6 +109,9 @@
                                         styleClass="text01"/>
                         </h:panelGrid>
 
+                        <!-- Temporizador -->
+                        <p:poll interval="1" update="botaoAcao"/>
+
                         <p:commandButton id="botaoAcao"
                                          update="botaoAcao"
                                          styleClass="botaoAzul" 
@@ -139,7 +142,8 @@
                     <p:commandButton styleClass="botaoAzul" 
                                      value="Confirmar"
                                      ajax="false"
-                                     action="#{diretorEnsinoMB.alterarDiretorEnsino()}"/>
+                                     actionListener="#{diretorEnsinoMB.alterarDiretorEnsino()}"
+                                     action="/PerfilDiretorEnsino"/>
 
                 </p:dialog>
 

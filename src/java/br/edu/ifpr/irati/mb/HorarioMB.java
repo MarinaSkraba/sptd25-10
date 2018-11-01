@@ -107,14 +107,15 @@ public class HorarioMB {
             horariosObjetoSelecionado = apoioEnsinoDAO.buscarPorId(((Apoio) object).getIdApoio()).getHorariosApoio();
         }
         if (object instanceof Participacao) {
-            if (((Participacao) object).getRotulo().equals("Colaborador")) {
+            Participacao part = ((Participacao) object);
+            if (part.getRotulo().equals("Colaborador")) {
                 horarioAtividade = horarioPesquisaExtensaoColab;
             } else {
                 horarioAtividade = horarioPesquisaExtensaoAutor;
             }
             horarioPesquisaExtensaoAutor = new Horario();
             horarioPesquisaExtensaoColab = new Horario();
-            horariosObjetoSelecionado = participacaoDAO.buscarPorId(((Participacao) object).getIdParticipacao()).getHorariosParticipacao();
+            horariosObjetoSelecionado = part.getHorariosParticipacao();
         }
         if (object instanceof Administracao) {
             horarioAtividade = horarioAdministracao;
