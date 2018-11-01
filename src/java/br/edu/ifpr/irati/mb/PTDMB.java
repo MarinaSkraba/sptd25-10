@@ -1022,7 +1022,7 @@ public class PTDMB {
                 }
             }
             if (!aula.getHorariosAula().isEmpty()) {
-                if (cargaHoraHorario != aula.getCargaHorariaTotal()) {
+                if (cargaHoraHorario > (aula.getCargaHorariaTotal()+ 0.2)|cargaHoraHorario < (aula.getCargaHorariaTotal()- 0.2)) {
                     errosTabelaAula.add("A carga horária fornecida é diferente da carga resultante dos horários fornecidos em aula! Atualize a atividade ou seus horários.");
                 }
             }
