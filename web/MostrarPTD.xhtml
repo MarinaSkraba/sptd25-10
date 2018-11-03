@@ -32,28 +32,6 @@
                                  action="#{pTDMB.sairTelaMostrarPTD(usuarioMB.usuarioLogado)}"
                                  style="float: left;"/>
 
-                <p:commandButton id="logout"
-                                 image="img/fundo_login.png" 
-                                 styleClass="imgLogado"/>
-
-                <!-- Informações e Logout -->
-                <p:overlayPanel id="Usuário" 
-                                for="logout" 
-                                hideEffect="fade" 
-                                style="padding: 0px;">
-                    <h:outputText value="#{usuarioMB.usuarioLogado.email}" 
-                                  styleClass="text01"
-                                  style="color: #1785ad; font-weight: normal; font-size: large; margin: 0px;"/>
-                    <br/>
-                    <p:commandButton value="Sair"
-                                     styleClass="opVermelhaMenu"
-                                     style="margin: 5px 0px;"
-                                     ajax="false" 
-                                     immediate="true"
-                                     actionListener="#{usuarioMB.realizarLogout()}"
-                                     action="/Login?faces-redirect=true"/>
-                </p:overlayPanel>
-
                 <h:outputText value="#{usuarioMB.usuarioLogado.nomeCompleto}" 
                               styleClass="text01"
                               style="color: white; float: right; font-weight: normal; font-size: large;"/>
