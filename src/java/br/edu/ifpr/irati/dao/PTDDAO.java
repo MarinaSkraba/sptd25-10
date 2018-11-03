@@ -165,7 +165,7 @@ public class PTDDAO implements IPTDDAO {
         List<PTD> results = query.list();
         List<PTD> filtrados = new ArrayList<>();
         for (PTD ptd : results) {
-            if (ptd.getProfessor().getNomeCompleto().contains(nomeDocente) == true) {
+            if (ptd.getProfessor().getNomeCompleto().toUpperCase().contains(nomeDocente.toUpperCase()) == true) {
 
                 filtrados.add(ptd);
 
@@ -188,38 +188,38 @@ public class PTDDAO implements IPTDDAO {
         List<PTD> filtrados = new ArrayList<>();
         for (PTD ptd : results) {
             for (Administracao a : ptd.getAdministrativas()) {
-                if (a.getTipoAdministracao().getRotulo().contains(rotuloAtividade)) {
+                if (a.getTipoAdministracao().getRotulo().toUpperCase().contains(rotuloAtividade.toUpperCase())) {
                     filtrados.add(ptd);
                 }
             }
             for (Apoio ap : ptd.getApoios()) {
-                if (ap.getTipoApoio().getRotulo().contains(rotuloAtividade)) {
+                if (ap.getTipoApoio().getRotulo().toUpperCase().contains(rotuloAtividade.toUpperCase())) {
                     filtrados.add(ptd);
                 }
             }
             for (AtividadeASerProposta asp : ptd.getAtividadesASeremPropostas()) {
-                if (asp.getRotulo().contains(rotuloAtividade)) {
+                if (asp.getRotulo().toUpperCase().contains(rotuloAtividade.toUpperCase())) {
                     if (filtrados.contains(ptd) == false) {
                         filtrados.add(ptd);
                     }
                 }
             }
             for (Aula aula : ptd.getAulas()) {
-                if (aula.getComponenteCurricular().contains(rotuloAtividade)) {
+                if (aula.getComponenteCurricular().toUpperCase().contains(rotuloAtividade.toUpperCase())) {
                     if (filtrados.contains(ptd) == false) {
                         filtrados.add(ptd);
                     }
                 }
             }
             for (ManutencaoEnsino mE : ptd.getManutencoesEnsino()) {
-                if (mE.getTipoManutencao().getRotulo().contains(rotuloAtividade)) {
+                if (mE.getTipoManutencao().getRotulo().toUpperCase().contains(rotuloAtividade.toUpperCase())) {
                     if (filtrados.contains(ptd) == false) {
                         filtrados.add(ptd);
                     }
                 }
             }
             for (OutroTipoAtividade oTa : ptd.getOutrosTiposAtividades()) {
-                if (oTa.getRotulo().contains(rotuloAtividade)) {
+                if (oTa.getRotulo().toUpperCase().contains(rotuloAtividade.toUpperCase())) {
                     if (filtrados.contains(ptd) == false) {
                         filtrados.add(ptd);
                     }
@@ -227,7 +227,7 @@ public class PTDDAO implements IPTDDAO {
 
             }
             for (Participacao p : ptd.getParticipacoes()) {
-                if (p.getProjetoPesquisaExtensao().getTituloProcesso().contains(rotuloAtividade)) {
+                if (p.getProjetoPesquisaExtensao().getTituloProcesso().toUpperCase().contains(rotuloAtividade.toUpperCase())) {
                     if (filtrados.contains(ptd) == false) {
                         filtrados.add(ptd);
                     }

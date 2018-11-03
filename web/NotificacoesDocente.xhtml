@@ -69,10 +69,13 @@
                               styleClass="text01"
                               style="color: white; float: right; font-weight: normal; font-size: large;"/>
 
-                <p:commandButton value="PTD em branco"
+                <p:commandButton id="addPTD"
+                                 value="PTD em branco"
                                  styleClass="opMenu"
                                  ajax="false" 
                                  action="#{pTDMB.abrirCriarCorrigirPTDEmBranco(usuarioMB.usuarioLogado)}"/>
+                
+                
 
                 <p:commandButton styleClass="opMenu"
                                  icon="/img/Search/searchLarger_24.png"
