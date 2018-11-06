@@ -70,12 +70,33 @@
                               style="color: white; float: right; font-weight: normal; font-size: large;"/>
 
                 <p:commandButton id="addPTD"
-                                 value="PTD em branco"
                                  styleClass="opMenu"
-                                 ajax="false" 
-                                 action="#{pTDMB.abrirCriarCorrigirPTDEmBranco(usuarioMB.usuarioLogado)}"/>
-                
-                
+                                 icon="/img/Search/searchLarger_24.png"
+                                 value="Novo PTD"/>
+
+                <!-- Caixa de "novo" PTD -->
+                <p:overlayPanel id="addPanel" 
+                                for="addPTD" 
+                                hideEffect="fade" 
+                                style="padding: 0px;">
+                    <p:commandButton value="PTD em branco"
+                                     styleClass="opMenu"
+                                     ajax="false" 
+                                     immediate="true"
+                                     action="#{pTDMB.abrirCriarCorrigirPTDEmBranco(usuarioMB.usuarioLogado)}"/>
+                    <br/>
+                    <p:commandButton value="Recuperar último"
+                                     styleClass="opMenu"
+                                     ajax="false" 
+                                     immediate="true"
+                                     action="#{pTDMB.abrirCriarCorrigirPTDAPartirDoUltimoArquivado(usuarioMB.usuarioLogado)}"/>
+                    <br/>
+                    <p:commandButton value="Continuar editando"
+                                     styleClass="opMenu"
+                                     ajax="false" 
+                                     immediate="true"
+                                     action="#{pTDMB.abrirCriarCorrigirPTDContinuarEdicao(usuarioMB.usuarioLogado)}"/>
+                </p:overlayPanel>
 
                 <p:commandButton styleClass="opMenu"
                                  icon="/img/Search/searchLarger_24.png"
@@ -83,7 +104,7 @@
                                  ajax="false" 
                                  actionListener="#{pTDASerMostradoMB.abrirTelaBuscarPTDs()}"
                                  action="/BuscarPTDs"/>
-
+                
             </h:form>
         </div>
 

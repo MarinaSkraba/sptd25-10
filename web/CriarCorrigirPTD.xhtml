@@ -102,8 +102,6 @@
             <div id="content">
 
                 <h:form id="PTD">
-
-                    <!-- Caixa de confirmação sair de PTD -->
                     <p:dialog header="Cancelar PTD" 
                               widgetVar="sairTelaPTDDialog" 
                               modal="true" 
@@ -111,17 +109,43 @@
                               hideEffect="fade" 
                               resizable="false">
 
-                        <h:outputText value="Ao sair as informações preenchidas são descartadas. Deseja mesmo sair?" 
+                        <h:outputText value="Deseja manter as informações inseridas nesse documento?" 
                                       styleClass="text01"
                                       style="font-size: large; width: 400px;"/>
                         <p:commandButton styleClass="botaoCinza" 
-                                         value="Manter e ficar" 
-                                         ajax="false"/>
-
-                        <p:commandButton value="Descartar e sair" 
+                                         value="Manter e sair" 
                                          ajax="false" 
-                                         action="#{pTDMB.cancelarPTD(pTDMB.ptd, usuarioMB.usuarioLogado.idUsuario, 'notificaçoes')}"
+                                         immediate="true"
+                                         action="/NotificacoesDocente"/>
+
+                        <h:commandButton value="Descartar e sair" 
+                                         action="#{pTDMB.cancelarPTD()}"
                                          styleClass="botaoVermelho"/>
+
+                    </p:dialog>
+
+                     <!-- Caixa de confirmação sair de PTD deslogando -->
+                    <p:dialog header="Efetuar logout" 
+                              widgetVar="logoutSairTelaPTDDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="Deseja manter as informações inseridas nesse documento?" 
+                                      styleClass="text01"
+                                      style="font-size: large; width: 400px;"/>
+                        <p:commandButton styleClass="botaoCinza" 
+                                         value="Manter e sair" 
+                                         ajax="false" 
+                                         immediate="true"
+                                         action="#{usuarioMB.realizarLogout()}"/>
+
+                        <h:commandButton value="Descartar e sair" 
+                                         action="#{pTDMB.cancelarPTDEfetuandoLogout()}"
+                                         styleClass="botaoVermelho"/>
+
+                    </p:dialog>
 
                     </p:dialog>
 
